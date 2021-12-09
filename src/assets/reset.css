@@ -1,0 +1,19 @@
+body{
+  margin: 0;
+}
+.el-input__inner {
+  background:#171616;
+  border-radius:10px;
+  color:white
+}
+@import 'https://fonts.googleapis.com/css?family=Rajdhani';
+@import 'https://fonts.googleapis.com/css?family=Rationale';
+
+.el-button--primary {
+  background-color: #ff8737 !important;
+  border-color: #ff8737 !important;
+}
+
+i {
+  color: white
+}

@@ -1,32 +1,48 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <el-container class="home_container">
+      <!--header-->
+      <el-header class="home_header">
+        <navbar />
+      </el-header>
+
+      <!-- middle -->
+      <!-- el-aside -->
+
+      <el-main>
+        <keep-alive>
+          <router-view class="base-ui"/>
+        </keep-alive>
+      <img
+        style="position: absolute; width: 200px; left: 50%; transform: translate(-50%, -340px);"
+        src="@/assets/imgs/felix_logo.svg"
+      />
+      </el-main>
+      <!-- bottom -->
+      <Bottom class="home-footer" />
+    </el-container>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+<script>
+import Navbar from "@/components/Navbar";
+import Bottom from "@/components/Bottom";
+export default {
+  name: "app",
+  components: {
+    Navbar,
+    Bottom
+  }
+};
+</script>
+<style scoped>
+.base-ui {
+  position: relative;
+  margin: auto;
+  max-width: 414px;
+  min-height: 750px;
+  padding: 20px;
+  background-color: #f3ede6;
+  border-radius: 10px;
 }
 </style>
