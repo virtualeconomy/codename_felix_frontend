@@ -30,7 +30,7 @@
     <div style="margin:24px 0 150px 0;position:relative;z-index:2;">
       <div style="margin-bottom:10px;fon-size:20px;font-weight:600">Random words</div>
       <div
-        :style="{color:selectedArray.indexOf(item)>-1?'#ff8737':'black'}"
+        :style="{color:selectedArray.indexOf(item)>-1?'#ff8737':''}"
         class="word-ui"
         v-for="(item, index) in wordHistory"
         :key="item.id"

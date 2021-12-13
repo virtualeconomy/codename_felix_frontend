@@ -13,6 +13,15 @@ export const reqGetAddress = () => request({
   method: 'GET',
   url: '/address',
 })
+export const reqGetBalance = (address) => request({
+  method: 'GET',
+  url: '/balance/' + address,
+})
+export const reqSaveWordId = (wordIdArr) => request({
+  method: 'post',
+  url: 'save',
+  data: wordIdArr
+})
 export const createPair = async (pairInfo, whichWallet = 'vsys') => {
   const res = await signRequest(pairInfo, whichWallet)
   return request({

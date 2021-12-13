@@ -14,15 +14,28 @@ export default new Vuex.Store({
     words: []
   },
   mutations: {
-    updateWallet (state, params) {
+    updateWallet(state, params) {
       state.wallet = Object.assign({}, state.wallet, params)
     },
-    savedWords (state, params) {
+    savedWords(state, params) {
       state.words = params
-    }
+    },
+    async sendToken(state, data) {
+      const res = await window.vsys.request({
+        method: 'send',
+        params:
+        {
+          publicKey: data.publicKey,
+          recipient: data.recipient,
+          amount: data.amount,// string
+          description: data.description && '<v-words>'
+        }
+      })
+      return res
+    },
   },
   actions: {
-    async getAccount ({ commit, state, dispatch }) {
+    async getAccount({ commit, state, dispatch }) {
       const err = {
         result: false
       }
@@ -35,7 +48,7 @@ export default new Vuex.Store({
       if (walletInfo && walletInfo.result === true) {
         params.net = walletInfo.network.toLowerCase()
       }
-  
+
       const res = await window.vsys.request({ method: 'publicKey' })
       if (res.message === 'OK' && res.result) {
         params.address = res.address
@@ -44,12 +57,12 @@ export default new Vuex.Store({
         commit('updateWallet', params)
         return params
       }
-  
+
       err.message = 'failed to load wallet'
       return err
     },
 
-    async signContent ({ _, state }, jsonStr) {
+    async signContent({ _, state }, jsonStr) {
       const err = {
         result: false
       }
@@ -65,10 +78,10 @@ export default new Vuex.Store({
       const res = await window.vsys.request({
         method: 'signContent',
         params:
-          {
-            publicKey: state.wallet.publicKey,
-            content
-          }
+        {
+          publicKey: state.wallet.publicKey,
+          content
+        }
       })
       if (res && res.result === true) {
         res.publicKey = state.wallet.publicKey

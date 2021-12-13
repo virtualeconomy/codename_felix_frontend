@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { reqGetAddress } from "@/api/index";
 
 export default {
   name: "WordSave",
@@ -33,8 +32,6 @@ export default {
       if (JSON.stringify(this.$store.state.wallet) === "{}") {
         this.$alert("TO CONTINUE, YOU MUST CONECT YOUR WALLET!");
       } else {
-        // var address = await reqGetAddress()
-        // console.log(address)
         this.$router.push("/word_pay");
       }
     }

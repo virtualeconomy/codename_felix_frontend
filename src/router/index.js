@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import WordDetail from '../views/WordDetail.vue'
 import WordSave from '../views/WordSave.vue'
 import WordPay from '../views/WordPay.vue'
+import WordFinish from '../views/WordFinish.vue'
 
 
 
@@ -24,6 +25,11 @@ const routes = [
     path: '/word_pay',
     name: 'WordPay',
     component: WordPay
+  },
+  {
+    path: '/word_finish',
+    name: 'WordFinish',
+    component: WordFinish
   },
   {
     path: '/word_detail',

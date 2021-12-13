@@ -3,7 +3,10 @@
     <img class="logo_size" src="@/assets/imgs/header_logo.svg" alt />
     <div v-show="!isPhone" class="right_corner">
       <div v-if="showWalletInfo" class="wallet_info">
-        <div class="connect_to_wallet_font" @click="toWalletInfoPage">{{$store.state.wallet.wallet.toUpperCase()}} WALLET</div>
+        <div
+          class="connect_to_wallet_font"
+          @click="toWalletInfoPage"
+        >{{$store.state.wallet.publicKey}}</div>
       </div>
       <div v-else class="connect_to_wallet" @click="connectWallet">
         <div class="connect_to_wallet_font" v-if="loadingWallet">
@@ -42,17 +45,17 @@ export default {
   },
   computed: {
     showWalletInfo() {
-      console.log(this.$store.state.wallet)
-      return JSON.stringify(this.$store.state.wallet) !== '{}';
+      console.log(this.$store.state.wallet);
+      return JSON.stringify(this.$store.state.wallet) !== "{}";
     }
   },
   async created() {
-    const vsysAcount = await this.$store.dispatch("getAccount")
+    const vsysAcount = await this.$store.dispatch("getAccount");
   },
   methods: {
     async connectWallet() {
       this.loadingWallet = true;
-      const res = await this.$store.dispatch('getAccount');
+      const res = await this.$store.dispatch("getAccount");
       if (res && !res.result === false) {
         alert(res.message);
       }
@@ -89,7 +92,6 @@ export default {
 };
 </script>
 <style>
-
 .logo_atomic {
   max-width: 100px;
   min-width: 20px;
@@ -129,19 +131,9 @@ export default {
   margin-right: 31px;
 }
 .connect_to_wallet_font {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 110px;
-  height: 19px;
+  overflow: scroll;
   font: normal normal normal 15px/19px Rajdhani;
-  letter-spacing: 0px;
   color: #f9fcfd;
-  opacity: 1;
 }
-.notification_bell {
-  height: 40px;
-  width: 32px;
-}
-
 </style>
