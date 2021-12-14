@@ -5,10 +5,11 @@ import WordDetail from '../views/WordDetail.vue'
 import WordSave from '../views/WordSave.vue'
 import WordPay from '../views/WordPay.vue'
 import WordFinish from '../views/WordFinish.vue'
-// import SavedWords from '../views/Settings/SavedWords.vue'
-// import About from '../views/Settings/About.vue'
+import SavedWords from '../views/Settings/SavedWords.vue'
+import About from '../views/Settings/About.vue'
 import SignOut from '../views/Settings/SignOut.vue'
 import DeviceSettings from '../views/Settings/DeviceSettings.vue'
+import Settings from '../views/Settings/Settings.vue'
 
 
 
@@ -20,6 +21,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: Settings
   },
   {
     path: '/word_save',
@@ -36,11 +42,26 @@ const routes = [
     name: 'WordFinish',
     component: WordFinish
   },
-  // {
-  //   path: '/saved_words',
-  //   name: 'SavedWords',
-  //   component: SavedWords
-  // },
+  {
+    path: '/settings/device_settings',
+    name: 'DeviceSettings',
+    component: DeviceSettings
+  },
+  {
+    path: '/settings/saved_words',
+    name: 'SavedWords',
+    component: SavedWords
+  },
+  {
+    path: '/settings/about',
+    name: 'About',
+    component: About
+  },
+  {
+    path: '/settings/sign_out',
+    name: 'SignOut',
+    component: SignOut
+  },
   {
     path: '/word_detail',
     name: 'Detail',

@@ -3,10 +3,8 @@
     <img class="logo_size" src="@/assets/imgs/header_logo.svg" alt />
     <div v-show="!isPhone" class="right_corner">
       <div v-if="showWalletInfo" class="wallet_info">
-        <div
-          class="connect_to_wallet_font"
-          @click="toWalletInfoPage"
-        >{{$store.state.wallet.publicKey}}</div>
+        <img @click="$router.push('/settings')" src="@/assets/imgs/settings.svg" width="20" alt />
+        <div class="connect_to_wallet_font">{{$store.state.wallet.publicKey}}</div>
       </div>
       <div v-else class="connect_to_wallet" @click="connectWallet">
         <div class="connect_to_wallet_font" v-if="loadingWallet">
@@ -79,14 +77,6 @@ export default {
         this.activeIndex = index;
         this.$router.replace(this.switchTaps[index].path);
       }
-    },
-    async toWalletInfoPage() {
-      await this.$store.dispatch(`${this.selectedWallet}/getAccount`);
-
-      const currentPath = this.$router.currentRoute.path;
-      if (this.$store.state.wallet && currentPath !== "/swap/wallet") {
-        this.$router.replace("/swap/wallet");
-      }
     }
   }
 };
@@ -109,14 +99,13 @@ export default {
 }
 .wallet_info {
   display: flex;
-  width: 138px;
-  height: 35px;
+  width: 150px;
   border-radius: 10px;
-  opacity: 1;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   cursor: pointer;
   background: #313134 0% 0% no-repeat padding-box;
+  padding: 8px;
 }
 .connect_to_wallet {
   display: flex;

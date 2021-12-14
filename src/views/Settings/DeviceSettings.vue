@@ -7,7 +7,7 @@
     >back to settings</i>
     <h3>Device Settings</h3>
     <div style="font-weight:bold;margin-bottom:19px">
-      Waller:
+      Wallet:
       <span style="color:#ff8737;">{{$store.state.wallet.address.slice(0,5)+'...'+$store.state.wallet.address.slice(-3)}}</span>
     </div>
     <div style="margin-bottom:19px;color:#ff8737;font-weight:bold">Auto-lock</div>
