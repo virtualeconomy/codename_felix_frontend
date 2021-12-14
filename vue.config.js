@@ -8,9 +8,9 @@ module.exports = {
   devServer: {
     // before: require('./mock/mock-server.js'),
     proxy: {
-      'save': {
-        target: 'https://saveaword.com/api/'
-      },
+      // 'save': {
+      //   target: 'https://saveaword.com/api/save'
+      // },
       '/': {
         target: 'http://samblana.vos.systems:8000'
       }

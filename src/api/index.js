@@ -19,7 +19,7 @@ export const reqGetBalance = (address) => request({
 })
 export const reqSaveWordId = (wordIdArr) => request({
   method: 'post',
-  url: 'save',
+  url: '/save',
   data: wordIdArr
 })
 export const createPair = async (pairInfo, whichWallet = 'vsys') => {
