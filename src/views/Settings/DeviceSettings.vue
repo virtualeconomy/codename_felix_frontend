@@ -8,13 +8,15 @@
     <h3>Device Settings</h3>
     <div style="font-weight:bold;margin-bottom:19px">
       Wallet:
-      <span style="color:#ff8737;">{{$store.state.wallet.address.slice(0,5)+'...'+$store.state.wallet.address.slice(-3)}}</span>
+      <span
+        style="color:#ff8737;"
+      >{{$store.state.wallet.address.slice(0,5)+'...'+$store.state.wallet.address.slice(-3)}}</span>
     </div>
     <div style="margin-bottom:19px;color:#ff8737;font-weight:bold">Auto-lock</div>
-    <div style="display:flex;color:#ff8737">
-      <div class="lock-button">5 min</div>
-      <div class="lock-button">15 min</div>
-      <div class="lock-button">never</div>
+    <div @click="autoLock($event)" style="display:flex;color:#ff8737">
+      <div :class="{'selected-ui':selected==5}" class="lock-button">5 min</div>
+      <div :class="{'selected-ui':selected==15}" class="lock-button">15 min</div>
+      <div :class="{'selected-ui':!selected}" class="lock-button">never</div>
     </div>
   </div>
 </template>
@@ -24,34 +26,21 @@ export default {
   name: "SavedWords",
   data() {
     return {
-      saveWord: [
-        {
-          blockchainhash: null,
-          definition: "uptight",
-          definition_no: 0,
-          etymology_no: 0,
-          id: 751314,
-          lexical_category: "Adjective",
-          nfthash: null,
-          word: "up-tight"
-        },
-        {
-          blockchainhash: null,
-          definition: "uptight",
-          definition_no: 0,
-          etymology_no: 0,
-          id: 751315,
-          lexical_category: "Adjective",
-          nfthash: null,
-          word: "up-down"
-        }
-      ]
+      selected: ""
     };
   },
-  methods: {},
-  mounted() {
-    // this.saveWord = this.$store.state.words;
-    // need to backend api
+  created() {
+    this.selected = window.localStorage["sessionTimeout"];
+  },
+  methods: {
+    autoLock(e) {
+      console.log(e.path[0].childNodes[0].data);
+      this.selected = window.localStorage["sessionTimeout"] = {
+        "5 min": 5,
+        "15 min": 15,
+        never: ""
+      }[e.path[0].childNodes[0].data || "never"];
+    }
   }
 };
 </script>
@@ -63,7 +52,7 @@ export default {
   border: 1px solid #ff8737;
   border-radius: 20px;
 }
-.lock-button:hover {
+.lock-button:hover,.selected-ui {
   background: #ff8737;
   color: white;
 }
