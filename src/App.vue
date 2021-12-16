@@ -9,7 +9,7 @@
       <!-- middle -->
       <!-- el-aside -->
 
-      <el-main>
+      <el-main style="padding:0">
         <keep-alive>
           <router-view class="base-ui" />
         </keep-alive>
@@ -17,6 +17,7 @@
           style="position: absolute; width: 200px; left: 50%; transform: translate(-50%, -340px);"
           src="@/assets/imgs/felix_logo.svg"
         />
+        <div class="gallery-btn">GALLERY</div>
       </el-main>
       <!-- bottom -->
       <Bottom class="home-footer" />
@@ -70,13 +71,43 @@ export default {
 };
 </script>
 <style scoped>
+@media screen and (max-width: 960px) {
+  .home_header {
+    background: black;
+  }
+}
+@media only screen and (min-width: 960px) {
+  #app {
+    background-image: url(./assets/imgs/back.jpg);
+    background-repeat: round;
+  }
+  .base-ui {
+    background-color: whitesmoke;
+  }
+  .gallery-btn {
+    margin: 20px auto;
+    border-radius: 10px;
+  }
+}
+#app {
+  font-family: 'coves-bold';
+  font-size: 20px;
+}
 .base-ui {
   position: relative;
   margin: auto;
   max-width: 414px;
   min-height: 750px;
   padding: 20px;
-  background-color: #f3ede6;
   border-radius: 10px;
+}
+.gallery-btn {
+  text-align: center;
+  margin-top: 20px;
+  background: #ff8737;
+  color: white;
+  max-width: 414px;
+  padding: 10px 20px;
+  cursor: pointer;
 }
 </style>

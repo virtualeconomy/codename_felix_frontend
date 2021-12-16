@@ -3,12 +3,12 @@
     <div style="display:flex;justify-content:space-between;margin-bottom:32px">
       <a
         :class="{active: selected === 'Dic'}"
-        style="text-decoration:none"
+        style="text-decoration:none;cursor:pointer"
         @click="selected = 'Dic'"
       >Dictionary</a>
       <a
         :class="{active: selected === 'Save'}"
-        style="text-decoration:none"
+        style="text-decoration:none;cursor:pointer"
         @click="selected = 'Save'"
       >Save a word</a>
     </div>
@@ -23,7 +23,7 @@
       style="width:100%"
       v-model="value"
       placeholder="Search here"
-      @input="querySearchAsync"
+      @keyup.enter.native="querySearchAsync"
       prefix-icon="el-icon-search"
     ></el-input>
 
@@ -40,11 +40,7 @@
 
     <div v-if="selected === 'Save'">
       <div class="base-button" @click="shuffle">SHUFFLE UNSELECTED WORDS</div>
-      <div
-        class="base-button"
-        @click="router_to_save"
-        style="margin-top:20px"
-      >SELECT THESE WORDS</div>
+      <div class="base-button" @click="router_to_save" style="margin-top:20px">SELECT THESE WORDS</div>
     </div>
   </div>
 </template>
@@ -63,8 +59,9 @@ export default {
     };
   },
   methods: {
-    querySearchAsync(queryString) {
-      console.log(queryString);
+    querySearchAsync() {
+      console.log(this.value);
+      this.$router.push({ path: "/word_detail", query: { 0: this.value} });
     },
     detail_selected(item, index) {
       if (this.selected === "Save") {
@@ -78,8 +75,10 @@ export default {
       }
     },
     router_to_save() {
-      this.$store.commit('savedWords', this.selectedArray)
-      this.$router.push('/word_save')
+      if (this.selectedArray.length > 0) {
+        this.$store.commit("savedWords", this.selectedArray);
+        this.$router.push("/word_save");
+      }
     },
     async shuffle() {
       var newWords = await reqRandomWords(
@@ -98,8 +97,7 @@ export default {
 <style scoped>
 .word-ui {
   margin-bottom: 10px;
-  font-family: serif;
-  font-size: 18px;
+  font-family: coves-light;
 }
 .word-ui:hover {
   background: #ff8737;

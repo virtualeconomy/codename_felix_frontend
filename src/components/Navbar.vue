@@ -1,18 +1,18 @@
 <template>
   <div class="navbar">
-    <img class="logo_size" src="@/assets/imgs/header_logo.svg" alt />
-    <div v-show="!isPhone" class="right_corner">
+    <img style="height:40px" src="@/assets/imgs/header_logo.svg" alt />
       <div v-if="showWalletInfo" class="wallet_info">
-        <img @click="$router.push('/settings')" src="@/assets/imgs/settings.svg" width="20" alt />
-        <div class="connect_to_wallet_font">{{$store.state.wallet.publicKey}}</div>
+        <img @click="$router.push('/settings')" src="@/assets/imgs/settings.svg" width="25" alt />
+        <div
+          style="margin-left:1.2rem;color:#ff8737"
+        >{{$store.state.wallet.address.slice(0,5)+'...'+$store.state.wallet.address.slice(-3)}}</div>
       </div>
       <div v-else class="connect_to_wallet" @click="connectWallet">
-        <div class="connect_to_wallet_font" v-if="loadingWallet">
-          <i class="el-icon-loading" style="margin-right:6px" /> LOADING
+        <div v-if="loadingWallet">
+          <i class="el-icon-loading" /> LOADING
         </div>
-        <div class="connect_to_wallet_font" v-else>CONNECT WALLET</div>
+        <div v-else>CONNECT WALLET</div>
       </div>
-    </div>
   </div>
 </template>
 <script>
@@ -82,40 +82,22 @@ export default {
 };
 </script>
 <style>
-.logo_atomic {
-  max-width: 100px;
-  min-width: 20px;
-}
 .navbar {
-  margin-top: 20px;
+  margin: 15px 0;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.right_corner {
-  display: flex;
-}
 .wallet_info {
   display: flex;
-  width: 150px;
-  border-radius: 10px;
   align-items: center;
-  justify-content: space-around;
   cursor: pointer;
-  background: #313134 0% 0% no-repeat padding-box;
   padding: 8px;
 }
 .connect_to_wallet {
-  display: flex;
-  width: 138px;
-  height: 35px;
-  background: #313134 0% 0% no-repeat padding-box;
-  border-radius: 10px;
-  opacity: 1;
-  align-items: center;
-  justify-content: center;
+  color: #ff8737;
   cursor: pointer;
   margin-right: 31px;
 }

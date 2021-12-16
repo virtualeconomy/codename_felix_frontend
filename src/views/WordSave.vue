@@ -7,10 +7,7 @@
     >save</i>
     <div style="margin-top:19px">You have selected these words for saving:</div>
     <div v-for="(item, index) in saveWord" :key="index">
-      <div style="display:flex;align-items:baseline">
-        <h3>{{index+1}}.&nbsp;{{ item.word }}</h3>&nbsp;&nbsp;
-        <i class="el-icon-star-off" style="color:black;"></i>
-      </div>
+      <h3>{{index+1}}.&nbsp;{{ item.word }}</h3>&nbsp;&nbsp;
       <span style="color:#ff8737">{{ item.lexical_category }}&nbsp;</span>
     </div>
     <div style="height:450px"></div>
@@ -19,7 +16,6 @@
 </template>
 
 <script>
-
 export default {
   name: "WordSave",
   data() {

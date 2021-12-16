@@ -7,12 +7,16 @@
     >search</i>
     <div style="display:flex;align-items:baseline">
       <h1>{{ word }}</h1>&nbsp;&nbsp;
-      <i class="el-icon-star-off" style="color:black;"></i>
+      <!-- <i class="el-icon-star-off" style="color:black;"></i> -->
     </div>
     <div>
-      <span style="color:#ff8737" v-for="(item,index) in lexical_category" :key="index">{{ item }}&nbsp;</span>
+      <span
+        style="color:#ff8737"
+        v-for="(item,index) in lexical_category"
+        :key="index"
+      >{{ item }}&nbsp;</span>
       <h3>DEFINITIONS</h3>
-      <div v-for="(item, index) in wordDetail" :key="item.id">{{index + 1}}. {{item.definition}}</div>
+      <div style="position:relative;z-index:2;" v-for="(item, index) in wordDetail" :key="item.id">{{index + 1}}. {{item.definition}}</div>
     </div>
   </div>
 </template>
@@ -25,7 +29,7 @@ export default {
   data() {
     return {
       wordDetail: [],
-      word: ''
+      word: ""
     };
   },
   computed: {
@@ -47,7 +51,10 @@ export default {
     }
   },
   mounted() {
-    this.word = this.$route.query[0]
+    this.word = this.$route.query[0];
+  },
+  activated() {
+    this.word = this.$route.query[0];
   }
 };
 </script>
