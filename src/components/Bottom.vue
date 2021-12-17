@@ -5,22 +5,21 @@
       <span style="font-weight:bold;color:#ff8737">Balance</span>
       &nbsp;
       <span>{{balance}} VSYS</span>&nbsp;
-      <div
-        style="display:inline-block;border-radius: 5px;background: #ff8737;padding: 5px 10px;"
-      >DONTATE</div>
+      <div class="dontate-btn">DONTATE</div>
     </div>
     <div class="placeholderDiv"></div>
   </div>
 </template>
 
 <script>
+import BigNumber from "bignumber.js";
 import { reqGetAddress, reqGetBalance } from "@/api/index";
 
 export default {
   async created() {
     var address = await reqGetAddress();
     const balanceData = await reqGetBalance(address[0]);
-    this.balance = balanceData.balance;
+    this.balance = BigNumber(balanceData.balance).dividedBy(1e8);
   },
   data() {
     return {
@@ -37,5 +36,15 @@ export default {
   .placeholderDiv {
     width: 50px;
   }
+}
+.dontate-btn {
+  display: inline-block;
+  border-radius: 5px;
+  border: 1px solid #ff8737;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.dontate-btn:hover {
+  background: #ff8737;
 }
 </style>

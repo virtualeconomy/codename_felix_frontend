@@ -47,7 +47,7 @@ export default {
         let loginTimer = window.localStorage["sessionTimeout"];
         if (!loginTimer) return;
         timeout = setTimeout(() => {
-          window.location.reload();
+          window.location.href = "/";
         }, loginTimer * 60 * 1000);
       };
     }
@@ -58,9 +58,7 @@ export default {
     for (var i = 0; i < eventListenerArr.length; i++) {
       document.addEventListener(
         eventListenerArr[i],
-        this.debounce(() => {
-          this.resetTimer();
-        }, 1000)
+        this.debounce(this.resetTimer(), 1000)
       );
     }
   },
@@ -90,7 +88,7 @@ export default {
   }
 }
 #app {
-  font-family: 'coves-bold';
+  font-family: "coves-bold";
   font-size: 20px;
 }
 .base-ui {
@@ -103,7 +101,7 @@ export default {
 }
 .gallery-btn {
   text-align: center;
-  margin-top: 20px;
+  margin: 20px auto 0 auto;
   background: #ff8737;
   color: white;
   max-width: 414px;

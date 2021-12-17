@@ -29,6 +29,7 @@
 
 <script>
 import { reqGetAddress, reqGetBalance, reqSaveWordId } from "@/api/index";
+import BigNumber from 'bignumber.js'
 
 export default {
   name: "WordPay",
@@ -44,12 +45,18 @@ export default {
         });
         console.log(res);
         var balanceData = await reqGetBalance(address[0]);
-        if (parseInt(balanceData.balance) > this.$store.state.words.length) {
-          var respond = await reqSaveWordId(this.$store.state.words.map(item => item.id));
-          console.log(respond)
+        if (
+          BigNumber(balanceData.balance).isGreaterThan(
+            BigNumber(this.$store.state.words.length * 1e8)
+          )
+        ) {
+          var respond = await reqSaveWordId(
+            this.$store.state.words.map(item => item.id)
+          );
+          console.log(respond);
           // this.$router.push("/word_finish");
         } else {
-          this.$alert('Balance of address in backend is insufficient')
+          this.$alert("Balance of address in backend is insufficient");
         }
       } catch (error) {
         return this.$alert(error);
