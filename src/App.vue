@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div id="bg">
+      <img src="./assets/imgs/back.jpg" alt />
+    </div>
     <el-container class="home_container">
       <!--header-->
       <el-header class="home_header">
@@ -10,14 +13,19 @@
       <!-- el-aside -->
 
       <el-main style="padding:0">
+        <router-view name="gallery" />
         <keep-alive>
           <router-view class="base-ui" />
         </keep-alive>
         <img
+          :style="{'display':watchRoute === '/gallery' ? 'none' :'block'}"
           style="position: absolute; width: 200px; left: 50%; transform: translate(-50%, -340px);"
           src="@/assets/imgs/felix_logo.svg"
         />
-        <div class="gallery-btn">GALLERY</div>
+        <div
+          @click="routeTo"
+          class="gallery-btn"
+        >{{watchRoute === '/gallery' ? 'BACK TO DICTIONARY' : 'GALLERY'}}</div>
       </el-main>
       <!-- bottom -->
       <Bottom class="home-footer" />
@@ -30,6 +38,11 @@ import Navbar from "@/components/Navbar";
 import Bottom from "@/components/Bottom";
 export default {
   name: "app",
+  computed: {
+    watchRoute() {
+      return this.$route.path;
+    }
+  },
   methods: {
     debounce(func, delay) {
       let timeout;
@@ -50,6 +63,13 @@ export default {
           window.location.href = "/";
         }, loginTimer * 60 * 1000);
       };
+    },
+    routeTo() {
+      if (this.$route.path === "/gallery") {
+        this.$router.go(-1);
+      } else {
+        this.$router.push("/gallery");
+      }
     }
   },
   mounted() {
@@ -62,6 +82,9 @@ export default {
       );
     }
   },
+  // activated(){
+  //   this.watchRoute = this.$route.path
+  // },
   components: {
     Navbar,
     Bottom
@@ -73,11 +96,28 @@ export default {
   .home_header {
     background: black;
   }
+  #bg {
+    display: none;
+  }
 }
 @media only screen and (min-width: 960px) {
-  #app {
-    background-image: url(./assets/imgs/back.jpg);
-    background-repeat: round;
+  #bg {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index: -10;
+  }
+  #bg img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    min-width: 50%;
+    min-height: 50%;
   }
   .base-ui {
     background-color: whitesmoke;

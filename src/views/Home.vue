@@ -24,8 +24,15 @@
       v-model="value"
       placeholder="Search here"
       @keyup.enter.native="querySearchAsync"
-      prefix-icon="el-icon-search"
-    ></el-input>
+    >
+      <el-button
+        @click="querySearchAsync"
+        class="goon"
+        style="backgroud:#ff8737"
+        slot="append"
+        icon="el-icon-search"
+      ></el-button>
+    </el-input>
 
     <div style="margin:24px 0 150px 0;position:relative;z-index:2;">
       <div style="margin-bottom:10px;fon-size:20px;font-weight:600">Random words</div>
@@ -61,7 +68,7 @@ export default {
   methods: {
     querySearchAsync() {
       console.log(this.value);
-      this.$router.push({ path: "/word_detail", query: { 0: this.value} });
+      this.$router.push({ path: "/word_detail", query: { 0: this.value } });
     },
     detail_selected(item, index) {
       if (this.selected === "Save") {
@@ -110,7 +117,6 @@ export default {
   color: #ff8737;
   text-decoration: underline !important;
 }
-.custom-input >>> .el-icon-search,
 .custom-input >>> input,
 .custom-input >>> input::-webkit-input-placeholder {
   color: #ff8737;
@@ -128,5 +134,12 @@ export default {
 .base-button:hover {
   color: white;
   background: #ff8737;
+}
+.goon {
+  background: #ff8737 !important;
+  border-radius: 0 5px 5px 0;
+}
+.goon >>> .el-icon-search::before {
+  color: white;
 }
 </style>
