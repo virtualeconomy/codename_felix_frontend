@@ -26,7 +26,7 @@ export default {
   methods: {
     async savePay() {
       if (JSON.stringify(this.$store.state.wallet) === "{}") {
-        this.$alert("TO CONTINUE, YOU MUST CONECT YOUR WALLET!");
+        alert("TO CONTINUE, YOU MUST CONECT YOUR WALLET!");
       } else {
         this.$router.push("/word_pay");
       }

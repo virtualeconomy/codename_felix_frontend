@@ -16,7 +16,7 @@
         :key="index"
       >{{ item }}&nbsp;</span>
       <h3>DEFINITIONS</h3>
-      <div style="position:relative;z-index:2;" v-for="(item, index) in wordDetail" :key="item.id">{{index + 1}}. {{item.definition}}</div>
+      <div style="position:relative;z-index:2;font-family:coves-light" v-for="(item, index) in wordDetail" :key="item.id">{{index + 1}}. {{item.definition}}</div>
     </div>
   </div>
 </template>

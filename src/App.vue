@@ -92,7 +92,7 @@ export default {
 };
 </script>
 <style scoped>
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 500px) {
   .home_header {
     background: black;
   }
@@ -100,7 +100,7 @@ export default {
     display: none;
   }
 }
-@media only screen and (min-width: 960px) {
+@media only screen and (min-width: 500px) {
   #bg {
     position: fixed;
     top: -50%;
@@ -123,7 +123,7 @@ export default {
     background-color: whitesmoke;
   }
   .gallery-btn {
-    margin: 20px auto;
+    margin: 20px auto !important;
     border-radius: 10px;
   }
 }

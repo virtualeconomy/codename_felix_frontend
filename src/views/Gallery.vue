@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align:center">
+  <div class="gallery" style="text-align:center">
     <div style="font-size:48px;color:#ff8737;text-align:center;margin:10px">GALLERY</div>
 
     <div style="max-width:1400px;margin:auto">
@@ -105,6 +105,11 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (max-width: 500px) {
+  .gallery {
+    background: #121212;
+  }
+}
 .checkWords >>> .el-input__inner {
   border: 0;
   border-bottom: 2px solid gray;

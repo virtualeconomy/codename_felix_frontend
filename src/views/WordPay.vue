@@ -56,10 +56,10 @@ export default {
           console.log(respond);
           // this.$router.push("/word_finish");
         } else {
-          this.$alert("Balance of address in backend is insufficient");
+          alert("Balance of address in backend is insufficient");
         }
       } catch (error) {
-        return this.$alert(error);
+        return alert(error);
       }
     }
   }
