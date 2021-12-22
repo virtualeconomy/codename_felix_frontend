@@ -9,7 +9,7 @@
     <div v-for="(item, index) in $store.state.words" :key="index">
         <h3 style="color:#ff8737">{{ item.word.toUpperCase() }}</h3>
     </div>
-    <div style="height:550px"></div>
+    <div style="min-height:100px;flex:1"></div>
     <div class="base-button" @click="shuffle">MINT NFTs</div>
     <div class="base-button" @click="router_to_save" style="margin-top:20px">VIEW YOUR SAVED WORDS</div>
   </div>

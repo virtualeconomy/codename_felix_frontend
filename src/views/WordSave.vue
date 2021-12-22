@@ -4,13 +4,13 @@
       class="el-icon-arrow-left"
       @click="$router.go(-1)"
       style="color:#ff8737;font-size:20px;font-weight:600"
-    >save</i>
+    >back</i>
     <div style="margin-top:19px">You have selected these words for saving:</div>
     <div v-for="(item, index) in saveWord" :key="index">
       <h3>{{index+1}}.&nbsp;{{ item.word }}</h3>&nbsp;&nbsp;
       <span style="color:#ff8737">{{ item.lexical_category }}&nbsp;</span>
     </div>
-    <div style="height:450px"></div>
+    <div style="min-height:100px;flex:1"></div>
     <div class="base-button" @click="savePay">SAVE THESE WORDS</div>
   </div>
 </template>

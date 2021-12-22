@@ -66,7 +66,7 @@ export default {
     },
     routeTo() {
       if (this.$route.path === "/gallery") {
-        this.$router.go(-1);
+        this.$router.replace('/');
       } else {
         this.$router.push("/gallery");
       }
@@ -132,6 +132,8 @@ export default {
   font-size: 20px;
 }
 .base-ui {
+  display:flex;
+  flex-direction:column;
   position: relative;
   margin: auto;
   max-width: 414px;

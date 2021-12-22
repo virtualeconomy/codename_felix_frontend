@@ -14,14 +14,14 @@
     <div>Price</div>
     <div style="margin-top:19px;font-size:24px;color:#ff8737">{{$store.state.words.length}} VSYS</div>
 
-    <div style="margin-top:38px;padding-right:100px">
+    <div style="margin-top:38px;padding-right:100px;z-index:10">
       Saving this word means it will be stored on the chain.
       <br />
       <br />After the word is saved you can also mint it as an NFT.
       <br />
       <br />Click PAY to continue
     </div>
-    <div style="height:150px"></div>
+    <div style="min-height:100px;flex:1"></div>
 
     <div class="base-button" @click="pay">PAY</div>
   </div>
