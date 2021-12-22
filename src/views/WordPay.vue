@@ -38,12 +38,12 @@ export default {
       try {
         var address = await reqGetAddress();
         console.log(address);
-        var res = await this.$store.commit("sendToken", {
-          publicKey: this.$store.state.wallet.publicKey,
-          recipient: address[0],
-          amount: this.$store.state.words.length
-        });
-        console.log(res);
+        // var res = await this.$store.commit("sendToken", {
+        //   publicKey: this.$store.state.wallet.publicKey,
+        //   recipient: address[0],
+        //   amount: this.$store.state.words.length
+        // });
+        // console.log(res);
         var balanceData = await reqGetBalance(address[0]);
         if (
           BigNumber(balanceData.balance).isGreaterThan(
@@ -54,11 +54,12 @@ export default {
             this.$store.state.words.map(item => item.id)
           );
           console.log(respond);
-          // this.$router.push("/word_finish");
+          this.$router.push("/word_finish");
         } else {
           alert("Balance of address in backend is insufficient");
         }
       } catch (error) {
+        if (error.response && error.response.status === 500) { return alert(error.response.data) }
         return alert(error);
       }
     }
