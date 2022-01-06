@@ -1,64 +1,157 @@
 <template>
   <div class="navbar">
-    <img style="height:40px" src="@/assets/imgs/header_logo.svg" alt />
-      <div v-if="showWalletInfo" class="wallet_info">
-        <img @click="$router.push('/settings')" src="@/assets/imgs/settings.svg" width="25" alt />
+    <img style="height:40px" src="@/assets/imgs/header_logo.svg" />
+    <div class="connect-wallet" @click="isShow = !isShow">
+      <div class="wallet-list" v-show="isShow">
+        <!-- MATAMASK WALLET -->
+        <div class="wallet-list-item">MATAMASK WALLET</div>
+        <!-- account list of eth -->
         <div
-          style="margin-left:1.2rem;color:#ff8737"
-        >{{$store.state.wallet.address.slice(0,5)+'...'+$store.state.wallet.address.slice(-3)}}</div>
-      </div>
-      <div v-else class="connect_to_wallet" @click="connectWallet">
-        <div v-if="loadingWallet">
-          <i class="el-icon-loading" /> LOADING
+          class="wallet-list-item"
+          style="color:white;cursor:pointer"
+          v-for="(address, index) in EthWalletList"
+          :key="index"
+          @click="switchWallet('eth')"
+        >
+          <img
+            v-if="$store.state.app.curWallet.walletName === 'eth'"
+            src="@/assets/imgs/selected.svg"
+            width="20"
+          />
+          <i v-else style="width:20px"></i>
+          &nbsp;&nbsp;
+          {{address.slice(0, 5) + "..." + address.slice(-3)}}
         </div>
-        <div v-else>CONNECT WALLET</div>
+        <!-- Metamask Settings -->
+        <div
+          v-if="EthWalletList.length"
+          class="wallet-list-item"
+          style="color:white;cursor:pointer"
+        >
+          <img src="@/assets/imgs/more.svg" width="20" />&nbsp;&nbsp;
+          Metamask Settings
+        </div>
+        <div
+          v-else
+          @click="toConnectWalletPage('eth')"
+          class="wallet-list-item"
+          style="color:white;cursor:pointer"
+        >
+          <i class="el-icon-circle-plus-outline"></i>&nbsp;&nbsp;
+          Connect Matamask
+        </div>
+
+        <!-- V WALLET -->
+        <div class="wallet-list-item">V WALLET</div>
+        <!-- account list of vsys -->
+        <div
+          class="wallet-list-item"
+          style="color:white;cursor:pointer"
+          v-for="(address, index) in VsysWalletList"
+          :key="index"
+          @click="switchWallet('vsys')"
+        >
+          <img
+            v-if="$store.state.app.curWallet.walletName === 'vsys'"
+            src="@/assets/imgs/selected.svg"
+            width="20"
+          />
+          <i v-else style="width:20px"></i>
+          &nbsp;&nbsp;
+          {{address.slice(0, 5) + "..." + address.slice(-3)}}
+        </div>
+        <!-- V Wallet Settings -->
+        <div
+          v-if="VsysWalletList.length"
+          class="wallet-list-item"
+          style="color:white;cursor:pointer"
+        >
+          <img src="@/assets/imgs/more.svg" width="20" />&nbsp;&nbsp;
+          V Wallet Settings
+        </div>
+        <div
+          v-else
+          @click="toConnectWalletPage('vsys')"
+          class="wallet-list-item"
+          style="color:white;cursor:pointer"
+        >
+          <i class="el-icon-circle-plus-outline"></i>&nbsp;&nbsp;
+          Connect Vsys
+        </div>
+
+        <!-- Felix Settings -->
+        <div
+          class="wallet-list-item"
+          style="border:0px;color:white;cursor:pointer"
+          @click="$router.push('/settings')"
+        >
+          <img src="@/assets/imgs/settings.svg" width="20" />&nbsp;&nbsp;
+          Felix Settings
+        </div>
       </div>
+
+      <!-- User Info -->
+      <img
+        v-if="showWalletInfo"
+        style="cursor: pointer;transform:translateX(150px)"
+        src="@/assets/imgs/user.svg"
+        width="25"
+      />
+      <div v-else style="color: #ff8737;cursor: pointer">
+        <div>CONNECT WALLETS</div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import { mapState } from "vuex";
+import Vue from "vue";
 export default {
   name: "navbar",
   data() {
     return {
-      dialogVisible: false,
-      totalNum: 0,
-      isPhone: false,
-      unfold: false,
-      drawer: false,
-      loadingWallet: false,
-      activeIndex: 2,
-      selectedWallet: "",
-      switchTaps: [
-        { path: "/swap", title: "SWAP" },
-        { path: "/counter-parties", title: "COUNTER PARTIES" },
-        { path: "/about", title: "ABOUT" }
-      ],
-      pathToTabIndex: {
-        swap: 0,
-        "counter-parties": 1,
-        about: 2
-      }
+      isShow: false
     };
   },
   computed: {
     showWalletInfo() {
       console.log(this.$store.state.wallet);
-      return JSON.stringify(this.$store.state.wallet) !== "{}";
+      return JSON.stringify(this.$store.state.app.curWallet) !== "{}";
+    },
+    EthWalletList() {
+      var address = this.$store.state.eth.wallet.address;
+      if (address) return [address];
+      else return [];
+    },
+    VsysWalletList() {
+      var address = this.$store.state.vsys.wallet.address;
+      if (address) return [address];
+      else return [];
     }
   },
-  async created() {
-    const vsysAcount = await this.$store.dispatch("getAccount");
-  },
   methods: {
-    async connectWallet() {
-      this.loadingWallet = true;
-      const res = await this.$store.dispatch("getAccount");
-      if (res && !res.result === false) {
-        alert(res.message);
-      }
-      this.loadingWallet = false;
+    toConnectWalletPage(walletName) {
+      if (walletName == this.$route.query[0]) return;
+      this.$router.push({
+        path: "/connect_wallet",
+        query: { 0: walletName }
+      });
     },
+    switchWallet(walletName) {
+      this.$store.commit(
+        "app/updateAppWallet",
+        this.$store.state[walletName].wallet
+      );
+    }
+
+    // async connectWallet() {
+    //   this.loadingWallet = true;
+    //   const res = await this.$store.dispatch("getAccount");
+    //   if (res && !res.result === false) {
+    //     alert(res.message);
+    //   }
+    //   this.loadingWallet = false;
+    // },
     // checkDevice() {
     //   if (document.documentElement.clientWidth < 768) {
     //     this.isPhone = true;
@@ -68,16 +161,16 @@ export default {
     //     this.drawer = false;
     //   }
     // },
-    switchActive(index) {
-      const currentPath = this.$router.currentRoute.path;
-      if (
-        this.activeIndex !== index ||
-        currentPath !== this.switchTaps[index]
-      ) {
-        this.activeIndex = index;
-        this.$router.replace(this.switchTaps[index].path);
-      }
-    }
+    //   switchActive(index) {
+    //     const currentPath = this.$router.currentRoute.path;
+    //     if (
+    //       this.activeIndex !== index ||
+    //       currentPath !== this.switchTaps[index]
+    //     ) {
+    //       this.activeIndex = index;
+    //       this.$router.replace(this.switchTaps[index].path);
+    //     }
+    //   }
   }
 };
 </script>
@@ -89,22 +182,34 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
-
-.wallet_info {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  padding: 8px;
+.connect-wallet {
+  min-width: 220px;
+  position: relative;
+}
+.wallet-list {
+  position: absolute;
+  z-index: 99;
+  background: #ff8737;
+  border-radius: 5px;
+  opacity: 0.9;
+  min-width: 229px;
+  top: 34px;
+  transform: translateX(-50px);
 }
 .connect_to_wallet {
   color: #ff8737;
   cursor: pointer;
-  margin-right: 31px;
 }
 .connect_to_wallet_font {
   width: 110px;
   overflow: scroll;
   font: normal normal normal 15px/19px Rajdhani;
   color: #f9fcfd;
+}
+.wallet-list-item {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid gray;
 }
 </style>

@@ -1,25 +1,47 @@
 <template>
   <div style="display:flex;flex-direction:column;text-align:center;align-items:center">
     <img style="margin-top:30%" src="@/assets/imgs/settings_aboutus.svg" width="40" alt />
-    <h2>Sign out of wallet</h2>
+    <h2>Connect your wallet</h2>
     <div
       style="padding:0 40px"
-    >Before you sign out of your wallet, please make sure that you have need information to sign in again. Without it, you will use access to to your saved words.</div>
+    >To continue saving a word you must connect your {{selectedWallet}} wallet and have minimum of 1,000 DARA tokens available.</div>
     <div
       style="display: flex;width: 100%;padding: 40px;justify-content: space-around;box-sizing: border-box;"
     >
       <div class="base-button-ui" @click="$router.go(-1)">Cancel</div>
-      <div class="base-button-ui" @click="clearStore">Sign Out</div>
+      <div class="base-button-ui" @click="getAccount">CONNECT</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return { selectedWallet: "" };
+  },
+  // computed: {
+  //   selectedWallet() {
+  //     return { eth: "Metamask", vsys: "V" }[window.walletName];
+  //   }
+  // },
+  watch: {
+    $route: {
+      handler() {
+        this.selectedWallet = this.$route.query[0];
+      },
+      immediate: true
+    }
+  },
+  created() {
+    // window.eventBus.$on("eventBusName", function(val) {
+    //   this.selectedWallet = val;
+    //   console.log(val);
+    // });
+  },
   methods: {
-    clearStore() {
-      this.$router.replace('/')
-      location.reload()
+    async getAccount() {
+      const res = await this.$store.dispatch(`${this.selectedWallet}/getAccount`);
+      this.$router.replace("/");
       // this.$confirm("Are you sure to sign out?", "", {
       //   confirmButtonText: "Yes",
       //   cancelButtonText: "No",

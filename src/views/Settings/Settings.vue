@@ -8,9 +8,7 @@
     <h3>Settings</h3>
     <div style="font-weight:bold;margin-bottom:19px">
       Wallet:
-      <span
-        style="color:#ff8737;"
-      >{{$store.state.wallet.address.slice(0,5)+'...'+$store.state.wallet.address.slice(-3)}}</span>
+      <span style="color:#ff8737;">{{currentWalletAddress}}</span>
     </div>
 
     <div @click="$router.push('/settings/device_settings')" class="base-item">
@@ -43,6 +41,13 @@ export default {
   name: "SavedWords",
   data() {
     return {};
+  },
+  computed: {
+    currentWalletAddress() {
+      var address = this.$store.state.app.curWallet.address;
+      if (address) return address.slice(0, 5) + "..." + address.slice(-3);
+      else return "Not connected";
+    }
   },
   methods: {},
   mounted() {

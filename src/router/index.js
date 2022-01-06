@@ -11,6 +11,7 @@ import SignOut from '../views/Settings/SignOut.vue'
 import DeviceSettings from '../views/Settings/DeviceSettings.vue'
 import Settings from '../views/Settings/Settings.vue'
 import Gallery from '../views/Gallery.vue'
+import ConnectWallet from '../views/ConnectWallet.vue'
 
 
 
@@ -57,6 +58,11 @@ const routes = [
     path: '/settings/about',
     name: 'About',
     component: About
+  },
+  {
+    path: '/connect_wallet',
+    name: 'ConnectWallet',
+    component: ConnectWallet
   },
   {
     path: '/settings/sign_out',
