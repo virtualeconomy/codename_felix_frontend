@@ -128,7 +128,7 @@ const actions = {
         params.address = res[0]
         params.walletName = 'eth'
         commit('updateWallet', params)
-        commit('app/updateAppWallet', params, { root: true })
+        commit('app/updateWallet', params, { root: true })
         dispatch('app/checkAppNet', null, { root: true })
       }
       return params

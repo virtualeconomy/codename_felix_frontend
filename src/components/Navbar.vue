@@ -2,93 +2,97 @@
   <div class="navbar">
     <img style="height:40px" src="@/assets/imgs/header_logo.svg" />
     <div class="connect-wallet" @click="isShow = !isShow">
-      <div class="wallet-list" v-show="isShow">
-        <!-- MATAMASK WALLET -->
-        <div class="wallet-list-item">MATAMASK WALLET</div>
-        <!-- account list of eth -->
-        <div
-          class="wallet-list-item"
-          style="color:white;cursor:pointer"
-          v-for="(address, index) in EthWalletList"
-          :key="index"
-          @click="switchWallet('eth')"
-        >
-          <img
-            v-if="$store.state.app.curWallet.walletName === 'eth'"
-            src="@/assets/imgs/selected.svg"
-            width="20"
-          />
-          <i v-else style="width:20px"></i>
-          &nbsp;&nbsp;
-          {{address.slice(0, 5) + "..." + address.slice(-3)}}
-        </div>
-        <!-- Metamask Settings -->
-        <div
-          v-if="EthWalletList.length"
-          class="wallet-list-item"
-          style="color:white;cursor:pointer"
-        >
-          <img src="@/assets/imgs/more.svg" width="20" />&nbsp;&nbsp;
-          Metamask Settings
-        </div>
-        <div
-          v-else
-          @click="toConnectWalletPage('eth')"
-          class="wallet-list-item"
-          style="color:white;cursor:pointer"
-        >
-          <i class="el-icon-circle-plus-outline"></i>&nbsp;&nbsp;
-          Connect Matamask
-        </div>
+      <transition name="fade">
+        <div class="wallet-list" v-show="isShow">
+          <!-- MATAMASK WALLET -->
+          <div class="wallet-list-item">MATAMASK WALLET</div>
+          <!-- account list of eth -->
+          <div
+            class="wallet-list-item"
+            style="color:white;cursor:pointer"
+            v-for="address in EthWalletList"
+            :key="address"
+            @click="switchWallet('eth')"
+          >
+            <img
+              v-if="$store.state.app.curWallet.walletName === 'eth'"
+              src="@/assets/imgs/selected.svg"
+              width="20"
+            />
+            <i v-else style="width:20px"></i>
+            &nbsp;&nbsp;
+            {{address.slice(0, 5) + "..." + address.slice(-3)}}
+          </div>
+          <!-- Metamask Settings -->
+          <div
+            v-if="EthWalletList.length"
+            @click="toConnectWalletPage('eth')"
+            class="wallet-list-item"
+            style="color:white;cursor:pointer"
+          >
+            <img src="@/assets/imgs/more.svg" width="20" />&nbsp;&nbsp;
+            Metamask Settings
+          </div>
+          <div
+            v-else
+            @click="toConnectWalletPage('eth')"
+            class="wallet-list-item"
+            style="color:white;cursor:pointer"
+          >
+            <i class="el-icon-circle-plus-outline"></i>&nbsp;&nbsp;
+            Connect Matamask
+          </div>
 
-        <!-- V WALLET -->
-        <div class="wallet-list-item">V WALLET</div>
-        <!-- account list of vsys -->
-        <div
-          class="wallet-list-item"
-          style="color:white;cursor:pointer"
-          v-for="(address, index) in VsysWalletList"
-          :key="index"
-          @click="switchWallet('vsys')"
-        >
-          <img
-            v-if="$store.state.app.curWallet.walletName === 'vsys'"
-            src="@/assets/imgs/selected.svg"
-            width="20"
-          />
-          <i v-else style="width:20px"></i>
-          &nbsp;&nbsp;
-          {{address.slice(0, 5) + "..." + address.slice(-3)}}
-        </div>
-        <!-- V Wallet Settings -->
-        <div
-          v-if="VsysWalletList.length"
-          class="wallet-list-item"
-          style="color:white;cursor:pointer"
-        >
-          <img src="@/assets/imgs/more.svg" width="20" />&nbsp;&nbsp;
-          V Wallet Settings
-        </div>
-        <div
-          v-else
-          @click="toConnectWalletPage('vsys')"
-          class="wallet-list-item"
-          style="color:white;cursor:pointer"
-        >
-          <i class="el-icon-circle-plus-outline"></i>&nbsp;&nbsp;
-          Connect Vsys
-        </div>
+          <!-- V WALLET -->
+          <div class="wallet-list-item">V WALLET</div>
+          <!-- account list of vsys -->
+          <div
+            class="wallet-list-item"
+            style="color:white;cursor:pointer"
+            v-for="address in VsysWalletList"
+            :key="address"
+            @click="switchWallet('vsys')"
+          >
+            <img
+              v-if="$store.state.app.curWallet.walletName === 'vsys'"
+              src="@/assets/imgs/selected.svg"
+              width="20"
+            />
+            <i v-else style="width:20px"></i>
+            &nbsp;&nbsp;
+            {{address.slice(0, 5) + "..." + address.slice(-3)}}
+          </div>
+          <!-- V Wallet Settings -->
+          <div
+            v-if="VsysWalletList.length"
+            @click="toConnectWalletPage('vsys')"
+            class="wallet-list-item"
+            style="color:white;cursor:pointer"
+          >
+            <img src="@/assets/imgs/more.svg" width="20" />&nbsp;&nbsp;
+            V Wallet Settings
+          </div>
+          <div
+            v-else
+            @click="toConnectWalletPage('vsys')"
+            class="wallet-list-item"
+            style="color:white;cursor:pointer"
+          >
+            <i class="el-icon-circle-plus-outline"></i>&nbsp;&nbsp;
+            Connect Vsys
+          </div>
 
-        <!-- Felix Settings -->
-        <div
-          class="wallet-list-item"
-          style="border:0px;color:white;cursor:pointer"
-          @click="$router.push('/settings')"
-        >
-          <img src="@/assets/imgs/settings.svg" width="20" />&nbsp;&nbsp;
-          Felix Settings
+          <!-- Felix Settings -->
+          <div
+            class="wallet-list-item"
+            style="border:0px;color:white;cursor:pointer"
+            @click="$router.push('/settings')"
+          >
+            <img src="@/assets/imgs/settings.svg" width="20" />&nbsp;&nbsp;
+            Felix Settings
+          </div>
         </div>
-      </div>
+      </transition>
 
       <!-- User Info -->
       <img
@@ -115,8 +119,8 @@ export default {
   },
   computed: {
     showWalletInfo() {
-      console.log(this.$store.state.wallet);
-      return JSON.stringify(this.$store.state.app.curWallet) !== "{}";
+      console.log(this.$store.state.app.curWallet);
+      return this.$store.state.app.curWallet.address;
     },
     EthWalletList() {
       var address = this.$store.state.eth.wallet.address;
@@ -125,6 +129,7 @@ export default {
     },
     VsysWalletList() {
       var address = this.$store.state.vsys.wallet.address;
+      console.log(address)
       if (address) return [address];
       else return [];
     }
@@ -139,7 +144,7 @@ export default {
     },
     switchWallet(walletName) {
       this.$store.commit(
-        "app/updateAppWallet",
+        "app/updateWallet",
         this.$store.state[walletName].wallet
       );
     }
@@ -211,5 +216,8 @@ export default {
   display: flex;
   align-items: center;
   border-bottom: 1px solid gray;
+}
+.fade-leave-active {
+  transition: opacity 0.3s;
 }
 </style>

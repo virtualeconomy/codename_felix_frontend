@@ -83,7 +83,7 @@ export default {
     },
     router_to_save() {
       if (this.selectedArray.length > 0) {
-        this.$store.commit("savedWords", this.selectedArray);
+        this.$store.commit("vsys/savedWords", this.selectedArray);
         this.$router.push("/word_save");
       }
     },

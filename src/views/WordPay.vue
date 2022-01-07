@@ -38,12 +38,6 @@ export default {
       try {
         var address = await reqGetAddress();
         console.log(address);
-        // var res = await this.$store.commit("sendToken", {
-        //   publicKey: this.$store.state.wallet.publicKey,
-        //   recipient: address[0],
-        //   amount: this.$store.state.words.length
-        // });
-        // console.log(res);
         var balanceData = await reqGetBalance(address[0]);
         if (
           BigNumber(balanceData.balance).isGreaterThan(

@@ -6,6 +6,7 @@ var state = {
 }
 var mutations = {
   updateWallet(state, params) {
+    console.log(params)
     state.wallet = Object.assign({}, state.wallet, params)
   },
   savedWords(state, params) {
@@ -47,7 +48,7 @@ var actions = {
       params.walletName = 'vsys'
       commit('updateWallet', params)
       // update curWallet in app modules
-      commit('app/updateAppWallet', params, { root: true })
+      commit('app/updateWallet', params, { root: true })
       return params
     }
 

@@ -10,7 +10,7 @@
       Wallet:
       <span
         style="color:#ff8737;"
-      >{{$store.state.wallet.address.slice(0,5)+'...'+$store.state.wallet.address.slice(-3)}}</span>
+      >{{address?address.slice(0,5)+'...'+address.slice(-3):'Not connected'}}</span>
     </div>
     <div style="margin-bottom:19px;color:#ff8737;font-weight:bold">Auto-lock</div>
     <div @click="autoLock($event)" style="display:flex;color:#ff8737">
@@ -28,6 +28,11 @@ export default {
     return {
       selected: ""
     };
+  },
+  computed: {
+    address() {
+      return this.$store.state.app.curWallet.address;
+    }
   },
   created() {
     this.selected = window.localStorage["sessionTimeout"];
@@ -52,7 +57,8 @@ export default {
   border: 1px solid #ff8737;
   border-radius: 20px;
 }
-.lock-button:hover,.selected-ui {
+.lock-button:hover,
+.selected-ui {
   background: #ff8737;
   color: white;
 }

@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     async savePay() {
-      if (JSON.stringify(this.$store.state.wallet) === "{}") {
+      if (this.$store.state.app.curWallet.address) {
         alert("TO CONTINUE, YOU MUST CONECT YOUR WALLET!");
       } else {
         this.$router.push("/word_pay");
@@ -33,7 +33,7 @@ export default {
     }
   },
   mounted() {
-    this.saveWord = this.$store.state.words;
+    this.saveWord = this.$store.state.app.words;
   }
 };
 </script>

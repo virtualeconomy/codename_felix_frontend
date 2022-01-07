@@ -1,23 +1,24 @@
 const state = {
   curWallet: {},
+  words: [],
   net: process.env.NODE_ENV === 'production' ? 'mainnet' : 'testnet',
   isSwappable: true,
   tokens: []
 }
 
 const mutations = {
-  updateAppWallet (state, params) {
-    state.curWallet = params
+  updateWallet (state, params) {
+    state.curWallet = Object.assign({}, state.curWallet, params)
   },
   updateIsSwappable (state, val) {
     state.isSwappable = val
   },
-  updateAppNet (state, net) {
+  updateNet (state, net) {
     // if (state.net !== net) {
     //   state.net = net
     // }
   },
-  updateAppTokens (state, tokens) {
+  updateTokens (state, tokens) {
     if (tokens !== undefined && tokens !== null && tokens.length > 0) {
       state.tokens = Object.assign([], tokens)
     }
