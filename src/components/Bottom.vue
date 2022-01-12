@@ -7,11 +7,18 @@
       <span>{{balance}} VSYS</span>&nbsp;
       <div @click="dialogFormVisible=true" class="dontate-btn">DONATE</div>
     </div>
-    <div class="placeholderDiv"></div>
+    <div class="placeholderDiv">
+      <div style="position: absolute;transform: translate(-180px,-8px);width: 180px;">
+        <span style="color:#ff8737">DARA</span>&nbsp;&nbsp;
+        <span style="color:white">Immutable DAO</span>
+      </div>
+    </div>
 
     <el-dialog title="Thank you for your donate!" :visible.sync="dialogFormVisible">
       <el-form>
-        <div style="font-size:20px;margin-bottom:10px">The money you donate will go into this account:</div>
+        <div
+          style="font-size:20px;margin-bottom:10px"
+        >The money you donate will go into this account:</div>
         <div style="color:#ff8737">{{address[0]}}</div>
         <div style="font-size:20px;margin-top:10px">Amount:</div>
         <el-input type="number" v-model="amount" auto-complete="off"></el-input>
@@ -44,16 +51,17 @@ export default {
   },
   methods: {
     async donate() {
-      if (!this.amount) return
-      if (JSON.stringify(this.$store.state.vsys.wallet) === "{}") return alert("TO CONTINUE, YOU MUST CONECT YOUR WALLET!")
-      if (!this.address) return alert('Invalid address')
+      if (!this.amount) return;
+      if (JSON.stringify(this.$store.state.vsys.wallet) === "{}")
+        return alert("TO CONTINUE, YOU MUST CONECT YOUR WALLET!");
+      if (!this.address) return alert("Invalid address");
       var res = await this.$store.commit("sendToken", {
         publicKey: this.$store.state.vays.wallet.publicKey,
         recipient: this.address[0],
         amount: this.amount
       });
-      this.dialogFormVisible = false
-      alert('Payment submitted successfully, please refresh page later')
+      this.dialogFormVisible = false;
+      alert("Payment submitted successfully, please refresh page later");
     }
   },
   components: {}
@@ -63,7 +71,13 @@ export default {
 <style scoped>
 @media screen and (min-width: 500px) {
   .placeholderDiv {
+    position: relative;
     width: 50px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .placeholderDiv {
+    display: none;
   }
 }
 .dontate-btn {

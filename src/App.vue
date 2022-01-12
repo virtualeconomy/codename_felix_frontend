@@ -17,6 +17,7 @@
         <keep-alive>
           <router-view class="base-ui" />
         </keep-alive>
+        <img class="tips-icon" src="@/assets/imgs/tips.png" />
         <img
           :style="{'display':watchRoute === '/gallery' ? 'none' :'block'}"
           style="position: absolute; width: 200px; left: 50%; transform: translate(-50%, -340px);"
@@ -66,7 +67,7 @@ export default {
     },
     routeTo() {
       if (this.$route.path === "/gallery") {
-        this.$router.replace('/');
+        this.$router.replace("/");
       } else {
         this.$router.push("/gallery");
       }
@@ -97,6 +98,9 @@ export default {
     background: black;
   }
   #bg {
+    display: none;
+  }
+  .tips-icon {
     display: none;
   }
 }
@@ -132,8 +136,8 @@ export default {
   font-size: 20px;
 }
 .base-ui {
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   position: relative;
   margin: auto;
   max-width: 414px;
@@ -149,5 +153,13 @@ export default {
   max-width: 414px;
   padding: 10px 20px;
   cursor: pointer;
+}
+.tips-icon {
+  width: 25px;
+  position: absolute;
+  color: white;
+  top: 80px;
+  left: 50%;
+  transform: translateX(240px);
 }
 </style>
