@@ -34,7 +34,7 @@
       ></el-button>
     </el-input>
 
-    <div style="margin:24px 0 150px 0;position:relative;z-index:2;">
+    <div style="margin:24px 0;z-index:2;">
       <div style="margin-bottom:10px;fon-size:20px;font-weight:600">Random words</div>
       <div
         :style="{color:selectedArray.indexOf(item)>-1?'#ff8737':''}"
@@ -43,6 +43,20 @@
         :key="item.id"
         @click="detail_selected(item,index)"
       >{{item.word}}</div>
+    </div>
+    <div style="display:flex;z-index:2;min-height:120px;flex-wrap:wrap;align-content:flex-start;justify-content:space-around">
+      <div
+        style="display:flex;align-items:center;height:30px;color:#ff8737"
+        v-for="item in selectedArray"
+        :key="item.id"
+      >
+        {{item.word}} &nbsp;
+        <img
+          @click="selectedArray.splice(selectedArray.indexOf(item), 1)"
+          style="cursor:pointer;width:18px"
+          src="@/assets/imgs/remove.svg"
+        />
+      </div>
     </div>
 
     <div v-if="selected === 'Save'">
@@ -74,8 +88,10 @@ export default {
       if (this.selected === "Save") {
         if (this.selectedArray.indexOf(item) > -1) {
           this.selectedArray.splice(this.selectedArray.indexOf(item), 1);
-        } else {
+        } else if(this.selectedArray.length <= 10) {
           this.selectedArray.push(item);
+        } else {
+          alert('Maximum storage is 10')
         }
       } else {
         this.$router.push({ path: "/word_detail", query: { 0: item.word } });
@@ -88,10 +104,7 @@ export default {
       }
     },
     async shuffle() {
-      var newWords = await reqRandomWords(
-        this.wordHistory.length - this.selectedArray.length
-      );
-      this.wordHistory = this.selectedArray.concat(newWords);
+      this.wordHistory = await reqRandomWords();
     }
   },
   async mounted() {

@@ -17,7 +17,7 @@
         <keep-alive>
           <router-view class="base-ui" />
         </keep-alive>
-        <img class="tips-icon" src="@/assets/imgs/tips.png" />
+        <TipTool/>
         <img
           :style="{'display':watchRoute === '/gallery' ? 'none' :'block'}"
           style="position: absolute; width: 200px; left: 50%; transform: translate(-50%, -340px);"
@@ -31,14 +31,39 @@
       <!-- bottom -->
       <Bottom class="home-footer" />
     </el-container>
+    <div
+      style="position: absolute;background-color: rgba(0, 0, 0, 0.5);z-index: 100;width: 100vw;height: 100vh;left: 0;top: 0;display:flex;justify-content:center;align-items:center"
+      v-if="isShowWarning"
+    >
+      <div
+        style="width: 65%;background: #ff8737;border-radius: 5px;text-align: center;padding: 25px;box-sizing: border-box;"
+      >
+        <img width="50" src="@/assets/imgs/settings_aboutus.svg" />
+        <h2>WARRNING</h2>To ensure best experience we strongly suggest to use desktop mode for
+        <span
+          style="color:white;font-size:14px"
+        >SAVE A WORD</span>
+        <div
+          style="margin-top:20px;width: 80px;padding: 8px;border-radius: 20px;display: inline-block;border: 1px solid;"
+          @click="isShowWarning = false"
+        >OK</div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar";
 import Bottom from "@/components/Bottom";
+import TipTool from "@/views/TipTool";
+
 export default {
   name: "app",
+  data() {
+    return {
+      isShowWarning: false
+    };
+  },
   computed: {
     watchRoute() {
       return this.$route.path;
@@ -82,13 +107,15 @@ export default {
         this.debounce(this.resetTimer(), 1000)
       );
     }
+    window.addEventListener("resize", () => {
+      if (window.innerWidth <= 500) this.isShowWarning = true;
+      else this.isShowWarning = false;
+    });
   },
-  // activated(){
-  //   this.watchRoute = this.$route.path
-  // },
   components: {
     Navbar,
-    Bottom
+    Bottom,
+    TipTool
   }
 };
 </script>
@@ -98,9 +125,6 @@ export default {
     background: black;
   }
   #bg {
-    display: none;
-  }
-  .tips-icon {
     display: none;
   }
 }
@@ -153,13 +177,5 @@ export default {
   max-width: 414px;
   padding: 10px 20px;
   cursor: pointer;
-}
-.tips-icon {
-  width: 25px;
-  position: absolute;
-  color: white;
-  top: 80px;
-  left: 50%;
-  transform: translateX(240px);
 }
 </style>
