@@ -2,7 +2,7 @@ const state = {
   curWallet: {},
   words: [],
   net: process.env.NODE_ENV === 'production' ? 'mainnet' : 'testnet',
-  isSwappable: true,
+  // isSwappable: true,
   tokens: []
 }
 
@@ -10,8 +10,8 @@ const mutations = {
   updateWallet (state, params) {
     state.curWallet = Object.assign({}, state.curWallet, params)
   },
-  updateIsSwappable (state, val) {
-    state.isSwappable = val
+  savedWords(state, params) {
+    state.words = params
   },
   updateNet (state, net) {
     // if (state.net !== net) {
@@ -25,12 +25,12 @@ const mutations = {
   }
 }
 const actions = {
-  checkAppNet ({ commit, rootState }) {
-    if (rootState.vsys.wallet.net && rootState.eth.wallet.net) {
-      const isSwappable = rootState.vsys.wallet.net === rootState.eth.wallet.net
-      commit('updateIsSwappable', isSwappable)
-    }
-  }
+  // checkAppNet ({ commit, rootState }) {
+  //   if (rootState.vsys.wallet.net && rootState.eth.wallet.net) {
+  //     const isSwappable = rootState.vsys.wallet.net === rootState.eth.wallet.net
+  //     commit('updateIsSwappable', isSwappable)
+  //   }
+  // }
 }
 
 export default {

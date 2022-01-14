@@ -36,7 +36,7 @@
       v-if="isShowWarning"
     >
       <div
-        style="width: 65%;background: #ff8737;border-radius: 5px;text-align: center;padding: 25px;box-sizing: border-box;"
+        style="width: 65%;background: #FB8809;border-radius: 5px;text-align: center;padding: 25px;box-sizing: border-box;"
       >
         <img width="50" src="@/assets/imgs/settings_aboutus.svg" />
         <h2>WARRNING</h2>To ensure best experience we strongly suggest to use desktop mode for
@@ -172,7 +172,7 @@ export default {
 .gallery-btn {
   text-align: center;
   margin: 20px auto 0 auto;
-  background: #ff8737;
+  background: #FB8809;
   color: white;
   max-width: 414px;
   padding: 10px 20px;

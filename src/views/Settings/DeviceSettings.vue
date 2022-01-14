@@ -3,17 +3,17 @@
     <i
       class="el-icon-arrow-left"
       @click="$router.go(-1)"
-      style="color:#ff8737;font-size:20px;font-weight:600"
+      style="color:#FB8809;font-size:20px;font-weight:600"
     >back to settings</i>
     <h3>Device Settings</h3>
     <div style="font-weight:bold;margin-bottom:19px">
       Wallet:
       <span
-        style="color:#ff8737;"
+        style="color:#FB8809;"
       >{{address?address.slice(0,5)+'...'+address.slice(-3):'Not connected'}}</span>
     </div>
-    <div style="margin-bottom:19px;color:#ff8737;font-weight:bold">Auto-lock</div>
-    <div @click="autoLock($event)" style="display:flex;color:#ff8737">
+    <div style="margin-bottom:19px;color:#FB8809;font-weight:bold">Auto-lock</div>
+    <div @click="autoLock($event)" style="display:flex;color:#FB8809">
       <div :class="{'selected-ui':selected==5}" class="lock-button">5 min</div>
       <div :class="{'selected-ui':selected==15}" class="lock-button">15 min</div>
       <div :class="{'selected-ui':!selected}" class="lock-button">never</div>
@@ -54,12 +54,12 @@ export default {
 .lock-button {
   margin-right: 15px;
   padding: 2px 8px;
-  border: 1px solid #ff8737;
+  border: 1px solid #FB8809;
   border-radius: 20px;
 }
 .lock-button:hover,
 .selected-ui {
-  background: #ff8737;
+  background: #FB8809;
   color: white;
 }
 </style>

@@ -4,7 +4,7 @@
     <h2>Connect your wallet</h2>
     <div
       style="padding:0 40px"
-    >To continue saving a word you must connect your {{selectedWallet}} wallet and have minimum of 1,000 DARA tokens available.</div>
+    >To continue saving a word you must connect your {{selectedWallet}} wallet.</div>
     <div
       style="display: flex;width: 100%;padding: 40px;justify-content: space-around;box-sizing: border-box;"
     >
@@ -33,6 +33,7 @@ export default {
     }
   },
   created() {
+    if (this.$store.state.eth.wallet.address && !this.$store.state.vsys.wallet.address) this.selectedWallet = 'vsys'
     // window.eventBus.$on("eventBusName", function(val) {
     //   this.selectedWallet = val;
     //   console.log(val);
@@ -60,7 +61,7 @@ export default {
   width: 100px;
 }
 .base-button-ui:hover {
-  background: #ff8737;
+  background: #FB8809;
   color: white;
 }
 </style>

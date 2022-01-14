@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <img style="height:40px" src="@/assets/imgs/header_logo.svg" />
+    <img id="felix_logo" style="height:40px" src="@/assets/imgs/header_logo.svg" />
     <div class="connect-wallet" @click="isShow = !isShow">
       <transition name="fade">
         <div class="wallet-list" v-show="isShow">
@@ -15,7 +15,7 @@
             @click="switchWallet('eth')"
           >
             <img
-              v-if="$store.state.app.curWallet.walletName === 'eth'"
+              v-if="$store.state.app.curWallet.address === address"
               src="@/assets/imgs/selected.svg"
               width="20"
             />
@@ -26,7 +26,6 @@
           <!-- Metamask Settings -->
           <div
             v-if="EthWalletList.length"
-            @click="toConnectWalletPage('eth')"
             class="wallet-list-item"
             style="color:white;cursor:pointer"
           >
@@ -54,7 +53,7 @@
             @click="switchWallet('vsys')"
           >
             <img
-              v-if="$store.state.app.curWallet.walletName === 'vsys'"
+              v-if="$store.state.app.curWallet.address === address"
               src="@/assets/imgs/selected.svg"
               width="20"
             />
@@ -65,7 +64,6 @@
           <!-- V Wallet Settings -->
           <div
             v-if="VsysWalletList.length"
-            @click="toConnectWalletPage('vsys')"
             class="wallet-list-item"
             style="color:white;cursor:pointer"
           >
@@ -101,7 +99,7 @@
         src="@/assets/imgs/user.svg"
         width="25"
       />
-      <div v-else style="color: #ff8737;cursor: pointer">
+      <div v-else style="color: #FB8809;cursor: pointer">
         <div>CONNECT WALLETS</div>
       </div>
     </div>
@@ -148,34 +146,6 @@ export default {
         this.$store.state[walletName].wallet
       );
     }
-
-    // async connectWallet() {
-    //   this.loadingWallet = true;
-    //   const res = await this.$store.dispatch("getAccount");
-    //   if (res && !res.result === false) {
-    //     alert(res.message);
-    //   }
-    //   this.loadingWallet = false;
-    // },
-    // checkDevice() {
-    //   if (document.documentElement.clientWidth < 768) {
-    //     this.isPhone = true;
-    //     this.unfold = false;
-    //   } else {
-    //     this.isPhone = false;
-    //     this.drawer = false;
-    //   }
-    // },
-    //   switchActive(index) {
-    //     const currentPath = this.$router.currentRoute.path;
-    //     if (
-    //       this.activeIndex !== index ||
-    //       currentPath !== this.switchTaps[index]
-    //     ) {
-    //       this.activeIndex = index;
-    //       this.$router.replace(this.switchTaps[index].path);
-    //     }
-    //   }
   }
 };
 </script>
@@ -194,7 +164,7 @@ export default {
 .wallet-list {
   position: absolute;
   z-index: 99;
-  background: #ff8737;
+  background: #FB8809;
   border-radius: 5px;
   opacity: 0.9;
   min-width: 229px;
@@ -202,7 +172,7 @@ export default {
   transform: translateX(-50px);
 }
 .connect_to_wallet {
-  color: #ff8737;
+  color: #FB8809;
   cursor: pointer;
 }
 .connect_to_wallet_font {

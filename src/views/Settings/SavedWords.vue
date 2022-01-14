@@ -3,13 +3,13 @@
     <i
       class="el-icon-arrow-left"
       @click="$router.go(-1)"
-      style="color:#ff8737;font-size:20px;font-weight:600"
+      style="color:#FB8809;font-size:20px;font-weight:600"
     >back to settings</i>
     <h3>Saved Words</h3>
     <div style="margin-top:19px;font-weight:bold">Here you can find full list of your saved words:</div>
     <div v-for="(item, index) in saveWord" :key="index">
         <h3>{{index+1}}.&nbsp;{{ item.word }}</h3>&nbsp;&nbsp;
-      <span style="color:#ff8737">{{ item.lexical_category }}&nbsp;</span>
+      <span style="color:#FB8809">{{ item.lexical_category }}&nbsp;</span>
     </div>
   </div>
 </template>

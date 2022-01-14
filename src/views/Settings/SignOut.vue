@@ -74,11 +74,11 @@ export default {
   width: 100px;
 }
 .base-button-ui:hover {
-  background: #ff8737;
+  background: #FB8809;
   color: white;
 }
 .active {
-  color: #ff8737;
+  color: #FB8809;
   text-align: center;
 }
 </style>

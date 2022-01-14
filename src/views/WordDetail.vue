@@ -3,7 +3,7 @@
     <i
       class="el-icon-arrow-left"
       @click="$router.go(-1)"
-      style="color:#ff8737;font-size:20px;font-weight:600"
+      style="color:#FB8809;font-size:20px;font-weight:600"
     >search</i>
     <div style="display:flex;align-items:baseline">
       <h1>{{ word }}</h1>&nbsp;&nbsp;
@@ -11,7 +11,7 @@
     </div>
     <div>
       <span
-        style="color:#ff8737"
+        style="color:#FB8809"
         v-for="(item,index) in lexical_category"
         :key="index"
       >{{ item }}&nbsp;</span>

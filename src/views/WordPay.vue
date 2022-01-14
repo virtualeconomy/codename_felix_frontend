@@ -3,16 +3,16 @@
     <i
       class="el-icon-arrow-left"
       @click="$router.go(-1)"
-      style="color:#ff8737;font-size:20px;font-weight:600"
+      style="color:#FB8809;font-size:20px;font-weight:600"
     >back</i>
     <div style="margin-top:38px">Save the words</div>
     <div
-      style="margin:18px 0;color:#ff8737"
-      v-for="(item, index) in $store.state.words"
+      style="margin:18px 0;color:#FB8809"
+      v-for="(item, index) in $store.state.app.words"
       :key="index"
     >{{ item.word.toUpperCase() }}</div>
     <div>Price</div>
-    <div style="margin-top:19px;font-size:24px;color:#ff8737">{{$store.state.words.length}} VSYS</div>
+    <div style="margin-top:19px;font-size:24px;color:#FB8809">{{$store.state.app.words.length}} VSYS</div>
 
     <div style="margin-top:38px;padding-right:100px;z-index:10">
       Saving this word means it will be stored on the chain.
@@ -29,23 +29,31 @@
 
 <script>
 import { reqGetAddress, reqGetBalance, reqSaveWordId } from "@/api/index";
-import BigNumber from 'bignumber.js'
+import BigNumber from "bignumber.js";
 
 export default {
   name: "WordPay",
+  data() {
+    return {
+      clickable: true
+    };
+  },
   methods: {
     async pay() {
+      if (!this.clickable) return;
+      this.clickable = false;
       try {
         var address = await reqGetAddress();
         console.log(address);
         var balanceData = await reqGetBalance(address[0]);
+        console.log(balanceData);
         if (
           BigNumber(balanceData.balance).isGreaterThan(
-            BigNumber(this.$store.state.words.length * 1e8)
+            BigNumber(this.$store.state.app.words.length * 1e8)
           )
         ) {
           var respond = await reqSaveWordId(
-            this.$store.state.words.map(item => item.id)
+            this.$store.state.app.words.map(item => item.id)
           );
           console.log(respond);
           this.$router.push("/word_finish");
@@ -53,9 +61,12 @@ export default {
           alert("Balance of address in backend is insufficient");
         }
       } catch (error) {
-        if (error.response && error.response.status === 500) { return alert(error.response.data) }
+        if (error.response && error.response.status === 500) {
+          return alert(error.response.data);
+        }
         return alert(error);
       }
+      this.clickable = true;
     }
   }
 };
@@ -67,13 +78,13 @@ export default {
   z-index: 2;
   padding: 5px;
   text-align: center;
-  border: 1px solid #ff8737;
+  border: 1px solid #FB8809;
   border-radius: 5px;
-  color: #ff8737;
+  color: #FB8809;
   margin: 100px 12px 0 12px;
 }
 .base-button:hover {
   color: white;
-  background: #ff8737;
+  background: #FB8809;
 }
 </style>

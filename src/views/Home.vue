@@ -28,7 +28,7 @@
       <el-button
         @click="querySearchAsync"
         class="goon"
-        style="backgroud:#ff8737"
+        style="backgroud:#FB8809"
         slot="append"
         icon="el-icon-search"
       ></el-button>
@@ -37,7 +37,7 @@
     <div style="margin:24px 0;z-index:2;">
       <div style="margin-bottom:10px;fon-size:20px;font-weight:600">Random words</div>
       <div
-        :style="{color:selectedArray.indexOf(item)>-1?'#ff8737':''}"
+        :style="{color:selectedArray.indexOf(item)>-1?'#FB8809':''}"
         class="word-ui"
         v-for="(item, index) in wordHistory"
         :key="item.id"
@@ -46,7 +46,7 @@
     </div>
     <div style="display:flex;z-index:2;min-height:120px;flex-wrap:wrap;align-content:flex-start;justify-content:space-around">
       <div
-        style="display:flex;align-items:center;height:30px;color:#ff8737"
+        style="display:flex;align-items:center;height:30px;color:#FB8809"
         v-for="item in selectedArray"
         :key="item.id"
       >
@@ -99,7 +99,7 @@ export default {
     },
     router_to_save() {
       if (this.selectedArray.length > 0) {
-        this.$store.commit("vsys/savedWords", this.selectedArray);
+        this.$store.commit("app/savedWords", this.selectedArray);
         this.$router.push("/word_save");
       }
     },
@@ -120,36 +120,36 @@ export default {
   font-family: coves-light;
 }
 .word-ui:hover {
-  background: #ff8737;
+  background: #FB8809;
   color: white;
   cursor: pointer;
   padding-left: 5px;
   border-radius: 5px;
 }
 .active {
-  color: #ff8737;
+  color: #FB8809;
   text-decoration: underline !important;
 }
 .custom-input >>> input,
 .custom-input >>> input::-webkit-input-placeholder {
-  color: #ff8737;
+  color: #FB8809;
 }
 .base-button {
   position: relative;
   z-index: 2;
   padding: 5px;
   text-align: center;
-  border: 1px solid #ff8737;
+  border: 1px solid #FB8809;
   border-radius: 5px;
-  color: #ff8737;
+  color: #FB8809;
   margin: 0 12px;
 }
 .base-button:hover {
   color: white;
-  background: #ff8737;
+  background: #FB8809;
 }
 .goon {
-  background: #ff8737 !important;
+  background: #FB8809 !important;
   border-radius: 0 5px 5px 0;
 }
 .goon >>> .el-icon-search::before {

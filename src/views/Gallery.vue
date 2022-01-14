@@ -1,6 +1,6 @@
 <template>
-  <div class="gallery" style="text-align:center">
-    <div style="font-size:48px;color:#ff8737;text-align:center;margin:10px">GALLERY</div>
+  <div class="gallery" style="text-align:center;font-family:serif;">
+    <div style="font-size:48px;color:#FB8809;text-align:center;margin:10px">GALLERY</div>
 
     <div style="max-width:1400px;margin:auto">
       <div class="checkWords">
@@ -15,14 +15,18 @@
         <div id="triangle-down"></div>
       </div>
       <div
-        style="color:white;font-family:coves-light;border-bottom:1px solid grey;padding:10px;margin-bottom:45px"
+        style="color:white;border-bottom:1px solid grey;padding:10px;margin-bottom:45px"
       >LIST OF SAVED WORDS THAT ARE NOW NFTs - 09/12/2021 - 19:57</div>
 
-      <div style="display:flex;min-height:750px;flex-wrap:wrap">
+      <div style="display:flex;min-height:750px;flex-wrap:wrap;">
         <div class="words-col" v-for="i in 6" :key="i">
           <div v-for="(j,index) in numberCol" :key="index">
-            <p style="font-size:40px">{{nftWords[i * numberCol + j].word}}</p>
-            <div class="origin-info">{{nftWords[i * numberCol + j].origin}}</div>
+            <p style="font-size:40px;font-style:italic;">{{nftWords[i * numberCol + j].word}}</p>
+            <div style="font-weight:700;">
+              <div style="margin:auto;width:80px;border-top:1px solid grey;"></div>
+              {{nftWords[i * numberCol + j].origin}}
+              <div style="margin:auto;width:80px;border-top:1px solid grey;"></div>
+            </div>
             <div style="margin-top:40px">{{nftWords[i * numberCol + j].definition}}</div>
           </div>
         </div>
@@ -50,8 +54,9 @@ export default {
       nftWords: [
         {
           word: "happy",
-          definition: "skdhlfsjhldjnflsjdnlj",
-          origin: "skdjfdfg"
+          definition:
+            "One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.",
+          origin: "by FRANZ KAFKA"
         },
         {
           word: "table",
@@ -71,7 +76,7 @@ export default {
         {
           word: "leggings",
           definition: "skdhlfsjhldjnflsjdnlj",
-          origin: "skdjfdfg"
+          origin: "A thousand unknown plants"
         },
         {
           word: "music",
@@ -80,8 +85,9 @@ export default {
         },
         {
           word: "happy",
-          definition: "skdhlfsjhldjnflsjdnlj",
-          origin: "skdjfdfg"
+          definition:
+            "One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.",
+          origin: "by FRANZ KAFKA"
         },
         {
           word: "happy",
@@ -145,7 +151,7 @@ export default {
 .origin-info {
   margin: auto;
   width: 80px;
-  border-top: 2px solid grey;
-  border-bottom: 2px solid grey;
+  border-top: 1px solid grey;
+  
 }
 </style>

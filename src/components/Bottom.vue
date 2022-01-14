@@ -2,15 +2,15 @@
   <div id="bottom" style="display:flex;align-items:center;background:black;font-size:1rem">
     <img style="padding:10px" src="@/assets/imgs/footer_logo.svg" width="30" />
     <div style="flex:1;color:white;text-align:center">
-      <span style="font-weight:bold;color:#ff8737">Balance</span>
+      <span style="font-weight:bold;color:#FB8809">Balance</span>
       &nbsp;
       <span>{{balance}} VSYS</span>&nbsp;
       <div @click="dialogFormVisible=true" class="dontate-btn">DONATE</div>
     </div>
     <div class="placeholderDiv">
       <div style="position: absolute;transform: translate(-180px,-8px);width: 180px;">
-        <span style="color:#ff8737">DARA</span>&nbsp;&nbsp;
-        <span style="color:white">Immutable DAO</span>
+        <span @click="openUrl('https://dara.global/')" style="color:#FB8809;cursor:pointer">DARA</span>&nbsp;&nbsp;
+        <span @click="openUrl('https://theimmutable.net/')" style="color:white;cursor:pointer">Immutable DAO</span>
       </div>
     </div>
 
@@ -19,7 +19,7 @@
         <div
           style="font-size:20px;margin-bottom:10px"
         >The money you donate will go into this account:</div>
-        <div style="color:#ff8737">{{address[0]}}</div>
+        <div style="color:#FB8809">{{address[0]}}</div>
         <div style="font-size:20px;margin-top:10px">Amount:</div>
         <el-input type="number" v-model="amount" auto-complete="off"></el-input>
       </el-form>
@@ -50,6 +50,9 @@ export default {
     };
   },
   methods: {
+    openUrl(url) {
+      window.open(url, "_blank");
+    },
     async donate() {
       if (!this.amount) return;
       if (JSON.stringify(this.$store.state.vsys.wallet) === "{}")
@@ -83,11 +86,11 @@ export default {
 .dontate-btn {
   display: inline-block;
   border-radius: 5px;
-  border: 1px solid #ff8737;
+  border: 1px solid #FB8809;
   padding: 5px 10px;
   cursor: pointer;
 }
 .dontate-btn:hover {
-  background: #ff8737;
+  background: #FB8809;
 }
 </style>

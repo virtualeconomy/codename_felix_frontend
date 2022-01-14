@@ -3,12 +3,12 @@
     <i
       class="el-icon-arrow-left"
       @click="$router.go(-1)"
-      style="color:#ff8737;font-size:20px;font-weight:600"
+      style="color:#FB8809;font-size:20px;font-weight:600"
     >back</i>
     <div style="margin-top:19px">You have selected these words for saving:</div>
     <div v-for="(item, index) in saveWord" :key="index">
       <h3>{{index+1}}.&nbsp;{{ item.word }}</h3>&nbsp;&nbsp;
-      <span style="color:#ff8737">{{ item.lexical_category }}&nbsp;</span>
+      <span style="color:#FB8809">{{ item.lexical_category }}&nbsp;</span>
     </div>
     <div style="min-height:100px;flex:1"></div>
     <div class="base-button" @click="savePay">SAVE THESE WORDS</div>
@@ -44,13 +44,13 @@ export default {
   z-index: 2;
   padding: 5px;
   text-align: center;
-  border: 1px solid #ff8737;
+  border: 1px solid #FB8809;
   border-radius: 5px;
-  color: #ff8737;
+  color: #FB8809;
   margin: 0 12px;
 }
 .base-button:hover {
   color: white;
-  background: #ff8737;
+  background: #FB8809;
 }
 </style>
