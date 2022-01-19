@@ -8,12 +8,13 @@
           <div class="wallet-list-item">MATAMASK WALLET</div>
           <!-- account list of eth -->
           <div
-            class="wallet-list-item"
+            class="wallet-list-item wallet_column_list"
             style="color:white;cursor:pointer"
             v-for="address in EthWalletList"
             :key="address"
             @click="switchWallet('eth')"
           >
+           <div style="width:100%">
             <img
               v-if="$store.state.app.curWallet.address === address"
               src="@/assets/imgs/selected.svg"
@@ -21,7 +22,8 @@
             />
             <i v-else style="width:20px"></i>
             &nbsp;&nbsp;
-            {{address.slice(0, 5) + "..." + address.slice(-3)}}
+            {{address.slice(0, 5) + "..." + address.slice(-3)}}</div>
+            <div class="coin_num">0 DARA</div>
           </div>
           <!-- Metamask Settings -->
           <div
@@ -46,12 +48,13 @@
           <div class="wallet-list-item">V WALLET</div>
           <!-- account list of vsys -->
           <div
-            class="wallet-list-item"
+            class="wallet-list-item wallet_column_list"
             style="color:white;cursor:pointer"
             v-for="address in VsysWalletList"
             :key="address"
             @click="switchWallet('vsys')"
           >
+          <div style="width:100%;">
             <img
               v-if="$store.state.app.curWallet.address === address"
               src="@/assets/imgs/selected.svg"
@@ -60,6 +63,8 @@
             <i v-else style="width:20px"></i>
             &nbsp;&nbsp;
             {{address.slice(0, 5) + "..." + address.slice(-3)}}
+          </div>
+            <div class="coin_num">0 VSYS</div>
           </div>
           <!-- V Wallet Settings -->
           <div
@@ -186,6 +191,17 @@ export default {
   display: flex;
   align-items: center;
   border-bottom: 1px solid gray;
+}
+.wallet_column_list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.coin_num{
+  width: 100%;
+  font-size: 15px;
+  margin-left: 85px;
+  margin-top: 5px;
 }
 .fade-leave-active {
   transition: opacity 0.3s;

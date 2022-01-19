@@ -44,7 +44,7 @@
         @click="detail_selected(item,index)"
       >{{item.word}}</div>
     </div>
-    <div style="display:flex;z-index:2;min-height:120px;flex-wrap:wrap;align-content:flex-start;justify-content:space-around">
+    <div style="display:flex;z-index:2;min-height:120px;flex-wrap:wrap;align-content:flex-start;justify-content:space-around" v-if="selected === 'Save'">
       <div
         style="display:flex;align-items:center;height:30px;color:#FB8809"
         v-for="item in selectedArray"
@@ -143,6 +143,7 @@ export default {
   border-radius: 5px;
   color: #FB8809;
   margin: 0 12px;
+  cursor: pointer;
 }
 .base-button:hover {
   color: white;
