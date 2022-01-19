@@ -20,13 +20,13 @@
     </div>
   </div>
 </template>
-      
+
 
 <script>
 export default {
   data() {
     return {
-      isShow: true,
+      isShow: false,
       currentPage: 0,
       tipTextList: [
         `<span style="color:#FB8809">Save a word</span> is home to Felix Dictionary, a non-profit and community operated project. Inspired by The Immutable and blessed by Sunny King, everyone in the world is able to immortalise words onto the V Systems blockchain and mint unique NFTs. To ensure we complete our mission of saving all words and their definitions (present and future) we gratefully accept your donations. Thanks.`,

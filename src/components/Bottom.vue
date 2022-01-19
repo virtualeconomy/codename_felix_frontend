@@ -56,7 +56,7 @@ export default {
     async donate() {
       if (!this.amount) return;
       if (JSON.stringify(this.$store.state.vsys.wallet) === "{}")
-        return alert("TO CONTINUE, YOU MUST CONECT YOUR WALLET!");
+        return alert("TO CONTINUE, YOU MUST CONNECT YOUR WALLET!");
       if (!this.address) return alert("Invalid address");
       var res = await this.$store.commit("sendToken", {
         publicKey: this.$store.state.vays.wallet.publicKey,

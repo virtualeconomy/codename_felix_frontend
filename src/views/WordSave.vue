@@ -25,8 +25,8 @@ export default {
   },
   methods: {
     async savePay() {
-      if (this.$store.state.app.curWallet.address) {
-        alert("TO CONTINUE, YOU MUST CONECT YOUR WALLET!");
+      if (!this.$store.state.app.curWallet.address) {
+        alert("TO CONTINUE, YOU MUST CONNECT YOUR WALLET!");
       } else {
         this.$router.push("/word_pay");
       }
