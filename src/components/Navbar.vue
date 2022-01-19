@@ -23,7 +23,7 @@
             <i v-else style="width:20px"></i>
             &nbsp;&nbsp;
             {{address.slice(0, 5) + "..." + address.slice(-3)}}</div>
-            <div class="coin_num">0 DARA</div>
+            <div class="coin_num">{{ daraBalance }} DARA</div>
           </div>
           <!-- Metamask Settings -->
           <div
@@ -121,8 +121,10 @@ export default {
     };
   },
   computed: {
+    daraBalance() {
+      return this.$store.state.eth.wallet.amount;
+    },
     showWalletInfo() {
-      console.log(this.$store.state.app.curWallet);
       return this.$store.state.app.curWallet.address;
     },
     EthWalletList() {
@@ -132,7 +134,6 @@ export default {
     },
     VsysWalletList() {
       var address = this.$store.state.vsys.wallet.address;
-      console.log(address)
       if (address) return [address];
       else return [];
     }
