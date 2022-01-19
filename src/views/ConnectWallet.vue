@@ -42,7 +42,9 @@ export default {
   methods: {
     async getAccount() {
       const res = await this.$store.dispatch(`${this.selectedWallet}/getAccount`);
-      this.$router.replace("/");
+      if (!Object.prototype.hasOwnProperty.call(res, 'result') && ! res.result) {
+        this.$router.replace("/");
+      }
       // this.$confirm("Are you sure to sign out?", "", {
       //   confirmButtonText: "Yes",
       //   cancelButtonText: "No",

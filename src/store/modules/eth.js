@@ -112,12 +112,45 @@ const actions = {
       const params = {}
       const walletInfo = await ethereum.request({ method: 'eth_chainId' })
       const chainId = {
-        '0x1': 'mainnet',
+        '0x1': 'Ethereum Mainnet',
         '0x3': 'testnet',
         '0x4': 'testnet',
         '0x5': 'testnet',
-        '0x2a': 'testnet'
+        '0x2a': 'testnet',
+        '0x38': 'Binance Smart Chain'
       }
+      if (walletInfo != "0x38") {
+        try {
+          await ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x38' }],
+          });
+        } catch (switchError) {
+          if (switchError.code === 4902) {
+            try {
+              await ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                  {
+                    chainId: '0x38',
+                    chainName: 'Binance Smart Chain Mainnet',
+                    rpcUrls: ['https://bsc-dataseed1.ninicoin.io'] /* ... */,
+                  },
+                ],
+              });
+            } catch (addError) {
+              err.message = 'failed to switch chain'
+              return err
+              // handle "add" error
+            }
+          } else if (switchError.code === 4001) {
+            // User rejected the request
+            err.message = 'failed to load wallet'
+            return err
+          }
+        }
+      }
+
       if (walletInfo) {
         params.net = chainId[walletInfo] || 'testnet'
         commit('updateChain', params.net)
