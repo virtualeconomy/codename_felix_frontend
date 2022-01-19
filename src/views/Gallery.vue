@@ -126,7 +126,7 @@ export default {
 .checkWords {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
 }
 #triangle-down {
   width: 0;
@@ -152,6 +152,6 @@ export default {
   margin: auto;
   width: 80px;
   border-top: 1px solid grey;
-  
+
 }
 </style>

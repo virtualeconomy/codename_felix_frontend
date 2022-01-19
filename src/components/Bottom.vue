@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <el-dialog title="Thank you for your donate!" :visible.sync="dialogFormVisible">
+    <el-dialog title="Thank you for your donation!" :visible.sync="dialogFormVisible">
       <el-form>
         <div
           style="font-size:20px;margin-bottom:10px"

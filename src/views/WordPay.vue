@@ -19,11 +19,11 @@
       <br />
       <br />After the word is saved you can also mint it as an NFT.
       <br />
-      <br />Click PAY to continue
+      <br />Click SAVE to continue
     </div>
     <div style="min-height:100px;flex:1"></div>
 
-    <div class="base-button" @click="pay">PAY</div>
+    <div class="base-button" @click="pay">SAVE</div>
   </div>
 </template>
 
