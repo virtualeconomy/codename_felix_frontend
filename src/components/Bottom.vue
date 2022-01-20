@@ -1,5 +1,5 @@
 <template>
-  <div id="bottom" style="display:flex;align-items:center;background:black;font-size:1rem">
+  <div id="bottom" style="position:fixed;bottom:0;width:100vw;display:flex;align-items:center;background:black;font-size:1rem">
     <img style="padding:10px" src="@/assets/imgs/footer_logo.svg" width="30" />
     <div style="flex:1;color:white;text-align:center">
       <span style="font-weight:bold;color:#FB8809">Balance</span>

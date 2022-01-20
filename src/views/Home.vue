@@ -37,7 +37,7 @@
     <div style="margin:24px 0;z-index:2;">
       <div style="margin-bottom:10px;fon-size:20px;font-weight:600">Random words</div>
       <div
-        :style="{color:selectedArray.indexOf(item)>-1?'#FB8809':''}"
+        :style="{color:selectedArray.find((value)=>value.id===item.id)?'#FB8809':''}"
         class="word-ui"
         v-for="(item, index) in wordHistory"
         :key="item.id"
@@ -52,7 +52,7 @@
       >
         {{item.word}} &nbsp;
         <img
-          @click="selectedArray.splice(selectedArray.indexOf(item), 1)"
+          @click="selectedArray.splice(selectedArray.findIndex(value => value.id === item.id), 1)"
           style="cursor:pointer;width:18px"
           src="@/assets/imgs/remove.svg"
         />
@@ -75,9 +75,18 @@ export default {
       wordHistory: [],
       links: [],
       value: "",
-      selected: "Dic",
-      selectedArray: []
+      selected: "Dic"
     };
+  },
+  computed: {
+    selectedArray: {
+      get() {
+        return this.$store.state.app.words;
+      },
+      set(v) {
+        return v;
+      }
+    }
   },
   methods: {
     querySearchAsync() {
@@ -86,15 +95,19 @@ export default {
     },
     detail_selected(item, index) {
       if (this.selected === "Save") {
-        if (this.selectedArray.indexOf(item) > -1) {
-          this.selectedArray.splice(this.selectedArray.indexOf(item), 1);
-        } else if(this.selectedArray.length <= 10) {
+        console.log(this.selectedArray.find(value => value === item))
+        if (this.selectedArray.find(value => value.id === item.id)) {
+          this.selectedArray.splice(
+            this.selectedArray.findIndex(value => value.id === item.id),
+            1
+          );
+        } else if (this.selectedArray.length < 10) {
           this.selectedArray.push(item);
         } else {
-          alert('Maximum storage is 10')
+          alert("Maximum storage is 10");
         }
       } else {
-        this.$router.push({ path: "/word_detail", query: { 0: item.word } });
+        this.$router.push({ path: "/word_detail", query: { 0: item } });
       }
     },
     router_to_save() {
@@ -110,6 +123,9 @@ export default {
   async mounted() {
     this.wordHistory = await reqRandomWords();
     console.log(this.wordHistory);
+  },
+  activated() {
+    this.selectedArray = this.$store.state.app.words;
   }
 };
 </script>
@@ -120,37 +136,37 @@ export default {
   font-family: coves-light;
 }
 .word-ui:hover {
-  background: #FB8809;
+  background: #fb8809;
   color: white;
   cursor: pointer;
   padding-left: 5px;
   border-radius: 5px;
 }
 .active {
-  color: #FB8809;
+  color: #fb8809;
   text-decoration: underline !important;
 }
 .custom-input >>> input,
 .custom-input >>> input::-webkit-input-placeholder {
-  color: #FB8809;
+  color: #fb8809;
 }
 .base-button {
   position: relative;
   z-index: 2;
   padding: 5px;
   text-align: center;
-  border: 1px solid #FB8809;
+  border: 1px solid #fb8809;
   border-radius: 5px;
-  color: #FB8809;
+  color: #fb8809;
   margin: 0 12px;
   cursor: pointer;
 }
 .base-button:hover {
   color: white;
-  background: #FB8809;
+  background: #fb8809;
 }
 .goon {
-  background: #FB8809 !important;
+  background: #fb8809 !important;
   border-radius: 0 5px 5px 0;
 }
 .goon >>> .el-icon-search::before {

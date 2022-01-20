@@ -6,7 +6,7 @@
       style="color:#FB8809;font-size:20px;font-weight:600"
     >search</i>
     <div style="display:flex;align-items:baseline">
-      <h1>{{ word }}</h1>&nbsp;&nbsp;
+      <h1>{{ word.word }}</h1>&nbsp;&nbsp;
       <!-- <i class="el-icon-star-off" style="color:black;"></i> -->
     </div>
     <div>
@@ -16,8 +16,19 @@
         :key="index"
       >{{ item }}&nbsp;</span>
       <h3>DEFINITIONS</h3>
-      <div style="position:relative;z-index:2;font-family:coves-light" v-for="(item, index) in wordDetail" :key="item.id">{{index + 1}}. {{item.definition}}</div>
+      <div style="min-height:500px">
+        <div
+          style="position:relative;z-index:2;font-family:coves-light"
+          v-for="(item, index) in wordDetail"
+          :key="item.id"
+        >{{index + 1}}. {{item.definition}}</div>
+      </div>
     </div>
+    <div
+      v-if="selectedArray.find((value)=>value.id === word.id)"
+      class="base-button"
+    >WORDS IS ALREADY SAVE</div>
+    <div v-else @click="save" class="base-button">SELECT THESE WORDS</div>
   </div>
 </template>
 
@@ -33,6 +44,14 @@ export default {
     };
   },
   computed: {
+    selectedArray: {
+      get() {
+        return this.$store.state.app.words;
+      },
+      set(v) {
+        return v;
+      }
+    },
     lexical_category() {
       var array = [];
       for (var i = 0; i < this.wordDetail.length; i++) {
@@ -46,7 +65,20 @@ export default {
   watch: {
     async word(newValue) {
       if (newValue && JSON.stringify(newValue) !== "{}") {
-        this.wordDetail = await reqLemmaWord(newValue);
+        this.wordDetail = await reqLemmaWord(newValue.word);
+      }
+    }
+  },
+  methods: {
+    save() {
+      console.log("save");
+      if (
+        this.selectedArray.length < 10 &&
+        !this.selectedArray.find(value => value.id === this.word.id)
+      ) {
+        this.selectedArray.push(this.word);
+      } else {
+        alert("Maximum storage is 10");
       }
     }
   },
@@ -60,4 +92,18 @@ export default {
 </script>
 
 <style scoped>
+.base-button {
+  position: relative;
+  z-index: 2;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #fb8809;
+  border-radius: 5px;
+  color: #fb8809;
+  margin: 0 12px;
+}
+.base-button:hover {
+  color: white;
+  background: #fb8809;
+}
 </style>
