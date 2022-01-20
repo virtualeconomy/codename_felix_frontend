@@ -33,6 +33,7 @@ var actions = {
     }
     if (!window.vsys || !window.vsys.isInstalled) {
       err.message = 'plugin is not installed'
+      alert('plugin is not installed !')
       return err
     }
     const params = {}

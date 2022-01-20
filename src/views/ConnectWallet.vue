@@ -62,6 +62,7 @@ export default {
   border-radius: 50px;
   padding: 5px;
   width: 100px;
+  cursor: pointer;
 }
 .base-button-ui:hover {
   background: #FB8809;

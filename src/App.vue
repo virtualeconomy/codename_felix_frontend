@@ -158,6 +158,7 @@ export default {
 #app {
   font-family: "coves-bold";
   font-size: 20px;
+  padding-bottom: 100px;
 }
 .base-ui {
   display: flex;
