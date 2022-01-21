@@ -63,10 +63,12 @@ export default {
     }
   },
   watch: {
-    async word(newValue) {
-      if (newValue && JSON.stringify(newValue) !== "{}") {
-        this.wordDetail = await reqLemmaWord(newValue.word);
-      }
+    $route: {
+      async handler() {
+        this.word = this.$route.query[0];
+        this.wordDetail = await reqLemmaWord(this.word.word);
+      },
+      immediate: true
     }
   },
   methods: {
@@ -81,12 +83,6 @@ export default {
         alert("Maximum storage is 10");
       }
     }
-  },
-  mounted() {
-    this.word = this.$route.query[0];
-  },
-  activated() {
-    this.word = this.$route.query[0];
   }
 };
 </script>

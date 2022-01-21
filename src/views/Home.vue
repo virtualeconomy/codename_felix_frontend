@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { reqRandomWords } from "@/api/index";
+import { reqRandomWords, reqLemmaWord } from "@/api/index";
 
 export default {
   data() {
@@ -89,9 +89,10 @@ export default {
     }
   },
   methods: {
-    querySearchAsync() {
-      console.log(this.value);
-      this.$router.push({ path: "/word_detail", query: { 0: this.value } });
+    async querySearchAsync() {
+      var wordDetail = await reqLemmaWord(this.value);
+      if (!wordDetail.length) return alert('Unfortunately, the word was not found')
+      this.$router.push({ path: "/word_detail", query: { 0: wordDetail[0]} });
     },
     detail_selected(item, index) {
       if (this.selected === "Save") {
