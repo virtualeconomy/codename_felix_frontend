@@ -7,13 +7,13 @@
     />
     <div
       v-show="isShow"
-      style="background:#171616;border-radius:5px;padding:8px 16px;position:absolute;top:120px;left:50%;transform:translateX(240px);width:150px;text-align:center;color:white;font-family:'coves-light'"
+      style="background:#171616;border-radius:5px;padding:8px 16px;position:absolute;top:120px;left:50%;transform:translateX(240px);width:300px;min-height:300px;text-align:center;color:white;font-family:'coves-light'"
     >
       <div style="text-align:right">
         <img @click="isShow=false" width="16px" src="@/assets/imgs/remove_white.svg" />
       </div>
-      <div v-html="tipTextList[currentPage]"></div>
-      <div style="display:flex;justify-content:space-around;margin-top:8px">
+      <div style="min-height:246px" v-html="tipTextList[currentPage]"></div>
+      <div style="display:flex;justify-content:space-between;margin-top:8px">
         <i class="el-icon-arrow-left" @click="lastPage"></i>&nbsp;&nbsp;
         <i class="el-icon-arrow-right" @click="nextPage"></i>
       </div>

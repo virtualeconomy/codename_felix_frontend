@@ -1,5 +1,5 @@
 <template>
-  <div id="bottom" style="position:fixed;bottom:0;width:100vw;display:flex;align-items:center;background:black;font-size:1rem">
+  <div id="bottom">
     <img style="padding:10px" src="@/assets/imgs/footer_logo.svg" width="30" />
     <div style="flex:1;color:white;text-align:center">
       <span style="font-weight:bold;color:#FB8809">Balance</span>
@@ -10,11 +10,17 @@
     <div class="placeholderDiv">
       <div style="position: absolute;transform: translate(-180px,-8px);width: 180px;">
         <span @click="openUrl('https://dara.global/')" style="color:#FB8809;cursor:pointer">DARA</span>&nbsp;&nbsp;
-        <span @click="openUrl('https://theimmutable.net/')" style="color:white;cursor:pointer">Immutable DAO</span>
+        <span
+          @click="openUrl('https://theimmutable.net/')"
+          style="color:white;cursor:pointer"
+        >Immutable DAO</span>
       </div>
     </div>
-
-    <el-dialog title="Thank you for your donation!" :visible.sync="dialogFormVisible" append-to-body>
+    <el-dialog
+      title="Thank you for your donation!"
+      :visible.sync="dialogFormVisible"
+      append-to-body
+    >
       <el-form>
         <div
           style="font-size:20px;margin-bottom:10px"
@@ -23,7 +29,7 @@
         <div style="font-size:20px;margin-top:10px">Amount:</div>
         <el-input type="number" v-model="amount" auto-complete="off"></el-input>
       </el-form>
-      <div slot="footer" class="dialog-footer">
+      <div slot="footer" style="display:flex;justify-content:space-between">
         <el-button @click="dialogFormVisible = false">Cancel</el-button>
         <el-button type="primary" @click="donate">Confirm</el-button>
       </div>
@@ -83,14 +89,26 @@ export default {
     display: none;
   }
 }
+#bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  background: black;
+  font-size: 1rem;
+}
+.el-dialog__wrapper >>> .el-dialog {
+  min-width: 300px;
+}
 .dontate-btn {
   display: inline-block;
   border-radius: 5px;
-  border: 1px solid #FB8809;
+  border: 1px solid #fb8809;
   padding: 5px 10px;
   cursor: pointer;
 }
 .dontate-btn:hover {
-  background: #FB8809;
+  background: #fb8809;
 }
 </style>

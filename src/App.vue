@@ -17,7 +17,7 @@
         <keep-alive>
           <router-view class="base-ui" />
         </keep-alive>
-        <TipTool/>
+        <TipTool />
         <img
           :style="{'display':watchRoute === '/gallery' ? 'none' :'block'}"
           style="position: absolute; width: 200px; left: 50%; transform: translate(-50%, -340px);"
@@ -31,21 +31,25 @@
       <!-- bottom -->
       <Bottom class="home-footer" />
     </el-container>
+    <!-- WARNING -->
     <div
-      style="position: absolute;background-color: rgba(0, 0, 0, 0.5);z-index: 100;width: 100vw;height: 100vh;left: 0;top: 0;display:flex;justify-content:center;align-items:center"
-      v-if="isShowWarning"
+      class="isShowWarning"
+      style="position:absolute;background-color:rgba(0, 0, 0, 0.5);z-index:100;width:100vw;height:100vh;left:0;top:0;display:flex;justify-content:center;align-items:center"
     >
       <div
-        style="width: 65%;background: #FB8809;border-radius: 5px;text-align: center;padding: 25px;box-sizing: border-box;"
+        style="width:65%;background:#FB8809;border-radius:5px;text-align:center;padding:25px;box-sizing:border-box;"
       >
         <img width="50" src="@/assets/imgs/settings_aboutus.svg" />
-        <h2>WARRNING</h2>To ensure best experience we strongly suggest to use desktop mode for
-        <span
-          style="color:white;font-size:14px"
-        >SAVE A WORD</span>
+        <h2>WARNING</h2>
+        <div>
+          To ensure best experience we strongly suggest to use desktop mode for
+          <span
+            style="color:white;font-size:14px"
+          >SAVE A WORD</span>
+        </div>
         <div
           style="margin-top:20px;width: 80px;padding: 8px;border-radius: 20px;display: inline-block;border: 1px solid;"
-          @click="isShowWarning = false"
+          @click="close"
         >OK</div>
       </div>
     </div>
@@ -96,6 +100,9 @@ export default {
       } else {
         this.$router.push("/gallery");
       }
+    },
+    close() {
+      document.querySelector(".isShowWarning").style.display = 'none';
     }
   },
   mounted() {
@@ -107,10 +114,6 @@ export default {
         this.debounce(this.resetTimer(), 1000)
       );
     }
-    window.addEventListener("resize", () => {
-      if (window.innerWidth <= 500) this.isShowWarning = true;
-      else this.isShowWarning = false;
-    });
   },
   components: {
     Navbar,
@@ -154,6 +157,9 @@ export default {
     margin: 20px auto !important;
     border-radius: 10px;
   }
+  .isShowWarning {
+    display: none !important;
+  }
 }
 #app {
   font-family: "coves-bold";
@@ -173,7 +179,7 @@ export default {
 .gallery-btn {
   text-align: center;
   margin: 20px auto 0 auto;
-  background: #FB8809;
+  background: #fb8809;
   color: white;
   max-width: 414px;
   padding: 10px 20px;
