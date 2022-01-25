@@ -104,8 +104,8 @@ const actions = {
     }
     const { ethereum } = window
     if (!ethereum || !ethereum.isMetaMask) {
-      err.message = 'plugin is not installed'
-      alert('plugin is not installed !')
+      err.message = 'Metamask extension is not installed'
+      alert('Metamask extension is not installed!')
       return err
     }
     err.message = 'failed to load wallet'

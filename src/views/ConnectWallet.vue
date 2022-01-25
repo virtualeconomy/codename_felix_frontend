@@ -42,7 +42,7 @@ export default {
   methods: {
     async getAccount() {
       const res = await this.$store.dispatch(`${this.selectedWallet}/getAccount`);
-      const balanceRes = await this.$store.dispatch(`${this.selectedWallet}/getBalance`, "0x0255af6c9f86F6B0543357baCefA262A2664f80F")
+      await this.$store.dispatch(`${this.selectedWallet}/getBalance`, "0x0255af6c9f86F6B0543357baCefA262A2664f80F")
       if (!Object.prototype.hasOwnProperty.call(res, 'result') && ! res.result) {
         this.$router.replace("/");
       }

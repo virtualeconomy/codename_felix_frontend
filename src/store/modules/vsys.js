@@ -32,8 +32,8 @@ var actions = {
       result: false
     }
     if (!window.vsys || !window.vsys.isInstalled) {
-      err.message = 'plugin is not installed'
-      alert('plugin is not installed !')
+      err.message = 'V wallet extension is not installed'
+      alert('V wallet extension is not installed!')
       return err
     }
     const params = {}

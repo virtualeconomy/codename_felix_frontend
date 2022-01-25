@@ -5,7 +5,7 @@
       <transition name="fade">
         <div class="wallet-list" v-show="isShow">
           <!-- MATAMASK WALLET -->
-          <div class="wallet-list-item">MATAMASK WALLET</div>
+          <div class="wallet-list-item">METAMASK WALLET</div>
           <!-- account list of eth -->
           <div
             class="wallet-list-item wallet_column_list"
@@ -41,7 +41,7 @@
             style="color:white;cursor:pointer"
           >
             <i class="el-icon-circle-plus-outline"></i>&nbsp;&nbsp;
-            Connect Matamask
+            Connect Metamask
           </div>
 
           <!-- V WALLET -->
