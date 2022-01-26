@@ -4,7 +4,7 @@
     <h2>Connect your wallet</h2>
     <div
       style="padding:0 40px"
-    >To continue saving a word you must connect your {{selectedWallet}} wallet.</div>
+    >To continue saving a word you must connect your {{selectedWallet == 'vsys' ? selectedWallet : 'DARA (metamask)'}} wallet.</div>
     <div
       style="display: flex;width: 100%;padding: 40px;justify-content: space-around;box-sizing: border-box;"
     >
