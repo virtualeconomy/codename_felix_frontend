@@ -65,7 +65,7 @@ export default {
         return alert("TO CONTINUE, YOU MUST CONNECT YOUR WALLET!");
       if (!this.address) return alert("Invalid address");
       var res = await this.$store.commit("sendToken", {
-        publicKey: this.$store.state.vays.wallet.publicKey,
+        publicKey: this.$store.state.vsys.wallet.publicKey,
         recipient: this.address[0],
         amount: this.amount
       });
@@ -97,6 +97,7 @@ export default {
   align-items: center;
   background: black;
   font-size: 1rem;
+  z-index: 99;
 }
 .el-dialog__wrapper >>> .el-dialog {
   min-width: 300px;

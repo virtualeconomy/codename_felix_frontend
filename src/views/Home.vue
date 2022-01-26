@@ -124,9 +124,6 @@ export default {
   async mounted() {
     this.wordHistory = await reqRandomWords();
     console.log(this.wordHistory);
-  },
-  activated() {
-    this.selectedArray = this.$store.state.app.words;
   }
 };
 </script>
