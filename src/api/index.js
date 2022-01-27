@@ -22,15 +22,18 @@ export const reqSaveWordId = (wordIdArr) => request({
   url: '/save',
   data: wordIdArr
 })
-export const createPair = async (pairInfo, whichWallet = 'vsys') => {
-  const res = await signRequest(pairInfo, whichWallet)
-  return request({
-    url: '/swap/pair/create',
-    method: 'post',
-    data: res.body,
-    headers: {
-      publicKey: res.publicKey,
-      signature: res.signature
-    }
-  })
-}
+export const reqInspectNft = (data) => request({
+  method: 'post',
+  url: '/inspectnft',
+  // data: ["TWst8k7NgZNzxiXSncex9uvSzt4kSaJZE8qwUDg8M", "TWst8k7NgZNzxiXSncex9uvSzt4kSaJZE8r3B7pgP"]
+})
+export const reqFetchDefinition = (data) => request({
+  method: 'post',
+  url: '/fetchdefinition',
+  // data: ["G5whHKUn6ejMQAnLEjMH6cqNnkeZMkc4kAbiFtKYmZkG"]
+})
+export const reqMakeNft = (wordIdArr) => request({
+  method: 'post',
+  url: '/makenft',
+  data: {'ATwAPYdriV1aRXAWYmLViW7Y6K5Jb5bZDkT': wordIdArr}
+})
