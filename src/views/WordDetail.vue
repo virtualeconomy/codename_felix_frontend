@@ -27,7 +27,7 @@
     <div
       v-if="selectedArray.find((value)=>value.id === word.id)"
       class="base-button"
-    >WORDS IS ALREADY SAVE</div>
+    >Sorry, this word has already been saved.</div>
     <div v-else @click="save" class="base-button">SELECT THESE WORDS</div>
   </div>
 </template>
