@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <img id="felix_logo" @click="$router.push('/')" style="height:40px" src="@/assets/imgs/header_logo.svg" />
+    <img id="felix_logo" @click="$router.push('/')" style="height:40px;cursor:pointer" src="@/assets/imgs/header_logo.svg" />
     <div class="connect-wallet" @click="isShow = !isShow">
       <transition name="fade">
         <div class="wallet-list" v-show="isShow">

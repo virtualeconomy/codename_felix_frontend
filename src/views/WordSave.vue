@@ -6,7 +6,7 @@
       style="color:#FB8809;font-size:20px;font-weight:600"
     >back</i>
     <div style="margin-top:19px">You have selected these words for saving:</div>
-    <div v-for="(item, index) in saveWord" :key="index">
+    <div v-for="(item, index) in saveWord" :key="index" style="z-index:1">
       <h3>{{index+1}}.&nbsp;{{ item.word }}</h3>&nbsp;&nbsp;
       <span style="color:#FB8809">{{ item.lexical_category }}&nbsp;</span>
     </div>
