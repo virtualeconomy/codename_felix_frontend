@@ -28,7 +28,7 @@
       v-if="selectedArray.find((value)=>value.id === word.id)"
       class="base-button"
     >WORD IS ADDED TO SAVE LIST.</div>
-    <div v-else @click="save" class="base-button">SELECT This WORD</div>
+    <div v-else @click="save" class="base-button">SELECT THIS WORD</div>
   </div>
 </template>
 
