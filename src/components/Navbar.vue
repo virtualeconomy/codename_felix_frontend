@@ -104,7 +104,7 @@
         src="@/assets/imgs/user.svg"
         width="25"
       />
-      <div v-else style="color: #FB8809;cursor: pointer">
+      <div v-else style="color: #FB8809;cursor: pointer;" class="connect_text_btn">
         <div>CONNECT WALLETS</div>
       </div>
     </div>
@@ -155,7 +155,7 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="less">
 .navbar {
   margin: 15px 0;
   width: 100%;
@@ -172,7 +172,6 @@ export default {
   z-index: 99;
   background: #FB8809;
   border-radius: 5px;
-  opacity: 0.9;
   min-width: 229px;
   top: 34px;
   transform: translateX(-50px);
@@ -206,5 +205,18 @@ export default {
 }
 .fade-leave-active {
   transition: opacity 0.3s;
+}
+@media screen and(max-width:768px) {
+  .navbar {
+    .wallet-list {
+  top: 44px;
+  transform: translateX(-0px);
+}
+.connect_text_btn{
+    font-size: 16px;
+    font-weight: bolder;
+    text-align: right;
+}
+  }
 }
 </style>

@@ -135,7 +135,7 @@ export default {
 }
 .word-ui:hover {
   background: #fb8809;
-  color: white;
+  color: white !important;
   cursor: pointer;
   padding-left: 5px;
   border-radius: 5px;
