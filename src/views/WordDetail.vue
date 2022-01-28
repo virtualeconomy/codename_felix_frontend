@@ -66,6 +66,7 @@ export default {
     $route: {
       async handler() {
         this.word = this.$route.query[0];
+        consolo.log(this.word)
         this.wordDetail = await reqLemmaWord(this.word.word);
       },
       immediate: true

@@ -10,12 +10,27 @@
         <h3 style="color:#FB8809">{{ item.word.toUpperCase() }}</h3>
     </div>
     <div style="min-height:100px;flex:1"></div>
-    <div class="base-button" @click="shuffle">MINT NFTs</div>
+    <div class="base-button" @click="mintNFT">MINT NFTs</div>
     <div class="base-button" @click="router_to_save" style="margin-top:20px">VIEW YOUR SAVED WORDS</div>
   </div>
 </template>
 
 <script>
+import { reqMakeNft } from "@/api/index";
+
+export default {
+  name: 'WordFinish',
+  data() {
+    return {}
+  },
+  methods: {
+    async mintNFT() {
+      // Need to check that the word has been saved
+      await reqMakeNft(this.$store.state.app.words.map(item => item.id))
+      alert('NFT has been generated')
+    }
+  }
+}
 </script>
 
 <style scoped>
