@@ -108,8 +108,6 @@ export default {
   border: 1px solid #fb8809;
   padding: 5px 10px;
   cursor: pointer;
-}
-.dontate-btn:hover {
   background: #fb8809;
 }
 </style>

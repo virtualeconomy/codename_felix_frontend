@@ -195,7 +195,7 @@ const actions = {
       const tokenInst = new web3Tool.eth.Contract(tokenABI, contractId)
       const amount = await tokenInst.methods.balanceOf(address).call()
       const params = {
-        amount: BigNumber(amount).dividedBy(1e18).toFixed(3).toString()
+        amount: BigNumber(amount).dividedBy(1e18).toFixed(2).toString()
       }
       commit('updateWallet', params)
       return params

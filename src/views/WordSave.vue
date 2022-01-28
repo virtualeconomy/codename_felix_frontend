@@ -6,7 +6,7 @@
       style="color:#FB8809;font-size:20px;font-weight:600"
     >back</i>
     <div style="margin-top:19px">You have selected these words for saving:</div>
-    <div v-for="(item, index) in saveWord" :key="index">
+    <div v-for="(item, index) in saveWord" :key="index" style="z-index:1">
       <h3>{{index+1}}.&nbsp;{{ item.word }}</h3>&nbsp;&nbsp;
       <span style="color:#FB8809">{{ item.lexical_category }}&nbsp;</span>
     </div>
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import BigNumber from "bignumber.js";
 export default {
   name: "WordSave",
   data() {
@@ -26,7 +27,9 @@ export default {
   methods: {
     async savePay() {
       if (!this.$store.state.app.curWallet.address) {
-        alert("TO CONTINUE, YOU MUST CONNECT YOUR WALLET!");
+        alert("TO CONTINUE, YOU MUST CONNECT YOUR WALLET");
+      } else if (!this.$store.state.eth.wallet.amount || BigNumber(this.$store.state.eth.wallet.amount).isEqualTo(0)) {
+        alert("Balance of DARA token is zero");
       } else {
         this.$router.push("/word_pay");
       }
