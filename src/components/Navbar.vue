@@ -82,7 +82,7 @@
             style="color:white;cursor:pointer"
           >
             <i class="el-icon-circle-plus-outline"></i>&nbsp;&nbsp;
-            Connect Vsys
+            Connect V Wallet
           </div>
 
           <!-- Felix Settings -->

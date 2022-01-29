@@ -44,18 +44,16 @@ export default {
       this.clickable = false;
       try {
         var address = await reqGetAddress();
-        console.log(address);
         var balanceData = await reqGetBalance(address[0]);
-        console.log(balanceData);
         if (
           BigNumber(balanceData.balance).isGreaterThan(
             BigNumber(this.$store.state.app.words.length * 1e8)
           )
         ) {
-          var respond = await reqSaveWordId(
+          var response = await reqSaveWordId(
             this.$store.state.app.words.map(item => item.id)
           );
-          console.log(respond);
+          console.log(response);
           this.$router.push("/word_finish");
         } else {
           alert("Balance of address in backend is insufficient");
