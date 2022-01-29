@@ -1,4 +1,5 @@
 import bs58 from 'bs58'
+import BigNumber from "bignumber.js";
 
 var state = {
   wallet: {},
@@ -40,6 +41,11 @@ var actions = {
     const walletInfo = await window.vsys.request({ method: 'info' })
     if (walletInfo && walletInfo.result === true) {
       params.net = walletInfo.network.toLowerCase()
+    }
+
+    const amountRes = await window.vsys.request({ method: 'amount' })
+    if (amountRes.message === 'OK' && amountRes.result) {
+      params.amount = BigNumber(amountRes.amount).toFixed(2).toString()
     }
 
     const res = await window.vsys.request({ method: 'publicKey' })

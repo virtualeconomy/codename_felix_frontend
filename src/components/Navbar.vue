@@ -4,7 +4,7 @@
     <div class="connect-wallet" @click="isShow = !isShow">
       <transition name="fade">
         <div class="wallet-list" v-show="isShow">
-          <!-- MATAMASK WALLET -->
+          <!-- METAMASK WALLET -->
           <div class="wallet-list-item">METAMASK WALLET</div>
           <!-- account list of eth -->
           <div
@@ -20,22 +20,22 @@
               src="@/assets/imgs/selected.svg"
               width="20"
             />
-            <i v-else style="width:20px"></i>
+            <i v-else style="margin-left:25px;width:20px"></i>
             &nbsp;&nbsp;
             {{address.slice(0, 5) + "..." + address.slice(-3)}}</div>
             <div class="coin_num">{{ daraBalance }} DARA</div>
           </div>
           <!-- Metamask Settings -->
+<!--          <div-->
+<!--            v-if="EthWalletList.length"-->
+<!--            class="wallet-list-item"-->
+<!--            style="color:white;cursor:pointer"-->
+<!--          >-->
+<!--            <img src="@/assets/imgs/more.svg" width="20" />&nbsp;&nbsp;-->
+<!--            Metamask Settings-->
+<!--          </div>-->
           <div
-            v-if="EthWalletList.length"
-            class="wallet-list-item"
-            style="color:white;cursor:pointer"
-          >
-            <img src="@/assets/imgs/more.svg" width="20" />&nbsp;&nbsp;
-            Metamask Settings
-          </div>
-          <div
-            v-else
+            v-if="!EthWalletList.length"
             @click="toConnectWalletPage('eth')"
             class="wallet-list-item"
             style="color:white;cursor:pointer"
@@ -60,23 +60,23 @@
               src="@/assets/imgs/selected.svg"
               width="20"
             />
-            <i v-else style="width:20px"></i>
+            <i v-else style="margin-left:25px;width:20px"></i>
             &nbsp;&nbsp;
             {{address.slice(0, 5) + "..." + address.slice(-3)}}
           </div>
-            <div class="coin_num">0 VSYS</div>
+            <div class="coin_num">{{ vsysBalance }} VSYS</div>
           </div>
           <!-- V Wallet Settings -->
+<!--          <div-->
+<!--            v-if="VsysWalletList.length"-->
+<!--            class="wallet-list-item"-->
+<!--            style="color:white;cursor:pointer"-->
+<!--          >-->
+<!--            <img src="@/assets/imgs/more.svg" width="20" />&nbsp;&nbsp;-->
+<!--            V Wallet Settings-->
+<!--          </div>-->
           <div
-            v-if="VsysWalletList.length"
-            class="wallet-list-item"
-            style="color:white;cursor:pointer"
-          >
-            <img src="@/assets/imgs/more.svg" width="20" />&nbsp;&nbsp;
-            V Wallet Settings
-          </div>
-          <div
-            v-else
+            v-if="!VsysWalletList.length"
             @click="toConnectWalletPage('vsys')"
             class="wallet-list-item"
             style="color:white;cursor:pointer"
@@ -111,8 +111,6 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
-import Vue from "vue";
 export default {
   name: "navbar",
   data() {
@@ -123,6 +121,9 @@ export default {
   computed: {
     daraBalance() {
       return this.$store.state.eth.wallet.amount;
+    },
+    vsysBalance() {
+      return this.$store.state.vsys.wallet.amount;
     },
     showWalletInfo() {
       return this.$store.state.app.curWallet.address;

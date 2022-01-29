@@ -39,7 +39,6 @@ export default {
   },
   methods: {
     autoLock(e) {
-      console.log(e.path[0].childNodes[0].data);
       this.selected = window.localStorage["sessionTimeout"] = {
         "5 min": 5,
         "15 min": 15,
