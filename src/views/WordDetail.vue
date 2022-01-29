@@ -24,6 +24,8 @@
         >{{index + 1}}. {{item.definition}}</div>
       </div>
     </div>
+    <div @click="addWord" class="base-add-button"  style="border:1px solid #000;color:#000;" v-if="selectedArray.find(value => value.id === word.id)">WORD IS ALREADY SAVED</div>
+    <div @click="addWord" class="base-add-button" v-else>ADD WORD TO LIST FOR SAVE </div>
     <div @click="save" class="base-button">SAVE THIS WORD</div>
   </div>
 </template>
@@ -78,14 +80,22 @@ export default {
         this.$store.commit("app/savedWords", [this.word]);
         this.$router.push("/word_pay");
       }
-      // if (
-      //   this.selectedArray.length < 10 &&
-      //   !this.selectedArray.find(value => value.id === this.word.id)
-      // ) {
-      //   this.selectedArray.push(this.word);
-      // } else {
-      //   alert("Maximum storage is 10");
-      // }
+    },
+    addWord(){
+      if (
+        this.selectedArray.length < 10 &&
+        !this.selectedArray.find(value => value.id === this.word.id)
+      ) {
+        this.selectedArray.push(this.word);
+        this.$router.push({
+          path:'/',
+          query:{
+            menu:'save'
+          }
+        })
+      } else {
+        alert("Maximum storage is 10");
+      }
     }
   }
 };
@@ -97,13 +107,23 @@ export default {
   z-index: 2;
   padding: 5px;
   text-align: center;
-  border: 1px solid #fb8809;
   border-radius: 5px;
-  color: #fb8809;
   margin: 0 12px;
-}
-.base-button:hover {
-  color: white;
   background: #fb8809;
+  color: white;
+  cursor: pointer;
+}
+
+.base-add-button{
+  position: relative;
+  z-index: 2;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 0 12px;
+  color: #fb8809;
+  cursor: pointer;
+  border: 1px solid #fb8809;
+  margin-bottom: 10px;
 }
 </style>

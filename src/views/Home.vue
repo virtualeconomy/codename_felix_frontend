@@ -88,6 +88,14 @@ export default {
       }
     }
   },
+  created(){
+    if(this.$route.query.menu && this.$route.query.menu === 'save'){
+      console.log('xx')
+      this.selected = 'Save'
+      this.$forceUpdate()
+      console.log(this.selected)
+    }
+  },
   methods: {
     async querySearchAsync() {
       var wordDetail = await reqLemmaWord(this.value);
