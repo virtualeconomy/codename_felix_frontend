@@ -4,7 +4,7 @@
     <div style="flex:1;color:white;text-align:center">
       <span style="font-weight:bold;color:#FB8809">Balance</span>
       &nbsp;
-      <span>{{balance}} VSYS</span>&nbsp;
+      <span>{{ balance }} VSYS</span>&nbsp;
       <div @click="dialogFormVisible=true" class="dontate-btn">DONATE</div>
     </div>
     <div class="placeholderDiv">
@@ -25,7 +25,7 @@
         <div
           style="font-size:20px;margin-bottom:10px"
         >The money you donate will go into this account:</div>
-        <div style="color:#FB8809">{{address[0]}}</div>
+        <div style="color:#FB8809">{{ address }}</div>
         <div style="font-size:20px;margin-top:10px">Amount:</div>
         <el-input type="number" v-model="amount" auto-complete="off"></el-input>
       </el-form>
@@ -39,13 +39,16 @@
 
 <script>
 import BigNumber from "bignumber.js";
-import { reqGetAddress, reqGetBalance } from "@/api/index";
+import { reqGetBalance } from "@/api/index";
 
 export default {
   async created() {
-    this.address = await reqGetAddress();
-    const balanceData = await reqGetBalance(this.address[0]);
-    this.balance = BigNumber(balanceData.balance).dividedBy(1e8);
+    const balanceData = await reqGetBalance();
+    if (balanceData) {
+      let values = Object.values(balanceData)
+      this.address = values[0].address
+      this.balance = BigNumber(values[0].balance).dividedBy(1e8)
+    }
   },
   data() {
     return {

@@ -4,18 +4,13 @@ export const reqRandomWords = (n=10) => request({
   method: 'GET',
   url: `/random/${n}`
 })
-
 export const reqLemmaWord = (word) => request({
   method: 'GET',
   url: '/lemma/' + word,
 })
-export const reqGetAddress = () => request({
+export const reqGetBalance = () => request({
   method: 'GET',
-  url: '/address',
-})
-export const reqGetBalance = (address) => request({
-  method: 'GET',
-  url: '/balance/' + address,
+  url: '/balance',
 })
 export const reqSaveWordId = (wordIdArr) => request({
   method: 'post',

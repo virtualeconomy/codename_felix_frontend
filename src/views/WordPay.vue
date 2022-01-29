@@ -43,10 +43,14 @@ export default {
       if (!this.clickable) return;
       this.clickable = false;
       try {
-        var address = await reqGetAddress();
-        var balanceData = await reqGetBalance(address[0]);
+        var balance = 0
+        const balanceData = await reqGetBalance();
+        if (balanceData) {
+          let values = Object.values(balanceData)
+          balance = BigNumber(values[0].balance).dividedBy(1e8)
+        }
         if (
-          BigNumber(balanceData.balance).isGreaterThan(
+          BigNumber(balance).isGreaterThan(
             BigNumber(this.$store.state.app.words.length * 1e8)
           )
         ) {
@@ -56,7 +60,7 @@ export default {
           console.log(response);
           this.$router.push("/word_finish");
         } else {
-          alert("Balance of address in backend is insufficient");
+          alert("Balance of address in Backend is insufficient");
         }
       } catch (error) {
         if (error.response && error.response.status === 500) {
