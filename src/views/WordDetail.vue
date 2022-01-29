@@ -24,16 +24,13 @@
         >{{index + 1}}. {{item.definition}}</div>
       </div>
     </div>
-    <div
-      v-if="selectedArray.find((value)=>value.id === word.id)"
-      class="base-button"
-    >WORD IS ADDED TO SAVE LIST.</div>
-    <div v-else @click="save" class="base-button">SELECT THIS WORD</div>
+    <div @click="save" class="base-button">SAVE THIS WORD</div>
   </div>
 </template>
 
 <script>
 import { reqLemmaWord } from "@/api/index";
+import BigNumber from "bignumber.js";
 
 export default {
   name: "WordDetail",
@@ -66,7 +63,6 @@ export default {
     $route: {
       async handler() {
         this.word = this.$route.query[0];
-        consolo.log(this.word)
         this.wordDetail = await reqLemmaWord(this.word.word);
       },
       immediate: true
@@ -74,15 +70,22 @@ export default {
   },
   methods: {
     save() {
-      console.log("save");
-      if (
-        this.selectedArray.length < 10 &&
-        !this.selectedArray.find(value => value.id === this.word.id)
-      ) {
-        this.selectedArray.push(this.word);
+      if (!this.$store.state.app.curWallet.address) {
+        alert("TO CONTINUE, YOU MUST CONNECT YOUR WALLET");
+      } else if (!this.$store.state.eth.wallet.amount || BigNumber(this.$store.state.eth.wallet.amount).isEqualTo(0)) {
+        alert("Balance of DARA token is zero");
       } else {
-        alert("Maximum storage is 10");
+        this.$store.commit("app/savedWords", [this.word]);
+        this.$router.push("/word_pay");
       }
+      // if (
+      //   this.selectedArray.length < 10 &&
+      //   !this.selectedArray.find(value => value.id === this.word.id)
+      // ) {
+      //   this.selectedArray.push(this.word);
+      // } else {
+      //   alert("Maximum storage is 10");
+      // }
     }
   }
 };
