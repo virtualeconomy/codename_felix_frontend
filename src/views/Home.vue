@@ -88,12 +88,14 @@ export default {
       }
     }
   },
-  created(){
-    if(this.$route.query.menu && this.$route.query.menu === 'save'){
-      console.log('xx')
-      this.selected = 'Save'
-      this.$forceUpdate()
-      console.log(this.selected)
+  watch: {
+    $route: {
+      async handler() {
+        if(this.$route.query.menu && this.$route.query.menu === 'save'){
+          this.selected = 'Save'
+        }
+      },
+      immediate: true
     }
   },
   methods: {

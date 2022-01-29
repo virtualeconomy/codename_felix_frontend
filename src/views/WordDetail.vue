@@ -24,9 +24,9 @@
         >{{index + 1}}. {{item.definition}}</div>
       </div>
     </div>
-    <div @click="addWord" class="base-add-button"  style="border:1px solid #000;color:#000;" v-if="selectedArray.find(value => value.id === word.id)">WORD IS ALREADY SAVED</div>
+    <div @click="$router.push('/')" class="base-add-button"  style="border:1px solid #000;color:#000;" v-if="isSaved">WORD IS ALREADY SAVED</div>
     <div @click="addWord" class="base-add-button" v-else>ADD WORD TO LIST FOR SAVE </div>
-    <div @click="save" class="base-button">SAVE THIS WORD</div>
+    <div @click="save" class="base-button" v-if="!isSaved">SAVE THIS WORD</div>
   </div>
 </template>
 
@@ -39,7 +39,8 @@ export default {
   data() {
     return {
       wordDetail: [],
-      word: ""
+      word: "",
+      isSaved: false,
     };
   },
   computed: {
@@ -64,8 +65,13 @@ export default {
   watch: {
     $route: {
       async handler() {
-        this.word = this.$route.query[0];
-        this.wordDetail = await reqLemmaWord(this.word.word);
+        if (this.$router.currentRoute.name === 'Detail') {
+          this.word = this.$route.query[0];
+          if (this.word && this.word.blockchainhash) {
+            this.isSaved = true
+          }
+          this.wordDetail = await reqLemmaWord(this.word.word);
+        }
       },
       immediate: true
     }
