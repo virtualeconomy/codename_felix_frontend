@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import { reqInspectNft, reqInspectNft } from "@/api/index";
+import { reqInspectNft } from "@/api/index";
 
 export default {
   name: "SavedWords",
