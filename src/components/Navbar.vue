@@ -20,7 +20,7 @@
               src="@/assets/imgs/selected.svg"
               width="20"
             />
-            <i v-else style="width:20px"></i>
+            <i v-else style="margin-left:25px;width:20px"></i>
             &nbsp;&nbsp;
             {{address.slice(0, 5) + "..." + address.slice(-3)}}</div>
             <div class="coin_num">{{ daraBalance }} DARA</div>
@@ -60,7 +60,7 @@
               src="@/assets/imgs/selected.svg"
               width="20"
             />
-            <i v-else style="width:20px"></i>
+            <i v-else style="margin-left:25px;width:20px"></i>
             &nbsp;&nbsp;
             {{address.slice(0, 5) + "..." + address.slice(-3)}}
           </div>
