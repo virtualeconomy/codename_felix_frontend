@@ -8,9 +8,9 @@ export const reqLemmaWord = (word) => request({
   method: 'GET',
   url: '/lemma/' + word,
 })
-export const reqGetBalance = (address) => request({
+export const reqGetBalance = () => request({
   method: 'GET',
-  url: '/balance/' + address,
+  url: '/balance',
 })
 export const reqSaveWordId = (wordIdArr) => request({
   method: 'post',
