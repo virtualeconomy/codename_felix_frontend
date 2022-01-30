@@ -20,5 +20,11 @@ npm run build
 npm run lint
 ```
 
+
+### deploy on gh-page
+```
+npm run deploy
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
