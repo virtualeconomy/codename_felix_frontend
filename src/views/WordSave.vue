@@ -28,8 +28,8 @@ export default {
     async savePay() {
       if (!this.$store.state.app.curWallet.address) {
         alert("TO CONTINUE, YOU MUST CONNECT YOUR WALLET");
-      } else if (!this.$store.state.eth.wallet.amount || BigNumber(this.$store.state.eth.wallet.amount).isEqualTo(0)) {
-        alert("Balance of DARA token is zero");
+      // } else if (!this.$store.state.eth.wallet.amount || BigNumber(this.$store.state.eth.wallet.amount).isEqualTo(0)) {
+      //   alert("Balance of DARA token is zero");
       } else {
         this.$router.push("/word_pay");
       }

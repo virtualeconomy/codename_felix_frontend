@@ -24,10 +24,29 @@ export default {
     return {}
   },
   methods: {
+    // debounce(func, delay) {// for 3 min
+    //   let timeout;
+    //   return function() {
+    //     clearTimeout(timeout);
+    //     timeout = setTimeout(() => {
+    //       func.apply(this, arguments);
+    //     }, delay);
+    //   };
+    // },
+    
     async mintNFT() {
-      // Need to check that the word has been saved
-      await reqMakeNft(this.$store.state.app.words.map(item => item.id))
-      alert('NFT has been generated')
+      try {
+        // {"ATwAPYdriV1aRXAWYmLViW7Y6K5Jb5bZDkT": [1432, 1433, 1434]}
+        var reqArg = {[this.$store.state.vsys.address]: this.$store.state.app.words.map(item => item.id)}
+        var result = await reqMakeNft(reqArg)
+        localStorage['nft'] = JSON.stringify(result)
+        console.log(result)
+        alert('NFT has been generated')
+      } catch (error) {
+        // Need to check that the word has been saved
+        alert(error)
+      }
+      
     }
   }
 }

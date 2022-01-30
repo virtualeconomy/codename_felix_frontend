@@ -8,9 +8,9 @@ export const reqLemmaWord = (word) => request({
   method: 'GET',
   url: '/lemma/' + word,
 })
-export const reqGetBalance = () => request({
+export const reqGetBalance = (address) => request({
   method: 'GET',
-  url: '/balance',
+  url: '/balance/' + address,
 })
 export const reqSaveWordId = (wordIdArr) => request({
   method: 'post',
@@ -20,15 +20,17 @@ export const reqSaveWordId = (wordIdArr) => request({
 export const reqInspectNft = (data) => request({
   method: 'post',
   url: '/inspectnft',
+  data
   // data: ["TWst8k7NgZNzxiXSncex9uvSzt4kSaJZE8qwUDg8M", "TWst8k7NgZNzxiXSncex9uvSzt4kSaJZE8r3B7pgP"]
 })
 export const reqFetchDefinition = (data) => request({
   method: 'post',
   url: '/fetchdefinition',
-  // data: ["G5whHKUn6ejMQAnLEjMH6cqNnkeZMkc4kAbiFtKYmZkG"]
+  data
 })
-export const reqMakeNft = (wordIdArr) => request({
+export const reqMakeNft = (data) => request({
   method: 'post',
   url: '/makenft',
-  data: {'ATwAPYdriV1aRXAWYmLViW7Y6K5Jb5bZDkT': wordIdArr}
+  data
+  // data: {'ATwAPYdriV1aRXAWYmLViW7Y6K5Jb5bZDkT': wordIdArr}
 })

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { reqGetAddress, reqGetBalance, reqSaveWordId } from "@/api/index";
+import { reqGetBalance, reqSaveWordId } from "@/api/index";
 import BigNumber from "bignumber.js";
 
 export default {
