@@ -36,9 +36,8 @@ export default {
     
     async mintNFT() {
       try {
-        // {"ATwAPYdriV1aRXAWYmLViW7Y6K5Jb5bZDkT": [1432, 1433, 1434]}
-        var reqArg = {[this.$store.state.vsys.address]: this.$store.state.app.words.map(item => item.id)}
-        var result = await reqMakeNft(reqArg)
+        let reqArg = { [this.$store.state.vsys.wallet.address] : this.$store.state.app.words.map(item => item.id)}
+        let result = await reqMakeNft(reqArg)
         localStorage['nft'] = JSON.stringify(result)
         console.log(result)
         alert('NFT has been generated')

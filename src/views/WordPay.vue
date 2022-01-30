@@ -51,7 +51,7 @@ export default {
         }
         if (
           BigNumber(balance).isGreaterThan(
-            BigNumber(this.$store.state.app.words.length * 1e8)
+            BigNumber(this.$store.state.app.words.length)
           )
         ) {
           var response = await reqSaveWordId(
