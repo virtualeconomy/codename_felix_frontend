@@ -26,6 +26,7 @@
         <div
           @click="routeTo"
           class="gallery-btn"
+          v-show="$route.path === '/' || $route.path === '/gallery'"
         >{{watchRoute === '/gallery' ? 'BACK TO DICTIONARY' : 'GALLERY'}}</div>
       </el-main>
       <!-- bottom -->
