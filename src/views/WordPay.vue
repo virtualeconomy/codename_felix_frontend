@@ -64,9 +64,10 @@ export default {
         }
       } catch (error) {
         if (error.response && error.response.status === 500) {
-          return alert(error.response.data);
+          alert(error.response.data);
+        } else {
+          alert(error);
         }
-        return alert(error);
       }
       this.clickable = true;
     }

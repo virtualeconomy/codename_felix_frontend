@@ -45,6 +45,7 @@ export default {
   },
   methods: {},
   mounted() {
+    this.saveWord = JSON.parse(localStorage['save_words'] || [])
     // this.saveWord = this.$store.state.words;
     // need to backend api
   }
