@@ -63,6 +63,7 @@ export default {
           document.querySelector(".tip-tool").style.display = "block";
         }
       },
+      immediate: true
     }
   },
   methods: {

@@ -2,34 +2,38 @@
   <div>
     <i
       class="el-icon-arrow-left"
-      @click="$router.go(-1)"
-      style="color: #fb8809; font-size: 20px; font-weight: 600"
-      >search</i
-    >
-    <div style="display: flex; align-items: baseline">
-      <h1>{{ word.word }}</h1>
-      &nbsp;&nbsp;
-      <!-- <i class="el-icon-star-off" style="color:black;"></i> -->
-    </div>
-    <div>
-      <span
-        style="color: #fb8809"
-        v-for="(item, index) in lexical_category"
-        :key="index"
-        >{{ item }}&nbsp;</span
-      >
-      <h3>DEFINITIONS</h3>
-      <div style="min-height: 500px">
-        <div
-          style="position: relative; z-index: 2; font-family: coves-light"
-          v-for="(item, index) in wordDetail"
-          :key="item.id"
-        >
-          {{ index + 1 }}. {{ item.definition }}
+      @click="$router.push('/')"
+      style="color:#FB8809;font-size:20px;font-weight:600"
+    >search</i>
+    <div class="scroll_container">
+      <div style="display:flex;align-items:baseline">
+        <h1>{{ word.word }}</h1>&nbsp;&nbsp;
+        <!-- <i class="el-icon-star-off" style="color:black;"></i> -->
+      </div>
+      <div>
+        <span
+          style="color:#FB8809"
+          v-for="(item,index) in lexical_category"
+          :key="index"
+        >{{ item }}&nbsp;</span>
+        <h3>DEFINITIONS</h3>
+        <div style="min-height:500px">
+          <div
+            style="position:relative;z-index:2;font-family:coves-light"
+            v-for="(item, index) in wordDetail"
+            :key="item.id"
+          >{{index + 1}}. {{item.definition}}</div>
         </div>
       </div>
     </div>
-    <div @click="save" class="base-button">SAVE THIS WORD</div>
+    <div
+      @click="$router.push('/')"
+      class="base-add-button"
+      style="border:1px solid #000;color:#000;"
+      v-if="isSaved"
+    >WORD IS ALREADY SAVED</div>
+    <div @click="addWord" class="base-add-button" v-else>ADD WORD TO LIST FOR SAVE</div>
+    <div @click="save" class="base-button" v-if="!isSaved">SAVE THIS WORD</div>
   </div>
 </template>
 
@@ -43,6 +47,7 @@ export default {
     return {
       wordDetail: [],
       word: "",
+      isSaved: false
     };
   },
   computed: {
@@ -52,7 +57,7 @@ export default {
       },
       set(v) {
         return v;
-      },
+      }
     },
     lexical_category() {
       var array = [];
@@ -62,40 +67,53 @@ export default {
         }
       }
       return array;
-    },
+    }
   },
   watch: {
     $route: {
       async handler() {
-        if (this.$route.query[0]) {
+        if (this.$router.currentRoute.name === "Detail") {
           this.word = this.$route.query[0];
-          console.log(this.word);
+          if (this.word && this.word.blockchainhash) {
+            this.isSaved = true;
+          }
           this.wordDetail = await reqLemmaWord(this.word.word);
         }
       },
-      immediate: true,
-    },
+      immediate: true
+    }
   },
   methods: {
     save() {
       if (!this.$store.state.app.curWallet.address) {
         alert("TO CONTINUE, YOU MUST CONNECT YOUR WALLET");
-      // } else if (!this.$store.state.eth.wallet.amount || BigNumber(this.$store.state.eth.wallet.amount).isEqualTo(0)) {
-      //   alert("Balance of DARA token is zero");
+      } else if (
+        !this.$store.state.eth.wallet.amount ||
+        BigNumber(this.$store.state.eth.wallet.amount).isEqualTo(0)
+      ) {
+        alert("Balance of DARA token is zero");
       } else {
         this.$store.commit("app/savedWords", [this.word]);
         this.$router.push("/word_pay");
       }
-      // if (
-      //   this.selectedArray.length < 10 &&
-      //   !this.selectedArray.find(value => value.id === this.word.id)
-      // ) {
-      //   this.selectedArray.push(this.word);
-      // } else {
-      //   alert("Maximum storage is 10");
-      // }
     },
-  },
+    addWord() {
+      if (
+        this.selectedArray.length < 10 &&
+        !this.selectedArray.find(value => value.id === this.word.id)
+      ) {
+        this.selectedArray.push(this.word);
+        this.$router.push({
+          path: "/",
+          query: {
+            menu: "save"
+          }
+        });
+      } else {
+        alert("Maximum storage is 10");
+      }
+    }
+  }
 };
 </script>
 
@@ -105,13 +123,30 @@ export default {
   z-index: 2;
   padding: 5px;
   text-align: center;
-  border: 1px solid #fb8809;
   border-radius: 5px;
-  color: #fb8809;
   margin: 0 12px;
-}
-.base-button:hover {
-  color: white;
   background: #fb8809;
+  color: white;
+  cursor: pointer;
+}
+
+.base-add-button {
+  position: relative;
+  z-index: 2;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 0 12px;
+  color: #fb8809;
+  cursor: pointer;
+  border: 1px solid #fb8809;
+  margin-bottom: 10px;
+}
+
+.scroll_container{
+  overflow: scroll;
+  z-index: 2;
+  height: 600px;
+  margin-bottom: 50px;
 }
 </style>

@@ -4,14 +4,9 @@ export const reqRandomWords = (n=10) => request({
   method: 'GET',
   url: `/random/${n}`
 })
-
 export const reqLemmaWord = (word) => request({
   method: 'GET',
   url: '/lemma/' + word,
-})
-export const reqGetAddress = () => request({
-  method: 'GET',
-  url: '/address',
 })
 export const reqGetBalance = (address) => request({
   method: 'GET',
@@ -31,9 +26,9 @@ export const reqInspectNft = (data) => request({
 export const reqFetchDefinition = (data) => request({
   method: 'post',
   url: '/fetchdefinition',
-  // data: ["G5whHKUn6ejMQAnLEjMH6cqNnkeZMkc4kAbiFtKYmZkG"]
+  data
 })
-export const reqMakeNft = (wordIdArr) => request({
+export const reqMakeNft = (data) => request({
   method: 'post',
   url: '/makenft',
   data
