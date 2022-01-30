@@ -25,6 +25,7 @@ export const reqSaveWordId = (wordIdArr) => request({
 export const reqInspectNft = (data) => request({
   method: 'post',
   url: '/inspectnft',
+  data
   // data: ["TWst8k7NgZNzxiXSncex9uvSzt4kSaJZE8qwUDg8M", "TWst8k7NgZNzxiXSncex9uvSzt4kSaJZE8r3B7pgP"]
 })
 export const reqFetchDefinition = (data) => request({
@@ -35,5 +36,6 @@ export const reqFetchDefinition = (data) => request({
 export const reqMakeNft = (wordIdArr) => request({
   method: 'post',
   url: '/makenft',
-  data: {'ATwAPYdriV1aRXAWYmLViW7Y6K5Jb5bZDkT': wordIdArr}
+  data
+  // data: {'ATwAPYdriV1aRXAWYmLViW7Y6K5Jb5bZDkT': wordIdArr}
 })

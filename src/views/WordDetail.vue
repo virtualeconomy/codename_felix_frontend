@@ -3,25 +3,30 @@
     <i
       class="el-icon-arrow-left"
       @click="$router.go(-1)"
-      style="color:#FB8809;font-size:20px;font-weight:600"
-    >search</i>
-    <div style="display:flex;align-items:baseline">
-      <h1>{{ word.word }}</h1>&nbsp;&nbsp;
+      style="color: #fb8809; font-size: 20px; font-weight: 600"
+      >search</i
+    >
+    <div style="display: flex; align-items: baseline">
+      <h1>{{ word.word }}</h1>
+      &nbsp;&nbsp;
       <!-- <i class="el-icon-star-off" style="color:black;"></i> -->
     </div>
     <div>
       <span
-        style="color:#FB8809"
-        v-for="(item,index) in lexical_category"
+        style="color: #fb8809"
+        v-for="(item, index) in lexical_category"
         :key="index"
-      >{{ item }}&nbsp;</span>
+        >{{ item }}&nbsp;</span
+      >
       <h3>DEFINITIONS</h3>
-      <div style="min-height:500px">
+      <div style="min-height: 500px">
         <div
-          style="position:relative;z-index:2;font-family:coves-light"
+          style="position: relative; z-index: 2; font-family: coves-light"
           v-for="(item, index) in wordDetail"
           :key="item.id"
-        >{{index + 1}}. {{item.definition}}</div>
+        >
+          {{ index + 1 }}. {{ item.definition }}
+        </div>
       </div>
     </div>
     <div @click="save" class="base-button">SAVE THIS WORD</div>
@@ -37,7 +42,7 @@ export default {
   data() {
     return {
       wordDetail: [],
-      word: ""
+      word: "",
     };
   },
   computed: {
@@ -47,7 +52,7 @@ export default {
       },
       set(v) {
         return v;
-      }
+      },
     },
     lexical_category() {
       var array = [];
@@ -57,23 +62,26 @@ export default {
         }
       }
       return array;
-    }
+    },
   },
   watch: {
     $route: {
       async handler() {
-        this.word = this.$route.query[0];
-        this.wordDetail = await reqLemmaWord(this.word.word);
+        if (this.$route.query[0]) {
+          this.word = this.$route.query[0];
+          console.log(this.word);
+          this.wordDetail = await reqLemmaWord(this.word.word);
+        }
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
   methods: {
     save() {
       if (!this.$store.state.app.curWallet.address) {
         alert("TO CONTINUE, YOU MUST CONNECT YOUR WALLET");
-      } else if (!this.$store.state.eth.wallet.amount || BigNumber(this.$store.state.eth.wallet.amount).isEqualTo(0)) {
-        alert("Balance of DARA token is zero");
+      // } else if (!this.$store.state.eth.wallet.amount || BigNumber(this.$store.state.eth.wallet.amount).isEqualTo(0)) {
+      //   alert("Balance of DARA token is zero");
       } else {
         this.$store.commit("app/savedWords", [this.word]);
         this.$router.push("/word_pay");
@@ -86,8 +94,8 @@ export default {
       // } else {
       //   alert("Maximum storage is 10");
       // }
-    }
-  }
+    },
+  },
 };
 </script>
 
