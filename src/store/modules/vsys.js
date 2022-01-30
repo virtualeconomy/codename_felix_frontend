@@ -34,7 +34,6 @@ var actions = {
     }
     if (!window.vsys || !window.vsys.isInstalled) {
       err.message = 'V wallet extension is not installed'
-      alert('V wallet extension is not installed!')
       return err
     }
     const params = {}
@@ -53,6 +52,7 @@ var actions = {
       params.address = res.address
       params.publicKey = res.publicKey
       params.walletName = 'vsys'
+      params.result = true
       commit('updateWallet', params)
       // update curWallet in app modules
       commit('app/updateWallet', params, { root: true })

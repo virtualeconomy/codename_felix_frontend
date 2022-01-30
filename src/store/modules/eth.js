@@ -105,7 +105,6 @@ const actions = {
     const { ethereum } = window
     if (!ethereum || !ethereum.isMetaMask) {
       err.message = 'Metamask extension is not installed'
-      alert('Metamask extension is not installed!')
       return err
     }
     err.message = 'failed to load wallet'
@@ -161,6 +160,7 @@ const actions = {
       if (res && res.length > 0) {
         params.address = res[0]
         params.walletName = 'eth'
+        params.result = true
         commit('updateWallet', params)
         commit('app/updateWallet', params, { root: true })
         dispatch('app/checkAppNet', null, { root: true })
