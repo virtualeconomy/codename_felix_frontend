@@ -6,7 +6,7 @@
       style="color:#FB8809;font-size:20px;font-weight:600"
     >back to home screen</i>
     <div style="margin-top:39px">You have successfully saved the words</div>
-    <div v-for="(item, index) in $store.app.state.words" :key="index">
+    <div v-for="(item, index) in $store.state.app.words" :key="index">
         <h3 style="color:#FB8809">{{ item.word.toUpperCase() }}</h3>
     </div>
     <div style="min-height:100px;flex:1"></div>
@@ -24,22 +24,25 @@ export default {
     return {}
   },
   methods: {
-    // debounce(func, delay) {// for 3 min
-    //   let timeout;
-    //   return function() {
-    //     clearTimeout(timeout);
-    //     timeout = setTimeout(() => {
-    //       func.apply(this, arguments);
-    //     }, delay);
-    //   };
-    // },
-    
     async mintNFT() {
       try {
         let reqArg = { [this.$store.state.vsys.wallet.address] : this.$store.state.app.words.map(item => item.id)}
         let result = await reqMakeNft(reqArg)
-        localStorage['nft'] = JSON.stringify(result)
-        console.log(result)
+        let nfts = result['nft']
+        let sents = result['sent']
+        let nftRecords = JSON.parse(window.localStorage.getItem('nfts'))
+        nftRecords = nftRecords ? nftRecords : []
+        for (let i = 0; i< nfts.length; i ++) {
+          let nft = {
+            "nftId": nfts[i][1][1],
+            "nftTransId": nfts[i][1][0],
+            "wordId": nfts[i][0],
+            "sentId": sents[i][0],
+          }
+          nftRecords.push(nft)
+        }
+        nftRecords = JSON.stringify(nftRecords)
+        window.localStorage.setItem('nfts', nftRecords)
         alert('NFT has been generated')
       } catch (error) {
         // Need to check that the word has been saved
