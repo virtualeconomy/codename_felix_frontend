@@ -32,7 +32,7 @@
       style="border:1px solid #000;color:#000;"
       v-if="isSaved"
     >WORD IS ALREADY SAVED</div>
-    <div @click="addWord" class="base-add-button" v-else>ADD WORD TO LIST FOR SAVE</div>
+    <div @click="addWord" class="base-add-button" v-else>ADD WORD TO LIST FOR SAVING</div>
     <div @click="save" class="base-button" v-if="!isSaved">SAVE THIS WORD</div>
   </div>
 </template>
