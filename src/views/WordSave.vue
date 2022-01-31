@@ -30,8 +30,11 @@ export default {
 
       if (!this.$store.state.app.curWallet.address) {
         alert("TO CONTINUE, YOU MUST CONNECT YOUR WALLET");
-      // } else if (!this.$store.state.eth.wallet.amount || BigNumber(this.$store.state.eth.wallet.amount).isEqualTo(0)) {
-      //   alert("Balance of DARA token is zero");
+      } else if (
+          !this.$store.state.eth.wallet.amount ||
+          BigNumber(this.$store.state.eth.wallet.amount).isLessThan(5000)
+      ) {
+        alert(`Balance of DARA is ${ this.$store.state.eth.wallet.amount }. You should have at least 5000 DARA to continue!`);
       } else {
         this.$router.push("/word_pay");
       }
