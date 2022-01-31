@@ -74,6 +74,7 @@ export default {
       async handler() {
         if (this.$router.currentRoute.name === "Detail") {
           this.word = this.$route.query[0];
+          this.isSaved = false;
           if (this.word && this.word.blockchainhash) {
             this.isSaved = true;
           }
