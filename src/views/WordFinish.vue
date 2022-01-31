@@ -6,7 +6,7 @@
       style="color:#FB8809;font-size:20px;font-weight:600"
     >back to home screen</i>
     <div style="margin-top:39px">You have successfully saved the words</div>
-    <div v-for="(item, index) in $store.app.state.words" :key="index">
+    <div v-for="(item, index) in $store.state.app.words" :key="index">
         <h3 style="color:#FB8809">{{ item.word.toUpperCase() }}</h3>
     </div>
     <div style="min-height:100px;flex:1"></div>

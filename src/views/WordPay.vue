@@ -57,7 +57,12 @@ export default {
           var response = await reqSaveWordId(
             this.$store.state.app.words.map(item => item.id)
           );
-          console.log(response);
+          var words = this.$store.state.app.words
+          var save_words = JSON.parse(localStorage['save_words'])
+          for (var eachWord of words){
+            save_words.push(eachWord)
+          }
+          localStorage['save_words'] = (JSON.stringify(save_words)) 
           this.$router.push("/word_finish");
         } else {
           alert("Balance of address in Backend is insufficient");
