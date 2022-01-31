@@ -58,6 +58,9 @@ export default {
             this.$store.state.app.words.map(item => item.id)
           );
           var words = this.$store.state.app.words
+          if (!window.localStorage.getItem('save_words')){
+            window.localStorage.setItem('save_words', "[]")
+          }
           var save_words = JSON.parse(localStorage['save_words'])
           for (var eachWord of words){
             save_words.push(eachWord)
