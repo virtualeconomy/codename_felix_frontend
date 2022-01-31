@@ -26,7 +26,7 @@
           style="font-size:20px;margin-bottom:10px"
         >The money you donate will go into this account:</div>
         <div style="color:#FB8809">{{ address }}</div>
-        <div style="font-size:20px;margin-top:10px">Amount:</div>
+        <div style="font-size:20px;margin-top:10px">Amount VSYS:</div>
         <el-input type="number" v-model="amount" auto-complete="off"></el-input>
       </el-form>
       <div slot="footer" style="display:flex;justify-content:space-between">
