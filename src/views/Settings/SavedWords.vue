@@ -20,26 +20,6 @@ export default {
   data() {
     return {
       saveWord: [
-        {
-          blockchainhash: null,
-          definition: "uptight",
-          definition_no: 0,
-          etymology_no: 0,
-          id: 751314,
-          lexical_category: "Adjective",
-          nfthash: null,
-          word: "up-tight"
-        },
-        {
-          blockchainhash: null,
-          definition: "uptight",
-          definition_no: 0,
-          etymology_no: 0,
-          id: 751315,
-          lexical_category: "Adjective",
-          nfthash: null,
-          word: "up-down"
-        }
       ]
     };
   },

@@ -57,6 +57,7 @@ export default {
           var response = await reqSaveWordId(
             this.$store.state.app.words.map(item => item.id)
           );
+          console.log(response, 'pay')
           var words = this.$store.state.app.words
           if (!window.localStorage.getItem('save_words')){
             window.localStorage.setItem('save_words', "[]")

@@ -31,18 +31,29 @@ export default {
         } else {
           const promises = this.$store.state.app.words.map(async word => {
             let reqArg = { [this.$store.state.vsys.wallet.address] : [word.id]}
+            console.log("make nft", reqArg)
             let result = await reqMakeNft(reqArg)
             return result;
           });
           const nfts = await Promise.all(promises);
           let nftRecords = JSON.parse(window.localStorage.getItem('nfts'))
           nftRecords = nftRecords ? nftRecords : []
+          console.log(nfts, "total")
+          let nft = {}
           for (let i = 0; i < nfts.length; i ++) {
-            let nft = {
-              "nftId": nfts[i]["nfts"][0][1],
-              "nftTransId": nfts[i]["nfts"][0][0],
-              "reciever": nfts[i]["reciever"],
+            const item = nfts[i]
+            let nftId = ""
+            for (let key in item["token_ids"]) {
+              nftId = item["token_ids"][key]
             }
+            nft = {
+              "nftId": nftId,
+              "nft_creation_txid": item["nft_creation_txids"][0],
+              "nft_send_txid": item["nft_send_txids"][0],
+              "recipient": item["recipient"],
+              "token_index": item["token_index"][0]
+            }
+            console.log(nft, "nft")
             nftRecords.push(nft)
           }
           nftRecords = JSON.stringify(nftRecords)
