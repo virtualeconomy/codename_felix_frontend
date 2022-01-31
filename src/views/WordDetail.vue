@@ -3,7 +3,7 @@
     <i
       class="el-icon-arrow-left"
       @click="$router.push('/')"
-      style="color:#FB8809;font-size:20px;font-weight:600"
+      style="color:#FB8809;font-size:20px;font-weight:600;cursor:pointer"
     >search</i>
     <div class="scroll_container">
       <div style="display:flex;align-items:baseline">

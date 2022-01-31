@@ -3,7 +3,7 @@
     <i
       class="el-icon-arrow-left"
       @click="$router.go(-1)"
-      style="color:#FB8809;font-size:20px;font-weight:600"
+      style="color:#FB8809;font-size:20px;font-weight:600;cursor:pointer"
     >back</i>
     <div style="margin-top:38px">Save the words</div>
     <div
