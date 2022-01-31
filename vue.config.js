@@ -1,7 +1,7 @@
 module.exports = {
   // publicPath: '/',
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/codename_felix_frontend/'
+    ? '/felix_frontend/'
     : '/',
   outputDir: 'dist',
   assetsDir: 'static',
