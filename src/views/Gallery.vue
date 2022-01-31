@@ -164,7 +164,7 @@ export default {
         });
       }
       var result = await reqInspectNft(nftIds);
-      let nftWordsCurrentList = await reqFetchDefinition([result]);
+      let nftWordsCurrentList = await reqFetchDefinition(result);
       nftWordsCurrentList.map(item => {
         Object.keys(item).map(val => {
           let nftName = "",

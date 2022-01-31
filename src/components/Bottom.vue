@@ -64,16 +64,28 @@ export default {
     },
     async donate() {
       if (!this.amount) return;
-      if (JSON.stringify(this.$store.state.vsys.wallet) === "{}")
-        return alert("TO CONTINUE, YOU MUST CONNECT YOUR WALLET!");
-      if (!this.address) return alert("Invalid address");
-      var res = await this.$store.commit("sendToken", {
-        publicKey: this.$store.state.vsys.wallet.publicKey,
-        recipient: this.address[0],
-        amount: this.amount
-      });
-      this.dialogFormVisible = false;
-      alert("Payment submitted successfully, please refresh page later");
+      if (!this.$store.state.vsys.wallet.address) {
+        alert("TO DONATE, YOU MUST CONNECT YOUR V WALLET");
+      } else if (!this.address) {
+        return alert("Invalid address");
+      } else {
+        let res = await window.vsys.request({
+          method: 'send',
+          params:
+              {
+                publicKey: this.$store.state.vsys.wallet.publicKey,
+                recipient: this.address,
+                amount: this.amount,
+                description: "donation"
+              }
+        })
+        if (res.result && res.message === 'OK') {
+          this.dialogFormVisible = false
+          alert("Payment submitted successfully, please refresh page later");
+        } else {
+          console.log(res, "cancel")
+        }
+      }
     }
   },
   components: {}
