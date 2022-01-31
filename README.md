@@ -1,6 +1,5 @@
-# v-words-nft
+# Felix - frontend
 
-## Project setup
 ```
 npm install
 ```
