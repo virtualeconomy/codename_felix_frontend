@@ -26,29 +26,33 @@ export default {
   methods: {
     async mintNFT() {
       try {
-        let reqArg = { [this.$store.state.vsys.wallet.address] : this.$store.state.app.words.map(item => item.id)}
-        let result = await reqMakeNft(reqArg)
-        let nfts = result['nft']
-        let sents = result['sent']
-        let nftRecords = JSON.parse(window.localStorage.getItem('nfts'))
-        nftRecords = nftRecords ? nftRecords : []
-        for (let i = 0; i< nfts.length; i ++) {
-          let nft = {
-            "nftId": nfts[i][1][1],
-            "nftTransId": nfts[i][1][0],
-            "wordId": nfts[i][0],
-            "sentId": sents[i][0],
+        if (!this.$store.state.vsys.wallet.address) {
+          alert("TO MINT, YOU MUST CONNECT YOUR V WALLET");
+        } else {
+          const promises = this.$store.state.app.words.map(async word => {
+            let reqArg = { [this.$store.state.vsys.wallet.address] : [word.id]}
+            let result = await reqMakeNft(reqArg)
+            return result;
+          });
+          const nfts = await Promise.all(promises);
+          let nftRecords = JSON.parse(window.localStorage.getItem('nfts'))
+          nftRecords = nftRecords ? nftRecords : []
+          for (let i = 0; i < nfts.length; i ++) {
+            let nft = {
+              "nftId": nfts[i]["nfts"][0][1],
+              "nftTransId": nfts[i]["nfts"][0][0],
+              "reciever": nfts[i]["reciever"],
+            }
+            nftRecords.push(nft)
           }
-          nftRecords.push(nft)
+          nftRecords = JSON.stringify(nftRecords)
+          window.localStorage.setItem('nfts', nftRecords)
+          alert('NFT has been generated')
         }
-        nftRecords = JSON.stringify(nftRecords)
-        window.localStorage.setItem('nfts', nftRecords)
-        alert('NFT has been generated')
       } catch (error) {
         // Need to check that the word has been saved
         alert(error)
       }
-      
     }
   }
 }
