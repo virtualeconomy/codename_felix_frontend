@@ -15,7 +15,7 @@ module.exports = {
       //   target: 'http://samblana.vos.systems:8000'
       // },
       '/': {
-        target: 'https://saveaword.com/api'
+        target: 'http://saveaword.com:8000'
       }
     }
   }
