@@ -1,9 +1,10 @@
 <template>
   <div class="gallery" style="text-align: center; font-family: serif">
-    <div
-      style="font-size: 48px; color: #fb8809; text-align: center; margin: 10px"
-    >
+    <div class="gallery_title">
       GALLERY
+      <div
+        class="wallet_addr"
+      >{{currentWalletAddress ? $store.state.app.curWallet.address: 'To view gallery, please connect your wallet.'}}</div>
     </div>
 
     <div style="max-width: 1400px; margin: auto">
@@ -21,17 +22,61 @@
       <div
         style="
           color: white;
-          border-bottom: 1px solid grey;
+          border: 1px solid #E6E1DC;
           padding: 10px;
-          margin-bottom: 45px;
+          margin-top:20px;
         "
-      >
-        LIST OF SAVED WORDS THAT ARE NOW NFTs - 09/12/2021 - 19:57
-      </div>
+      >LIST OF SAVED WORDS THAT ARE NOW NFTs - {{currentTime}}</div>
 
-      <div style="display: flex; min-height: 750px; flex-wrap: wrap">
-        <div class="words-col" v-for="i in 6" :key="i">
-          <div v-for="(j, index) in numberCol" :key="index">
+      <div class="gellery_nft_content">
+        <div class="word_content" v-for="(item,idx) in  nftWordsList" :key="idx" v-if="currentWalletAddress">
+          <div >
+              <p style="font-size: 40px; font-style: italic">
+                {{ item.word}}
+              </p>
+              <div style="font-weight: 700;font-size:12px;">
+                <div
+                  style="margin: auto; width: 80px; border-top: 1px solid grey;"
+                ></div>
+                {{ currentWalletAddress}}
+                <div
+                  style="margin: auto; width: 80px; border-top: 1px solid grey"
+                ></div>
+              </div>
+              <div style="margin-top: 40px">
+                {{ item.definition }}
+              </div>
+              <img src="@/assets/imgs/share.png" style="width；25px;height:25px;margin-top:10px;cursor:pointer"
+              @click="modelOpt('show',item.word)">
+          </div>
+        </div>
+      <div class="word_content_none_contain" v-else>
+        <div class="word_content_none" v-for="i in 6" :key="i"></div>
+      </div>
+      </div>
+         <div
+      class="isShowWarning"
+      style="position:absolute;background-color:rgba(0, 0, 0, 0.5);z-index:100;width:100vw;height:100vh;left:0;top:0;display:none;justify-content:center;align-items:center;"
+    >
+      <div
+       class="modal_container"
+        style="width:35%;background:#FB8809;border-radius:5px;text-align:center;padding:25px;box-sizing:border-box;padding-bottom:100px;"
+      >
+      <div style="width:100%;text-align:right;">
+        <img width="30" src="@/assets/imgs/gallery_close.svg" style="cursor:pointer" @click="modelOpt('close')" />
+      </div>
+        <h2>SHARE</h2>
+        <div style="width:100%;display:flex;justify-content:center">
+          <div
+            style="color:white;font-size:18px;width:70%"
+          >Hey, I just saved word {{currentWord}} and made it nto NFT ! Check it out on Felix. </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- <div style="display: flex; min-height: 750px; flex-wrap: wrap; border: 1px solid #E6E1DC;">
+        <div class="words-col" v-for="i in 6" :key="i" style="border:1px solid red">
+          <div v-for="(j, index) in numberCol" :key="index" style="border:1px solid yellow">
             <p style="font-size: 40px; font-style: italic">
               {{ nftWords[i * numberCol + j].word }}
             </p>
@@ -48,7 +93,7 @@
               {{ nftWords[i * numberCol + j].definition }}
             </div>
           </div>
-          <div v-if="i <= remainder" class="" style="margin-top: 40px">
+          <div v-if="i <= remainder" class="" style="margin-top: 40px;border:1px solid green" >
             <p style="font-size: 40px; font-style: italic">
               {{ nftWords[nftWords.length - 1 - i].word }}
             </p>
@@ -66,13 +111,13 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
 
 <script>
-import { reqInspectNft } from "@/api/index";
+import { reqInspectNft, reqFetchDefinition } from "@/api/index";
 
 export default {
   name: "SavedWords",
@@ -81,126 +126,63 @@ export default {
       options: [
         {
           value: "Oldest",
-          label: "Oldest",
+          label: "Oldest"
         },
         {
           value: "Newest",
-          label: "Newest",
-        },
+          label: "Newest"
+        }
       ],
       value: "",
-      nftWords: [
-        {
-          word: "happy",
-          definition:
-            "One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.",
-          origin: "by FRANZ KAFKA",
-        },
-        {
-          word: "table",
-          definition: "skdhlfsjhldjnflsjdnlj",
-          origin: "skdjfdfg",
-        },
-        {
-          word: "song",
-          definition: "skdhlfsjhldjnflsjdnlj",
-          origin: "skdjfdfg",
-        },
-        {
-          word: "legal",
-          definition: "skdhlfsjhldjnflsjdnlj",
-          origin: "skdjfdfg",
-        },
-        {
-          word: "leggings",
-          definition: "skdhlfsjhldjnflsjdnlj",
-          origin: "A thousand unknown plants",
-        },
-        {
-          word: "music",
-          definition: "skdhlfsjhldjnflsjdnlj",
-          origin: "skdjfdfg",
-        },
-        {
-          word: "happy",
-          definition:
-            "One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.",
-          origin: "by FRANZ KAFKA",
-        },
-        {
-          word: "happy",
-          definition: "skdhlfsjhldjnflsjdnlj",
-          origin: "skdjfdfg",
-        },
-      ],
+      nftWordsList: [],
+      currentWord:''
     };
   },
   computed: {
-    numberCol() {
-      return Math.floor(this.nftWords.length / 6); // one column display
+    currentWalletAddress() {
+      var address = this.$store.state.app.curWallet.address;
+      if (address) return address.slice(0, 5) + "..." + address.slice(-3);
+      else return false;
     },
-    remainder() {
-      return this.nftWords.length % 6;
-    },
+    currentTime(){
+      return new Date(parseInt(new Date().getTime())).toLocaleString().replace(/:\d{1,2}$/, ' ')
+    }
   },
-  methods: {},
+  methods: {
+    modelOpt(type,val){
+      document.querySelector(".isShowWarning").style.display = type === 'show' ? 'flex' : 'none';
+      this.currentWord = val
+    }
+  },
   async mounted() {
-    if (localStorage["nft"]) {
-      var result = await reqInspectNft(JSON.parse(localStorage["nft"]));
-      console.log(result);
-      var arg_inspectnft = [];
-      result["nft"].forEach((element) => {
-        element.forEach(async (item) => {
-          arg_inspectnft.push(item[1][0]);
+    if (localStorage["nfts"]) {
+      let nftRecords = JSON.parse(window.localStorage.getItem("nfts"));
+      let nftIds = [];
+      if (nftRecords) {
+        nftRecords.forEach(element => {
+          nftIds.push(element["nftId"]);
+        });
+      }
+      var result = await reqInspectNft(nftIds);
+      let nftWordsCurrentList = await reqFetchDefinition([result]);
+      nftWordsCurrentList.map(item => {
+        Object.keys(item).map(val => {
+          let nftName = "",
+            definition = item[val];
+          val = val.slice(val.indexOf(":") + 1);
+          nftName = val.slice(0, val.indexOf(":"));
+          this.nftWordsList.push({ word: nftName, definition: definition });
         });
       });
-      console.log(arg_inspectnft);
-      this.nftWords = await reqInspectNft(); // The data parsed to unify structure for rendering
     }
-    //     {
-    //     "nft": [
-    //         [
-    //             210,
-    //             [
-    //                 "97uq4W21JXhMBVJVSScWjsxTkArcienYxc16oubocqf2",
-    //                 "TWst8k7NgZNzxiXSncex9uvSzt4kSaJZE8tkLKzo8"
-    //             ]
-    //         ],
-    //         [
-    //             211,
-    //             [
-    //                 "97uq4W21JXhMBVJVSScWjsxTkArcienYxc16oubocqf2",
-    //                 "TWst8k7NgZNzxiXSncex9uvSzt4kSaJZE8tkLKzo8"
-    //             ]
-    //         ]
-    //     ],
-    //     "sent": [
-    //         [
-    //             "CassH2MrofLtoZF2dQ3b6zAZ9o5XGVpWAdpaZuVYRK6R",
-    //             "TWst8k7NgZNzxiXSncex9uvSzt4kSaJZE8tkLKzo8"
-    //         ],
-    //         [
-    //             "HYP5nhXMqZwC4qD9mUkJn21SX3858fJ8rwxAMnGacp4k",
-    //             "TWst8k7NgZNzxiXSncex9uvSzt4kSaJZE8tkLKzo8"
-    //         ]
-    //     ]
-    // }
-
-    // this.saveWord = this.$store.state.words;
-    // need to backend api
-  },
+  }
 };
 </script>
 
 <style scoped>
-@media screen and (max-width: 500px) {
-  .gallery {
-    background: #121212;
-  }
-}
 .checkWords >>> .el-input__inner {
   border: 0;
-  border-bottom: 2px solid gray;
+  border-bottom: 2px solid #e6e1dc;
   border-radius: 0;
   background-color: transparent;
 }
@@ -226,13 +208,80 @@ export default {
   flex: 1;
   min-width: 150px;
   color: white;
-  border-left: 1px solid white;
-  border-right: 1px solid white;
+  /* border-left: 1px solid white; */
+  /* border-right: 1px solid white; */
   padding: 10px;
 }
 .origin-info {
   margin: auto;
   width: 80px;
   border-top: 1px solid grey;
+}
+
+.gallery_title {
+  font-size: 68px;
+  color: #fb8809;
+  text-align: center;
+  margin: 10px;
+  font-weight: bold;
+}
+
+.wallet_addr {
+  color: #fb8809;
+  font-size: 15px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.gellery_nft_content {
+  width:100%;
+  height: 562px;
+  border: 1px solid #e6e1dc;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+
+
+.gellery_nft_content::-webkit-scrollbar {
+            display: none;
+        }
+
+.word_content{
+  width: 16.55%;
+  color: #fff;
+  border-right: 1px solid #e6e1dc;
+}
+
+.word_content_none_contain{
+  width:100%;
+  height: 562px;
+display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+
+.word_content_none{
+  width: 16.58%;
+  height:100%;
+  border-right: 1px solid #e6e1dc;
+  color: #fff;
+}
+
+@media screen and (max-width: 500px) {
+  .gallery {
+    background: #121212;
+  }
+  .word_content{
+  width: 50%;
+  color: #fff;
+  border-right: 1px solid #e6e1dc;
+}
+.word_content_none{
+    width: 50%;
+}
+.modal_container{
+  width:70% !important;
+}
 }
 </style>
