@@ -24,28 +24,35 @@ export default {
     return {}
   },
   methods: {
-    // debounce(func, delay) {// for 3 min
-    //   let timeout;
-    //   return function() {
-    //     clearTimeout(timeout);
-    //     timeout = setTimeout(() => {
-    //       func.apply(this, arguments);
-    //     }, delay);
-    //   };
-    // },
-    
     async mintNFT() {
       try {
-        let reqArg = { [this.$store.state.vsys.wallet.address] : this.$store.state.app.words.map(item => item.id)}
-        let result = await reqMakeNft(reqArg)
-        localStorage['nft'] = JSON.stringify(result)
-        console.log(result)
-        alert('NFT has been generated')
+        if (!this.$store.state.vsys.wallet.address) {
+          alert("TO MINT, YOU MUST CONNECT YOUR V WALLET");
+        } else {
+          const promises = this.$store.state.app.words.map(async word => {
+            let reqArg = { [this.$store.state.vsys.wallet.address] : [word.id]}
+            let result = await reqMakeNft(reqArg)
+            return result;
+          });
+          const nfts = await Promise.all(promises);
+          let nftRecords = JSON.parse(window.localStorage.getItem('nfts'))
+          nftRecords = nftRecords ? nftRecords : []
+          for (let i = 0; i < nfts.length; i ++) {
+            let nft = {
+              "nftId": nfts[i]["nfts"][0][1],
+              "nftTransId": nfts[i]["nfts"][0][0],
+              "reciever": nfts[i]["reciever"],
+            }
+            nftRecords.push(nft)
+          }
+          nftRecords = JSON.stringify(nftRecords)
+          window.localStorage.setItem('nfts', nftRecords)
+          alert('NFT has been generated')
+        }
       } catch (error) {
         // Need to check that the word has been saved
         alert(error)
       }
-      
     }
   }
 }
