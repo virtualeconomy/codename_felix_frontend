@@ -31,7 +31,7 @@
 
     <div @click="$router.push('/settings/sign_out')" class="base-item">
       <img width="18" src="@/assets/imgs/settings_signout.svg" alt />
-      <div style="margin-left:12px;color:#FB8809">SING OUT</div>
+      <div style="margin-left:12px;color:#FB8809">SIGN OUT</div>
     </div>
   </div>
 </template>
