@@ -10,7 +10,6 @@
         <h3 style="color:#FB8809">{{ item.word.toUpperCase() }}</h3>
     </div>
     <div style="min-height:100px;flex:1"></div>
-    <div class="base-button" @click="mintNFT">MINT NFTs</div>
     <div class="base-button" @click="$router.push('/settings/saved_words')" style="margin-top:20px">VIEW YOUR SAVED WORDS</div>
   </div>
 </template>

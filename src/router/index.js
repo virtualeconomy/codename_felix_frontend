@@ -69,11 +69,13 @@ const routes = [
     name: 'SignOut',
     component: SignOut
   },
+  /*
   {
     path: '/gallery',
     name: 'Gallery',
     components: { gallery: Gallery }
   },
+  */
   {
     path: '/word_detail',
     name: 'Detail',

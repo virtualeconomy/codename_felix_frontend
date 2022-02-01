@@ -154,10 +154,12 @@ export default {
   .base-ui {
     background-color: whitesmoke;
   }
+  /*
   .gallery-btn {
     margin: 20px auto !important;
     border-radius: 10px;
   }
+  */
   .isShowWarning {
     display: none !important;
   }
@@ -177,6 +179,7 @@ export default {
   padding: 20px;
   border-radius: 10px;
 }
+/*
 .gallery-btn {
   text-align: center;
   margin: 20px auto 0 auto;
@@ -186,4 +189,5 @@ export default {
   padding: 10px 20px;
   cursor: pointer;
 }
+*/
 </style>

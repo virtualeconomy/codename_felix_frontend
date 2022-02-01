@@ -15,9 +15,7 @@
     <div style="margin-top:19px;font-size:24px;color:#FB8809">{{$store.state.app.words.length}} VSYS</div>
 
     <div style="margin-top:38px;padding-right:100px;z-index:10">
-      Saving this word means it will be stored on the chain.
-      <br />
-      <br />After the word is saved you can also mint it as an NFT.
+      Saving this word means it will be stored on the V SYSTEMS blockchain.
       <br />
       <br />Click SAVE to continue
     </div>
