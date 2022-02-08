@@ -38,45 +38,54 @@ export default {
   },
   methods: {
     async pay() {
-      if (!this.clickable) return;
-      this.clickable = false;
-      try {
-        var balance = 0
-        const balanceData = await reqGetBalance();
-        if (balanceData) {
-          let values = Object.values(balanceData)
-          balance = BigNumber(values[0].balance).dividedBy(1e8)
-        }
-        if (
-          BigNumber(balance).isGreaterThan(
-            BigNumber(this.$store.state.app.words.length)
-          )
-        ) {
-          var response = await reqSaveWordId(
-            this.$store.state.app.words.map(item => item.id)
-          );
-          console.log(response, 'pay')
-          var words = this.$store.state.app.words
-          if (!window.localStorage.getItem('save_words')){
-            window.localStorage.setItem('save_words', "[]")
+      if (!this.$store.state.eth.wallet.address) {
+        alert("TO SAVE, YOU MUST CONNECT YOUR METAMASK WALLET");
+      } else if (
+          !this.$store.state.eth.wallet.amount ||
+          BigNumber(this.$store.state.eth.wallet.amount).isLessThan(5000)
+      ) {
+        alert(`Balance of DARA is ${ this.$store.state.eth.wallet.amount }. You should have at least 5000 DARA to continue!`);
+      } else {
+        try {
+          if (!this.clickable) return;
+          this.clickable = false;
+          let balance = 0
+          const balanceData = await reqGetBalance();
+          if (balanceData) {
+            let values = Object.values(balanceData)
+            balance = BigNumber(values[0].balance).dividedBy(1e8)
           }
-          var save_words = JSON.parse(localStorage['save_words'])
-          for (var eachWord of words){
-            save_words.push(eachWord)
+          if (
+              BigNumber(balance).isGreaterThan(
+                  BigNumber(this.$store.state.app.words.length)
+              )
+          ) {
+            let response = await reqSaveWordId(
+                this.$store.state.app.words.map(item => item.id)
+            );
+            console.log(response, 'pay')
+            let words = this.$store.state.app.words
+            if (!window.localStorage.getItem('save_words')){
+              window.localStorage.setItem('save_words', "[]")
+            }
+            let save_words = JSON.parse(localStorage['save_words'])
+            for (var eachWord of words){
+              save_words.push(eachWord)
+            }
+            localStorage['save_words'] = (JSON.stringify(save_words))
+            this.$router.push("/word_finish");
+          } else {
+            alert("Balance of address in Backend is insufficient");
           }
-          localStorage['save_words'] = (JSON.stringify(save_words)) 
-          this.$router.push("/word_finish");
-        } else {
-          alert("Balance of address in Backend is insufficient");
+        } catch (error) {
+          if (error.response && error.response.status === 500) {
+            alert(error.response.data);
+          } else {
+            alert(error);
+          }
         }
-      } catch (error) {
-        if (error.response && error.response.status === 500) {
-          alert(error.response.data);
-        } else {
-          alert(error);
-        }
+        this.clickable = true;
       }
-      this.clickable = true;
     }
   }
 };
