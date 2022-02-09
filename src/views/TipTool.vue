@@ -1,7 +1,7 @@
 <template>
   <div class="tip-tool">
     <img
-      style="width: 25px;position: absolute;color: white;top: 80px;left: 50%;transform: translateX(240px);"
+      style="width: 25px;position: absolute;color: white;top: 80px;left: 50%;transform: translateX(240px);cursor:pointer"
       @click="isShow=true"
       :src="isShow?require('@/assets/imgs/tips.png'):require('@/assets/imgs/tips_white.png')"
     />
@@ -9,13 +9,13 @@
       v-show="isShow"
       style="background:#171616;border-radius:5px;padding:8px 16px;position:absolute;top:120px;left:50%;transform:translateX(240px);width:300px;text-align:center;color:white;font-family:'coves-light';"
     >
-      <div style="text-align:right">
+      <div style="text-align:right;cursor:pointer">
         <img @click="isShow=false" width="16px" src="@/assets/imgs/remove_white.svg" />
       </div>
       <div style="margin-top:15px" v-html="tipTextList[currentPage]"></div>
       <div style="display:flex;justify-content:space-between;margin-top:18px">
-        <i class="el-icon-arrow-left" @click="lastPage"></i>&nbsp;&nbsp;
-        <i class="el-icon-arrow-right" @click="nextPage"></i>
+        <i class="el-icon-arrow-left" style="cursor:pointer" @click="lastPage"></i>&nbsp;&nbsp;
+        <i class="el-icon-arrow-right" style="cursor:pointer" @click="nextPage"></i>
       </div>
     </div>
   </div>

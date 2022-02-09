@@ -11,12 +11,11 @@
       <span style="color:#FB8809">{{ item.lexical_category }}&nbsp;</span>
     </div>
     <div style="min-height:100px;flex:1"></div>
-    <div class="base-button" @click="savePay">SAVE THESE WORDS</div>
+    <div class="base-button" style="cursor:pointer" @click="savePay">SAVE THESE WORDS</div>
   </div>
 </template>
 
 <script>
-import BigNumber from "bignumber.js";
 export default {
   name: "WordSave",
   data() {

@@ -7,13 +7,13 @@
       <br />
       <br />Select wallet to sign out. You must select at least one to continue.
     </div>
-    <div style="z-index:2" :class="{active:selected==='eth'}" @click="selected='eth'">
+    <div style="z-index:2;cursor:pointer" :class="{active:selected==='eth'}" @click="selected='eth'">
       <img v-if="selected==='eth'" src="@/assets/imgs/selectedHighlight.svg" width="20" />
       <i v-else width="20"></i>
       <span style="display: inline-block;width: 90px;">Metamask</span>
     </div>
     <div style="height:10px"></div>
-    <div style="z-index:2" :class="{active:selected==='vsys'}" @click="selected='vsys'">
+    <div style="z-index:2;cursor:pointer" :class="{active:selected==='vsys'}" @click="selected='vsys'">
       <img v-if="selected==='vsys'" src="@/assets/imgs/selectedHighlight.svg" width="20" />
       <i v-else width="20"></i>
       <span style="display: inline-block;width: 90px;">V Wallet</span>
@@ -22,8 +22,8 @@
     <div
       style="display: flex;width: 100%;padding: 40px;justify-content: space-around;box-sizing: border-box;z-index:2"
     >
-      <div class="base-button-ui" @click="$router.go(-1)">Cancel</div>
-      <div class="base-button-ui" @click="clearStore">Sign Out</div>
+      <div class="base-button-ui" style="cursor:pointer" @click="$router.go(-1)">Cancel</div>
+      <div class="base-button-ui" style="cursor:pointer" @click="clearStore">Sign Out</div>
     </div>
   </div>
 </template>
