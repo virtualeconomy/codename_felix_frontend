@@ -7,7 +7,7 @@
     >back to settings</i>
     <h3>Saved Words</h3>
     <div style="margin-top:19px;font-weight:bold">Here you can find full list of your saved words:</div>
-    <div v-for="(item, index) in saveWord" :key="index">
+    <div style="position: relative; z-index: 2;" v-for="(item, index) in saveWord" :key="index">
         <h3>{{index+1}}.&nbsp;{{ item.word }}</h3>&nbsp;&nbsp;
       <span style="color:#FB8809">{{ item.lexical_category }}&nbsp;</span>
     </div>

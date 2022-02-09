@@ -20,7 +20,7 @@
         <TipTool />
         <img
           :style="{'display':watchRoute === '/gallery' ? 'none' :'block'}"
-          style="position: absolute; width: 200px; left: 50%; transform: translate(-50%, -340px);"
+          style="position: absolute; width: 200px; left: 50%; transform: translate(-50%, -340px);z-index: 0;"
           src="@/assets/imgs/felix_logo.svg"
         />
         <div
