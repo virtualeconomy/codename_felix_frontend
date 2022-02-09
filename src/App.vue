@@ -179,7 +179,6 @@ export default {
   padding: 20px;
   border-radius: 10px;
 }
-/*
 .gallery-btn {
   text-align: center;
   margin: 20px auto 0 auto;
@@ -189,5 +188,4 @@ export default {
   padding: 10px 20px;
   cursor: pointer;
 }
-*/
 </style>
