@@ -136,9 +136,9 @@ export default {
 }
 
 .scroll_container{
-  overflow: scroll;
+  overflow-y:auto;
   z-index: 2;
-  height: 600px;
+  height: 750px;
   margin-bottom: 50px;
 }
 </style>
