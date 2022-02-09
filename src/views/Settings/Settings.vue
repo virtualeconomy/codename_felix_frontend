@@ -30,7 +30,7 @@
     </div>
 
     <div @click="$router.push('/settings/trans_id')" class="base-item">
-      <img width="20" src="@/assets/imgs/settings_aboutus.svg" alt />
+      <img width="20" src="@/assets/imgs/settings_transId.svg" alt />
       <div style="margin-left:12px;flex:1">List of transactions ID</div>
       <i class="el-icon-arrow-right" style="color:#FB8809;font-size:20px;font-weight:600"></i>
     </div>
