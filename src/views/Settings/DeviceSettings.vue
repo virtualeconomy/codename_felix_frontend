@@ -2,8 +2,8 @@
   <div>
     <i
       class="el-icon-arrow-left"
-      @click="$router.go(-1)"
-      style="color:#FB8809;font-size:20px;font-weight:600"
+      @click="$router.push('/settings')"
+      style="color:#FB8809;font-size:20px;font-weight:600;cursor:pointer"
     >back to settings</i>
     <h3>Device Settings</h3>
     <div style="font-weight:bold;margin-bottom:19px">
@@ -14,9 +14,9 @@
     </div>
     <div style="margin-bottom:19px;color:#FB8809;font-weight:bold">Auto-lock</div>
     <div @click="autoLock($event)" style="display:flex;color:#FB8809">
-      <div :class="{'selected-ui':selected==5}" class="lock-button">5 min</div>
-      <div :class="{'selected-ui':selected==15}" class="lock-button">15 min</div>
-      <div :class="{'selected-ui':!selected}" class="lock-button">never</div>
+      <div :class="{'selected-ui':selected==5}" class="lock-button" style="cursor:pointer">5 min</div>
+      <div :class="{'selected-ui':selected==15}" class="lock-button" style="cursor:pointer">15 min</div>
+      <div :class="{'selected-ui':!selected}" class="lock-button" style="cursor:pointer">never</div>
     </div>
   </div>
 </template>

@@ -21,7 +21,7 @@
     </div>
     <div style="min-height:100px;flex:1"></div>
 
-    <div class="base-button" @click="pay">SAVE</div>
+    <div class="base-button" style="cursor:pointer" @click="pay">SAVE</div>
   </div>
 </template>
 
