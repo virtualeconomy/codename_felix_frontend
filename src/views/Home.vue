@@ -42,7 +42,11 @@
         v-for="(item, index) in wordHistory"
         :key="item.id"
         @click="detail_selected(item,index)"
-      >{{item.word}}</div>
+      >{{item.word}}
+        <span v-if="item.blockchainhash" style="font-size:10px;font-weight:600;float:right;margin-top:8px;">
+          WORD IS SAVED
+        </span>
+      </div>
     </div>
     <div style="display:flex;z-index:2;min-height:120px;flex-wrap:wrap;align-content:flex-start;justify-content:space-around" v-if="selected === 'Save'">
       <div
