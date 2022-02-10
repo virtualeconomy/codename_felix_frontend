@@ -12,6 +12,18 @@ export const reqGetBalance = () => request({
   method: 'GET',
   url: '/balance',
 })
+export const reqGetLastSaved = () => request({
+  method: 'GET',
+  url: '/lastsaved',
+})
+export const reqGetCountNFT = () => request({
+  method: 'GET',
+  url: '/countnft',
+})
+export const reqGetCountSaved = () => request({
+  method: 'GET',
+  url: '/countsaved',
+})
 export const reqSaveWordId = (wordIdArr) => request({
   method: 'post',
   url: '/save',
