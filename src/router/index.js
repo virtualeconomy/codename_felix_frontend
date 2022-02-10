@@ -12,6 +12,7 @@ import DeviceSettings from '../views/Settings/DeviceSettings.vue'
 import Settings from '../views/Settings/Settings.vue'
 import Gallery from '../views/Gallery.vue'
 import ConnectWallet from '../views/ConnectWallet.vue'
+import MintSuccess from '../views/MintSuccess.vue'
 
 
 
@@ -43,6 +44,11 @@ const routes = [
     path: '/word_finish',
     name: 'WordFinish',
     component: WordFinish
+  },
+  {
+    path: '/mint_success',
+    name: 'MintSuccess',
+    component: MintSuccess
   },
   {
     path: '/settings/device_settings',

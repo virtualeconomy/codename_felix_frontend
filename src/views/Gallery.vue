@@ -167,9 +167,14 @@ export default {
       let nftWordsCurrentList = await reqFetchDefinition(dbkeys);
       nftWordsCurrentList.map(item => {
         Object.keys(item).map(val => {
-          let definition = item[val]
-          definition = definition.split("::")
-          this.nftWordsList.push({ word: val, definition: definition[2] });
+          // let definition = item[val]
+          // definition = definition.split(":")
+          // this.nftWordsList.push({ word: val, definition: definition[2] });
+          let nftName = "",
+            definition = item[val];
+          val = val.slice(val.indexOf(":") + 1);
+          nftName = val.slice(0, val.indexOf(":"));
+          this.nftWordsList.push({ word: nftName, definition: definition });
         });
       });
     }

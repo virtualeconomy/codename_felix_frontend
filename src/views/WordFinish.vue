@@ -4,13 +4,20 @@
       class="el-icon-arrow-left"
       @click="$router.go(-1)"
       style="color:#FB8809;font-size:20px;font-weight:600; cursor:pointer"
-    >back to home screen</i>
-    <div style="margin-top:39px">You have successfully saved the words</div>
-    <div v-for="(item, index) in $store.state.app.words" :key="index">
-        <h3 style="color:#FB8809">{{ item.word.toUpperCase() }}</h3>
+    >back</i>
+    <div style="margin-top:39px">MINT</div>
+    <div class="scroll_container">
+      <div v-for="(item, index) in $store.state.app.words" :key="index" class="mint_words">
+          <h3 style="color:#FB8809;">{{ item.word.toUpperCase() }}</h3>
+          <span>1 VSYS</span>
+      </div>
     </div>
-    <div style="min-height:100px;flex:1"></div>
-    <div class="base-button" @click="$router.push('/settings/saved_words')" style="margin-top:20px; cursor:pointer">VIEW YOUR SAVED WORDS</div>
+    <div style="flex:1;z-index: 2;">Total Price</div>
+    <div style="font-size:34px;color:#FB8809;margin-top:20px;z-index: 2;">{{$store.state.app.words.length}} VSYS</div>
+    <div class="mint_tips">After you clikc MINT, your selection will be stored on the chain.</div>
+    <div class="mint_tips">Click MINT to continue</div>
+    <div class="mint_btn" @click="mintNFT">MINT</div>
+    <!-- <div class="base-button" @click="$router.push('/settings/saved_words')" style="margin-top:20px; cursor:pointer">VIEW YOUR SAVED WORDS</div> -->
   </div>
 </template>
 
@@ -22,10 +29,20 @@ export default {
   data() {
     return {}
   },
+  mounted(){
+    console.log(this.$store.state.app)
+  },
   methods: {
     async mintNFT() {
+      const loading = this.$loading({
+            lock: true,
+            text: 'PLEASE WAIT',
+            background: 'rgba(0, 0, 0, 0.8)',
+            customClass: 'loading_sty'
+      });
       try {
         if (!this.$store.state.vsys.wallet.address) {
+          loading.close();
           alert("TO MINT, YOU MUST CONNECT YOUR V WALLET");
         } else {
           const promises = this.$store.state.app.words.map(async word => {
@@ -57,18 +74,65 @@ export default {
           }
           nftRecords = JSON.stringify(nftRecords)
           window.localStorage.setItem('nfts', nftRecords)
-          alert('NFT has been generated')
+          this.$store.commit("app/savedWords", []);
+          loading.close();
+          this.$router.push("/mint_success");
+          // alert('NFT has been generated')
         }
       } catch (error) {
         // Need to check that the word has been saved
-        alert(error)
+        loading.close();
+        this.$message.error(error);
       }
     }
   }
 }
 </script>
 
-<style scoped>
+<style  lang="less" >
+.loading_sty{
+}
+.loading_sty .el-loading-spinner .path{
+      stroke: #FB8809;
+    }
+.loading_sty  .el-loading-spinner .el-loading-text {
+    color: #FB8809 ;
+}
+.mint_btn{
+  background: #fb8809;
+  color: white;
+  font-weight: bold;
+  position: relative;
+  z-index: 2;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 30px 0px 12px;
+  cursor: pointer;
+}
+.scroll_container{
+  overflow-y:auto;
+  z-index: 2;
+  height: 400px;
+}
+.mint_words{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 95%;
+
+  h3{
+    font-weight: normal;
+  }
+  
+  span{
+    font-size: 17px;
+  }
+}
+.mint_tips{
+  z-index: 2;
+margin-top: 20px;
+}
 .base-button {
   position: relative;
   z-index: 2;

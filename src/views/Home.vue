@@ -10,7 +10,7 @@
         :class="{active: selected === 'Save'}"
         style="text-decoration:none;cursor:pointer"
         @click="selected = 'Save'"
-      >Save a word</a>
+      >Mint</a>
     </div>
 
     <div
@@ -65,7 +65,7 @@
 
     <div v-if="selected === 'Save'">
       <div class="base-button" @click="shuffle">SHUFFLE UNSELECTED WORDS</div>
-      <div class="base-button" @click="router_to_save" style="margin-top:20px">SELECT THESE WORDS</div>
+      <div class="base-button mint_btn" @click="router_to_save" style="margin-top:20px;">MINT</div>
     </div>
   </div>
 </template>
@@ -128,7 +128,8 @@ export default {
     router_to_save() {
       if (this.selectedArray.length > 0) {
         this.$store.commit("app/savedWords", this.selectedArray);
-        this.$router.push("/word_save");
+        this.$router.push("/word_finish");
+        // this.$router.push("/word_save");
       }
     },
     async shuffle() {
@@ -173,9 +174,14 @@ export default {
   margin: 0 12px;
   cursor: pointer;
 }
-.base-button:hover {
+/* .base-button:hover {
   color: white;
   background: #fb8809;
+} */
+.mint_btn{
+  background: #fb8809;
+  color: white;
+  font-weight: bold;
 }
 .goon {
   background: #fb8809 !important;
