@@ -2,6 +2,12 @@
   <div id="bottom">
     <img style="padding:10px" src="@/assets/imgs/footer_logo.svg" width="30" />
     <div style="flex:1;color:white;text-align:center">
+      <span style="font-weight:bold;color:#FB8809">MINTED WORDS: </span>
+      &nbsp;
+      <span>{{ NFTCount }} &nbsp;&nbsp;|</span>&nbsp;&nbsp;
+      <span style="font-weight:bold;color:#FB8809">LAST MINTED: </span>
+      &nbsp;
+      <span>{{ lastSavedWords }} &nbsp;&nbsp;|</span>&nbsp;&nbsp;
       <span style="font-weight:bold;color:#FB8809">Balance</span>
       &nbsp;
       <span>{{ balance }} VSYS</span>&nbsp;
@@ -39,7 +45,7 @@
 
 <script>
 import BigNumber from "bignumber.js";
-import { reqGetBalance } from "@/api/index";
+import { reqGetBalance,reqGetLastSaved,reqGetCountNFT,reqGetCountSaved } from "@/api/index";
 
 export default {
   async created() {
@@ -49,13 +55,23 @@ export default {
       this.address = values[0].address
       this.balance = BigNumber(values[0].balance).dividedBy(1e8)
     }
+    const lastSavedWordsList = await reqGetLastSaved();
+    if (lastSavedWordsList) {
+      for (var savedWord in lastSavedWordsList){
+        this.lastSavedWords = this.lastSavedWords + " " + JSON.parse(lastSavedWordsList[savedWord])["word"]+ ", "
+      }
+      this.lastSavedWords = this.lastSavedWords.slice(0, this.lastSavedWords.length-2)
+    }
+    this.NFTCount = await reqGetCountNFT();
   },
   data() {
     return {
       address: "",
       balance: 0,
       amount: "",
-      dialogFormVisible: false
+      dialogFormVisible: false,
+      lastSavedWords: "",
+      NFTCount: 0
     };
   },
   methods: {
