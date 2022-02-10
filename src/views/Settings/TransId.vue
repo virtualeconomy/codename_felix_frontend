@@ -7,7 +7,7 @@
     >back to settings</i>
     <h3>List of transactions ID</h3>
     <div class="transaction_detail" 
-        v-for="(item,index) in transaction_list"
+        v-for="(item,index) in txId_list"
         :key="index">
         <div class="session_status">#{{index+1}} SESSION - {{ item.word }}</div>
         <div class="detail_content">{{item.txId}}</div>
@@ -22,7 +22,7 @@ export default {
   name: "TransId",
   data() {
     return {
-        transaction_list: [
+        txId_list: [
             {"word":"BOOK", "txId":"0x966e5D...3BA2D41701A", "status":"done"},{"word":"MATURE", "txId":"0x966e5D...3BA2D41701A", "status":"done"} 
         ]
     };
