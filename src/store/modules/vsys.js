@@ -30,19 +30,34 @@ var mutations = {
 var actions = {
   async getAccount({ commit, state, dispatch }) {
     const err = {
+      code: 0,
       result: false
     }
     if (!window.vsys || !window.vsys.isInstalled) {
       err.message = 'V wallet extension is not installed'
+      err.code = 1 // Not installed
       return err
     }
     const params = {}
     const walletInfo = await window.vsys.request({ method: 'info' })
-    if (walletInfo && walletInfo.result === true) {
-      params.net = walletInfo.network.toLowerCase()
+    if (walletInfo) {
+      if (walletInfo.result) {
+        params.net = walletInfo.network.toLowerCase()
+      } else {
+        if (walletInfo.message === "account is not created") {
+          err.message = "Account is not created"
+          err.code = 2 // Not created
+          return err
+        }
+      }
     }
 
     const amountRes = await window.vsys.request({ method: 'amount' })
+    if (!amountRes.result && amountRes.message === "account is locked") {
+      err.message = "Account is locked"
+      err.code = 2
+      return err
+    }
     if (amountRes.message === 'OK' && amountRes.result) {
       params.amount = BigNumber(amountRes.amount).toFixed(2).toString()
     }
