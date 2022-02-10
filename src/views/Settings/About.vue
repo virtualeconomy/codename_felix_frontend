@@ -2,7 +2,7 @@
   <div>
     <i
         class="el-icon-arrow-left"
-        @click="$router.go(-1)"
+        @click="$router.push('/settings')"
         style="color:#FB8809;font-size:20px;font-weight:600;cursor:pointer"
     >back to settings</i>
     <h3>About us</h3>

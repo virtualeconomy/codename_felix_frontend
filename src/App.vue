@@ -115,6 +115,10 @@ export default {
         this.debounce(this.resetTimer(), 1000)
       );
     }
+    // check local wallet information
+    if (localStorage['vsysWallet']) this.$store.commit("vsys/updateWallet", JSON.parse(localStorage['vsysWallet']))
+    if (localStorage['ethWallet']) this.$store.commit("eth/updateWallet", JSON.parse(localStorage['ethWallet']))
+    if (localStorage['appWallet']) this.$store.commit("app/updateWallet", JSON.parse(localStorage['appWallet']))
   },
   components: {
     Navbar,
@@ -179,7 +183,6 @@ export default {
   padding: 20px;
   border-radius: 10px;
 }
-/*
 .gallery-btn {
   text-align: center;
   margin: 20px auto 0 auto;
@@ -189,5 +192,4 @@ export default {
   padding: 10px 20px;
   cursor: pointer;
 }
-*/
 </style>

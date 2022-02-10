@@ -163,7 +163,7 @@ const actions = {
         params.result = true
         commit('updateWallet', params)
         commit('app/updateWallet', params, { root: true })
-        dispatch('app/checkAppNet', null, { root: true })
+        // dispatch('app/checkAppNet', null, { root: true })
       }
       return params
     } catch (e) {

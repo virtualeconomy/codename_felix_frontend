@@ -25,6 +25,7 @@
           border: 1px solid #E6E1DC;
           padding: 10px;
           margin-top:20px;
+          background: black;
         "
       >LIST OF SAVED WORDS THAT ARE NOW NFTs - {{currentTime}}</div>
 
@@ -238,6 +239,8 @@ export default {
   display: flex;
   flex-wrap: wrap;
   overflow-y: scroll;
+  background: black;
+  box-sizing: border-box;
 }
 
 

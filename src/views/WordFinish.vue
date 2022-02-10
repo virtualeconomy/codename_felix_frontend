@@ -3,14 +3,14 @@
     <i
       class="el-icon-arrow-left"
       @click="$router.go(-1)"
-      style="color:#FB8809;font-size:20px;font-weight:600"
+      style="color:#FB8809;font-size:20px;font-weight:600; cursor:pointer"
     >back to home screen</i>
     <div style="margin-top:39px">You have successfully saved the words</div>
     <div v-for="(item, index) in $store.state.app.words" :key="index">
         <h3 style="color:#FB8809">{{ item.word.toUpperCase() }}</h3>
     </div>
     <div style="min-height:100px;flex:1"></div>
-    <div class="base-button" @click="$router.push('/settings/saved_words')" style="margin-top:20px">VIEW YOUR SAVED WORDS</div>
+    <div class="base-button" @click="$router.push('/settings/saved_words')" style="margin-top:20px; cursor:pointer">VIEW YOUR SAVED WORDS</div>
   </div>
 </template>
 

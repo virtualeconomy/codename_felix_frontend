@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <img id="felix_logo" @click="$router.push('/')" style="height:40px;cursor:pointer" src="@/assets/imgs/header_logo.svg" />
-    <div class="connect-wallet" @click="isShow = !isShow">
+    <div class="connect-wallet" @click.stop="isShow = !isShow">
       <transition name="fade">
         <div class="wallet-list" v-show="isShow">
           <!-- METAMASK WALLET -->
@@ -137,6 +137,11 @@ export default {
       var address = this.$store.state.vsys.wallet.address;
       if (address) return [address];
       else return [];
+    }
+  },
+  created() {
+    document.onclick = ()=> {
+      this.isShow = false
     }
   },
   methods: {

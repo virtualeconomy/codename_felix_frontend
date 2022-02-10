@@ -2,8 +2,8 @@
   <div>
     <i
       class="el-icon-arrow-left"
-      @click="$router.go(-1)"
-      style="color:#FB8809;font-size:20px;font-weight:600"
+      @click="$router.push('/settings')"
+      style="color:#FB8809;font-size:20px;font-weight:600;cursor:pointer"
     >back to settings</i>
     <h3>Saved Words</h3>
     <div style="margin-top:19px;font-weight:bold">Here you can find full list of your saved words:</div>

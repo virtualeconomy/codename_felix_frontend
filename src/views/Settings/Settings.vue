@@ -2,8 +2,8 @@
   <div>
     <i
       class="el-icon-arrow-left"
-      @click="$router.go(-1)"
-      style="color:#FB8809;font-size:20px;font-weight:600"
+      @click="$router.push('/')"
+      style="color:#FB8809;font-size:20px;font-weight:600;cursor:pointer"
     >back to home</i>
     <h3>Settings</h3>
     <div style="font-weight:bold;margin-bottom:19px">
@@ -11,25 +11,25 @@
       <span style="color:#FB8809;">{{currentWalletAddress}}</span>
     </div>
 
-    <div @click="$router.push('/settings/device_settings')" class="base-item">
+    <div @click="$router.push('/settings/device_settings')" class="base-item" style="cursor:pointer">
       <img width="20" src="@/assets/imgs/settings_devicesettings.svg" alt />
       <div style="margin-left:12px;flex:1">Device settings</div>
       <i class="el-icon-arrow-right" style="color:#FB8809;font-size:20px;font-weight:600"></i>
     </div>
 
-    <div @click="$router.push('/settings/saved_words')" class="base-item">
+    <div @click="$router.push('/settings/saved_words')" class="base-item" style="cursor:pointer">
       <img width="20" src="@/assets/imgs/settings_savedwords.svg" alt />
       <div style="margin-left:12px;flex:1">Saved words</div>
       <i class="el-icon-arrow-right" style="color:#FB8809;font-size:20px;font-weight:600"></i>
     </div>
 
-    <div @click="$router.push('/settings/about')" class="base-item">
+    <div @click="$router.push('/settings/about')" class="base-item" style="cursor:pointer">
       <img width="20" src="@/assets/imgs/settings_aboutus.svg" alt />
       <div style="margin-left:12px;flex:1">About us</div>
       <i class="el-icon-arrow-right" style="color:#FB8809;font-size:20px;font-weight:600"></i>
     </div>
 
-    <div @click="$router.push('/settings/sign_out')" class="base-item">
+    <div @click="$router.push('/settings/sign_out')" class="base-item" style="cursor:pointer">
       <img width="18" src="@/assets/imgs/settings_signout.svg" alt />
       <div style="margin-left:12px;color:#FB8809">SIGN OUT</div>
     </div>
