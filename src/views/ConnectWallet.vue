@@ -47,6 +47,7 @@ export default {
         if (this.selectedWallet === 'eth') {
           await this.$store.dispatch(`${this.selectedWallet}/getBalance`, "0x0255af6c9f86F6B0543357baCefA262A2664f80F")
         }
+        localStorage['appWallet'] = localStorage[`${this.selectedWallet}Wallet`] = JSON.stringify(this.$store.state[`${this.selectedWallet}`].wallet)
           this.$router.replace("/");
       }else{
         this.isInstall = true
