@@ -57,11 +57,8 @@ export default {
   watch: {
     $route: {
       handler() {
-        if (this.$route.path.includes("gallery")) {
-          document.querySelector(".tip-tool").style.display = "none";
-        } else {
-          document.querySelector(".tip-tool").style.display = "block";
-        }
+        var tip_tool = document.querySelector(".tip-tool")
+        if(tip_tool) tip_tool.style.display = this.$route.path.includes("gallery") ? "none" : "block"
       },
       immediate: true
     }
