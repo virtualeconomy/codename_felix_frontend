@@ -87,7 +87,8 @@ export default {
   methods: {
     save() {
       this.$store.commit("app/savedWords", [this.word]);
-      this.$router.push("/word_pay");
+      // this.$router.push("/word_pay");
+      this.$router.push("/word_finish");
     },
     addWord() {
       if (

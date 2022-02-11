@@ -3,8 +3,8 @@
     <img src="@/assets/imgs/mint_success.svg" class="mint_success_img" />
     <div class="title">NFT HAS BEEN MINTED!</div>
     <div class="des">Your NFT has been minted and you can find it in gallery, with other NFTs.</div>
-    <div class="base-button" @click="$router.push('/gallery')">GO TO GALLERY</div>
-    <div class="base-button mint_btn" @click="$router.push('/')" style="margin-top:20px;">GO TO DICTIONARY</div>
+    <div class="base-buttons" @click="$router.push('/gallery')">GO TO GALLERY</div>
+    <div class="base-buttons mint_btn" @click="$router.push('/')" style="margin-top:20px;">GO TO DICTIONARY</div>
   </div>
 </template>
 <script>
@@ -40,7 +40,7 @@ export default {
     margin-top: 19px;
   }
 
-  .base-button {
+  .base-buttons {
     position: relative;
     top: 380px;
     z-index: 2;

@@ -60,14 +60,14 @@ export default {
             const item = nfts[i]
             let nftId = ""
             for (let key in item["token_ids"]) {
-              nftId = item["token_ids"][key]
+              nftId = item["token_ids"] ? item["token_ids"][key] : ''
             }
             nft = {
               "nftId": nftId,
-              "nft_creation_txid": item["nft_creation_txids"][0],
-              "nft_send_txid": item["nft_send_txids"][0],
-              "recipient": item["recipient"],
-              "token_index": item["token_index"][0]
+              "nft_creation_txid": item["nft_creation_txids"] ? item["nft_creation_txids"][0] : '',
+              "nft_send_txid": item["nft_send_txids"] ? item["nft_send_txids"][0] : '',
+              "recipient": item["recipient"] ? item["recipient"] : '',
+              "token_index": item["token_index"] ? item["token_index"][0] : ''
             }
             console.log(nft, "nft")
             nftRecords.push(nft)
@@ -77,7 +77,6 @@ export default {
           this.$store.commit("app/savedWords", []);
           loading.close();
           this.$router.push("/mint_success");
-          // alert('NFT has been generated')
         }
       } catch (error) {
         // Need to check that the word has been saved
