@@ -22,7 +22,7 @@
             style="position:relative;z-index:2;font-family:coves-light"
             v-for="(item, index) in wordDetail"
             :key="item.id"
-            v-html="`${index + 1}.${formatDefinition(item.definition)}`"
+            v-html="`${index + 1}. ${formatDefinition(item.definition)}`"
           ></div>
           
         </div>
@@ -88,7 +88,10 @@ export default {
   },
   methods: {
     formatDefinition(str) {
-      return str.replace( /\''(.*?)\''/ig,function(item){return `<span style="color:blue;cursor:pointer">${item.substr(1, item.length-3).split('|')[1]}</span>`})
+      // return str.replace( /\''(.*?)\''/ig,function(item){return `<span style="color:blue;cursor:pointer">${item.substr(1, item.length-3).split('|')[1]}</span>`})
+      var str = str.replace( /\''(.*?)\''/ig,function(item){return `<span style="color:blue;cursor:pointer">${item.substr(1, item.length-3).split('|')[1]}</span>`})
+      if(/^[a-zA-Z]+$/.test(str.charAt(0))) return str.charAt(0).toUpperCase()+str.slice(1)
+      else return str
     },
     save() {
       this.$store.commit("app/savedWords", [this.word]);
