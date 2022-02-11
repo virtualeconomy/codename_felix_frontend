@@ -1,14 +1,14 @@
 <template>
   <div id="bottom">
     <img style="padding:10px" src="@/assets/imgs/footer_logo.svg" width="30" />
-    <div style="flex:1;color:white;text-align:center">
+    <div style="flex:1;color:white;text-align:center;margin-left:-100px">
       <span style="font-weight:bold;color:#FB8809">MINTED WORDS: </span>
       &nbsp;
-      <span>{{ NFTCount }} &nbsp;&nbsp;|</span>&nbsp;&nbsp;
-      <span style="font-weight:bold;color:#FB8809">LAST MINTED: </span>
+      <span>{{ NFTCount }} </span>
+      <span style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;LAST MINTED: </span>
       &nbsp;
-      <span>{{ lastSavedWords }} &nbsp;&nbsp;|</span>&nbsp;&nbsp;
-      <span style="font-weight:bold;color:#FB8809">Balance</span>
+      <span>{{ lastSavedWords }} </span>
+      <span style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;Balance</span>
       &nbsp;
       <span>{{ balance }} VSYS</span>&nbsp;
       <div @click="dialogFormVisible=true" class="dontate-btn">DONATE</div>
