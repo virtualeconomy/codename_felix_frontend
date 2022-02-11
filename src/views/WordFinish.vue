@@ -90,8 +90,6 @@ export default {
 </script>
 
 <style  lang="less" >
-.loading_sty{
-}
 .loading_sty .el-loading-spinner .path{
       stroke: #FB8809;
     }
