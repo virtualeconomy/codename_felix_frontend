@@ -123,9 +123,10 @@ export default {
   .balance_label {
     float: left;
     margin-left: 20px;
-    margin-top: 5px
+    margin-top: 5px;
   }
   .balance_amount {
+    text-align:center;
     margin-top: 5px; 
   }
   .dontate-btn {
