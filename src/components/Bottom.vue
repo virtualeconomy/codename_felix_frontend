@@ -126,7 +126,7 @@ export default {
     margin-top: 5px
   }
   .balance_amount {
-    margin-top: 5px 
+    margin-top: 5px; 
   }
   .dontate-btn {
     float: right;
