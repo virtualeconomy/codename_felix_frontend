@@ -4,11 +4,12 @@
     <div style="flex:1;color:white;text-align:center;">
       <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">MINTED WORDS: </span>
       &nbsp;
-      <span>{{ NFTCount }} </span>
+      <span class="placeholderDiv" >{{ NFTCount }} </span>
       <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;LAST MINTED: </span>
       &nbsp;
-      <span>{{ lastSavedWords }} </span>
-      <span style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;Balance</span>
+      <span class="placeholderDiv" >{{ lastSavedWords }} </span>
+      <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      <span style="font-weight:bold;color:#FB8809"> Balance</span>
       &nbsp;
       <span>{{ balance }} VSYS</span>&nbsp;
       <div @click="dialogFormVisible=true" class="dontate-btn">DONATE</div>
