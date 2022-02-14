@@ -1,16 +1,17 @@
 <template>
   <div id="bottom">
-    <img style="padding:10px" src="@/assets/imgs/footer_logo.svg" width="30" />
-    <div style="flex:1;color:white;text-align:center;margin-left:-100px">
-      <span style="font-weight:bold;color:#FB8809">MINTED WORDS: </span>
+    <img class="placeholderDiv" style="padding:10px" src="@/assets/imgs/footer_logo.svg" width="30" />
+    <div style="flex:1;color:white;text-align:center;">
+      <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">MINTED WORDS: </span>
       &nbsp;
-      <span>{{ NFTCount }} </span>
-      <span style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;LAST MINTED: </span>
+      <span class="placeholderDiv" >{{ NFTCount }} </span>
+      <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;LAST MINTED: </span>
       &nbsp;
-      <span>{{ lastSavedWords }} </span>
-      <span style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;Balance</span>
+      <span class="placeholderDiv" >{{ lastSavedWords }} </span>
+      <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      <span class="balance_label" style="font-weight:bold;color:#FB8809"> Balance</span>
       &nbsp;
-      <span>{{ balance }} VSYS</span>&nbsp;
+      <span class="balance_amount">{{ balance }} VSYS</span>&nbsp;
       <div @click="dialogFormVisible=true" class="dontate-btn">DONATE</div>
     </div>
     <div class="placeholderDiv">
@@ -119,6 +120,18 @@ export default {
   .placeholderDiv {
     display: none;
   }
+  .balance_label {
+    float: left;
+    margin-left: 20px;
+    margin-top: 5px
+  }
+  .balance_amount {
+    margin-top: 5px; 
+  }
+  .dontate-btn {
+    float: right;
+    margin-right: 20px;
+  }
 }
 #bottom {
   position: fixed;
@@ -140,5 +153,6 @@ export default {
   padding: 5px 10px;
   cursor: pointer;
   background: #fb8809;
+  margin-left: 20px;
 }
 </style>
