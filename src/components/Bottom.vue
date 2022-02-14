@@ -1,11 +1,11 @@
 <template>
   <div id="bottom">
     <img style="padding:10px" src="@/assets/imgs/footer_logo.svg" width="30" />
-    <div style="flex:1;color:white;text-align:center;margin-left:-100px">
-      <span style="font-weight:bold;color:#FB8809">MINTED WORDS: </span>
+    <div style="flex:1;color:white;text-align:center;">
+      <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">MINTED WORDS: </span>
       &nbsp;
       <span>{{ NFTCount }} </span>
-      <span style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;LAST MINTED: </span>
+      <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;LAST MINTED: </span>
       &nbsp;
       <span>{{ lastSavedWords }} </span>
       <span style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;Balance</span>
