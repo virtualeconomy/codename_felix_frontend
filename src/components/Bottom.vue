@@ -9,7 +9,7 @@
       &nbsp;
       <span class="placeholderDiv" >{{ lastSavedWords }} </span>
       <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-      <span style="font-weight:bold;color:#FB8809"> Balance</span>
+      <span class="balance" style="font-weight:bold;color:#FB8809"> Balance</span>
       &nbsp;
       <span>{{ balance }} VSYS</span>&nbsp;
       <div @click="dialogFormVisible=true" class="dontate-btn">DONATE</div>
@@ -119,6 +119,12 @@ export default {
 @media screen and (max-width: 500px) {
   .placeholderDiv {
     display: none;
+  }
+  .balance {
+    margin-left: -20px
+  }
+  .dontate-btn {
+    margin-left: 20px
   }
 }
 #bottom {
