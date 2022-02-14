@@ -9,9 +9,9 @@
       &nbsp;
       <span class="placeholderDiv" >{{ lastSavedWords }} </span>
       <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-      <span class="balance" style="font-weight:bold;color:#FB8809"> Balance</span>
+      <span class="balance_label" style="font-weight:bold;color:#FB8809"> Balance</span>
       &nbsp;
-      <span>{{ balance }} VSYS</span>&nbsp;
+      <span class="balance_amount">{{ balance }} VSYS</span>&nbsp;
       <div @click="dialogFormVisible=true" class="dontate-btn">DONATE</div>
     </div>
     <div class="placeholderDiv">
@@ -120,13 +120,17 @@ export default {
   .placeholderDiv {
     display: none;
   }
-  .balance {
+  .balance_label {
     float: left;
-    margin-left: 20px
+    margin-left: 20px;
+    margin-top: 5px
+  }
+  .balance_amount {
+    margin-top: 5px 
   }
   .dontate-btn {
     float: right;
-    margin-right: 20px
+    margin-right: 20px;
   }
 }
 #bottom {
