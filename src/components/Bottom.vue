@@ -1,6 +1,6 @@
 <template>
   <div id="bottom">
-    <img style="padding:10px" src="@/assets/imgs/footer_logo.svg" width="30" />
+    <img class="placeholderDiv" style="padding:10px" src="@/assets/imgs/footer_logo.svg" width="30" />
     <div style="flex:1;color:white;text-align:center;">
       <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">MINTED WORDS: </span>
       &nbsp;
@@ -141,5 +141,6 @@ export default {
   padding: 5px 10px;
   cursor: pointer;
   background: #fb8809;
+  margin-left: 20px;
 }
 </style>
