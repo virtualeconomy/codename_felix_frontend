@@ -121,10 +121,12 @@ export default {
     display: none;
   }
   .balance {
-    margin-left: -20px
+    float: left;
+    margin-left: 20px
   }
   .dontate-btn {
-    margin-left: 20px
+    float: right;
+    margin-right: 20px
   }
 }
 #bottom {
