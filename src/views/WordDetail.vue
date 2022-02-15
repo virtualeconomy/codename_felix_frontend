@@ -89,7 +89,7 @@ export default {
   methods: {
     formatDefinition(str) {
       // return str.replace( /\''(.*?)\''/ig,function(item){return `<span style="color:blue;cursor:pointer">${item.substr(1, item.length-3).split('|')[1]}</span>`})
-      var str = str.replace( /\''(.*?)\''/ig,function(item){return `<span style="color:blue;cursor:pointer">${item.substr(1, item.length-3).split('|')[1]}</span>`})
+      var str = str.replace( /\''(.*?)\''/ig,function(item){return `<span style="color:blue">${item.substr(1, item.length-3).split('|')[1]}</span>`})
       if(/^[a-zA-Z]+$/.test(str.charAt(0))) return str.charAt(0).toUpperCase()+str.slice(1)
       else return str
     },
