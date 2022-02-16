@@ -88,7 +88,9 @@ export default {
   padding: 5px;
   text-align: center;
   border-radius: 5px;
-  margin: 12px 12px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
   background: #fb8809;
   color: white;
   cursor: pointer;
@@ -100,7 +102,9 @@ export default {
   padding: 5px;
   text-align: center;
   border-radius: 5px;
-  margin: 12px 12px;
+  margin-top: 25px;
+  margin-left: 20px;
+  margin-right: 20px;
   color: #fb8809;
   cursor: pointer;
   border: 1px solid #fb8809;
