@@ -48,6 +48,8 @@ export default {
     margin-top:14px;
     height:120px;
     border-bottom: solid black 1px;
+    position: relative;
+    z-index: 2;
 }
 .session_status {
     color:171616;
