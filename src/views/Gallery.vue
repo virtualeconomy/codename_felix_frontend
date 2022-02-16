@@ -9,15 +9,23 @@
 
     <div style="max-width: 1400px; margin: auto">
       <div class="checkWords">
-        <el-select v-model="value" placeholder="Recently Active">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          ></el-option>
-        </el-select>
-        <div id="triangle-down"></div>
+        <el-input placeholder="Search"
+                  style="width:193px;color:#E6E1DC"
+                  @keyup.enter.native="searchNft" 
+                  v-model="searchVal">
+          <img slot="suffix" style="width:15px;margin-top:14px;cursor:pointer;" src="@/assets/imgs/gallery_search.svg" @click="searchNft"/>
+        </el-input>
+        <div style="display:flex;align-items:center">
+          <el-select v-model="value" placeholder="Recently Active">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+          <div id="triangle-down"></div>
+        </div>
       </div>
       <div
         style="
@@ -135,7 +143,8 @@ export default {
       ],
       value: "",
       nftWordsList: [],
-      currentWord:''
+      currentWord:'',
+      searchVal:''
     };
   },
   computed: {
@@ -152,6 +161,11 @@ export default {
     modelOpt(type,val){
       document.querySelector(".isShowWarning").style.display = type === 'show' ? 'flex' : 'none';
       this.currentWord = val
+    },
+    searchNft(){
+      if(this.searchVal !== ''){
+         console.log('Search Value: ' + this.searchVal)
+      }
     }
   },
   async mounted() {
@@ -160,16 +174,21 @@ export default {
       let nftIds = [];
       if (nftRecords) {
         nftRecords.forEach(element => {
-          nftIds.push(element["nftId"]);
+          nftIds.push(element["nft_creation_txid"]);
         });
       }
       let dbkeys = await reqInspectNft(nftIds);
       let nftWordsCurrentList = await reqFetchDefinition(dbkeys);
       nftWordsCurrentList.map(item => {
         Object.keys(item).map(val => {
-          let definition = item[val]
-          definition = definition.split("::")
-          this.nftWordsList.push({ word: val, definition: definition[2] });
+          // let definition = item[val]
+          // definition = definition.split(":")
+          // this.nftWordsList.push({ word: val, definition: definition[2] });
+          let nftName = "",
+            definition = item[val];
+          val = val.slice(val.indexOf(":") + 1);
+          nftName = val.slice(0, val.indexOf(":"));
+          this.nftWordsList.push({ word: nftName, definition: definition });
         });
       });
     }
@@ -188,7 +207,7 @@ export default {
 .checkWords {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 #triangle-down {
   width: 0;

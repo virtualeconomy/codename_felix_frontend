@@ -28,9 +28,9 @@ export const reqFetchDefinition = (data) => request({
   url: '/fetchdefinition',
   data
 })
-export const reqMakeNft = (data) => request({
+export const reqMintNft = (data) => request({
   method: 'post',
-  url: '/makenft',
+  url: '/mintnft',
   data
   // data: {'ATwAPYdriV1aRXAWYmLViW7Y6K5Jb5bZDkT': wordIdArr}
 })
