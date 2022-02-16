@@ -139,7 +139,7 @@ export default {
       else return [];
     }
   },
-  created() {
+  mounted() {
     document.onclick = ()=> {
       this.isShow = false
     }
