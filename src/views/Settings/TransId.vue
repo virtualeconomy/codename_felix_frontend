@@ -10,7 +10,7 @@
         v-for="(item,index) in txId_list"
         :key="index">
         <div class="session_status">#{{index+1}} SESSION - {{ item.word }}</div>
-        <div class="detail_content">{{item.txId}}</div>
+        <div class="detail_content" @click="txInfo(item.txId)"><u>{{item.txId}}</u></div>
         <div class="session_status">STATUS</div>
         <div class="detail_content">{{item.status}}</div>
     </div>
@@ -37,7 +37,16 @@ export default {
             }
         }
   },
-  methods: {},
+  methods: {
+    txInfo(txId) {
+        let NETWORK_BYTE = 'T'
+        let EXPLORER = 'https://explorer.v.systems'
+        let TEST_EXPLORER = 'https://testexplorer.v.systems'
+        let TX_URL = '/transactions/'
+        let url = NETWORK_BYTE === 'T' ? TEST_EXPLORER : EXPLORER
+        window.open(url + TX_URL + txId)
+    },
+  },
   mounted() {
   }
 };
