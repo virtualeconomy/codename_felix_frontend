@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { reqMakeNft } from "@/api/index";
+import { reqMintNft } from "@/api/index";
 
 export default {
   name: 'WordFinish',
@@ -46,30 +46,29 @@ export default {
           alert("TO MINT, YOU MUST CONNECT YOUR V WALLET");
         } else {
           const promises = this.$store.state.app.words.map(async word => {
-            let reqArg = { [this.$store.state.vsys.wallet.address] : [word.id]}
-            console.log("make nft", reqArg)
-            let result = await reqMakeNft(reqArg)
+            let reqArg = { user_addr :this.$store.state.vsys.wallet.address ,
+                           words: [word.id]
+                         }
+            let result = await reqMintNft(reqArg)
             return result;
           });
           const nfts = await Promise.all(promises);
           let nftRecords = JSON.parse(window.localStorage.getItem('nfts'))
           nftRecords = nftRecords ? nftRecords : []
-          console.log(nfts, "total")
           let nft = {}
           for (let i = 0; i < nfts.length; i ++) {
             const item = nfts[i]
-            let nftId = ""
-            for (let key in item["token_ids"]) {
-              nftId = item["token_ids"] ? item["token_ids"][key] : ''
-            }
+            // let nftId = ""
+            // for (let key in item["token_ids"]) {
+            //   nftId = item["token_ids"] ? item["token_ids"][key] : ''
+            // }
             nft = {
-              "nftId": nftId,
-              "nft_creation_txid": item["nft_creation_txids"] ? item["nft_creation_txids"][0] : '',
-              "nft_send_txid": item["nft_send_txids"] ? item["nft_send_txids"][0] : '',
-              "recipient": item["recipient"] ? item["recipient"] : '',
-              "token_index": item["token_index"] ? item["token_index"][0] : ''
+              // "nftId": nftId,
+              "nft_creation_txid": item["db_save_txid"],
+              "nft_word_ids": item["word_ids"],
+              "nft_word_name": this.$store.state.app.words[this.$store.state.app.words.findIndex(idx=>idx.id === item["word_ids"][0])].word,
+              "recipient": item["recipient"]
             }
-            console.log(nft, "nft")
             nftRecords.push(nft)
           }
           nftRecords = JSON.stringify(nftRecords)
@@ -120,6 +119,7 @@ export default {
 
   h3{
     font-weight: normal;
+    width: 80%;
   }
   
   span{

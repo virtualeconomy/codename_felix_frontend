@@ -75,7 +75,7 @@ export default {
         if (this.$router.currentRoute.name === "Detail") {
           this.word = this.$route.query[0];
           this.isSaved = false;
-          if (this.word && this.word.blockchainhash) {
+          if (this.word && (this.word.blockchainhash || this.word.isMinted)) {
             this.isSaved = true;
           }
           this.wordDetail = await reqLemmaWord(this.word.word);

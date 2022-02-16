@@ -174,7 +174,7 @@ export default {
       let nftIds = [];
       if (nftRecords) {
         nftRecords.forEach(element => {
-          nftIds.push(element["nftId"]);
+          nftIds.push(element["nft_creation_txid"]);
         });
       }
       let dbkeys = await reqInspectNft(nftIds);
