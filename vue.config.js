@@ -16,7 +16,7 @@ module.exports = {
       // },
       '/': {
         // target: 'https://saveaword.com/api'
-        target: 'https://felix.banamedia.net/api'
+        target: 'https://staging.vsystems.dev/api'
       }
     }
   }
