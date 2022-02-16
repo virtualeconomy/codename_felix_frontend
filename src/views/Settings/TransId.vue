@@ -22,10 +22,20 @@ export default {
   name: "TransId",
   data() {
     return {
-        txId_list: [
-            {"word":"BOOK", "txId":"0x966e5D...3BA2D41701A", "status":"done"},{"word":"MATURE", "txId":"0x966e5D...3BA2D41701A", "status":"done"} 
-        ]
+        txId_list: []
     };
+  },
+  created() {
+        let nfts = JSON.parse(window.localStorage.getItem('nfts'))
+        if(nfts.length > 0){
+            for(let i=0; i<nfts.length; i++){
+                let nft = {};
+                nft["word"] = nfts[i].nft_word_name
+                nft["txId"] = nfts[i].nft_creation_txid
+                nft["status"] = "done"
+                this.txId_list.push(nft)
+            }
+        }
   },
   methods: {},
   mounted() {
