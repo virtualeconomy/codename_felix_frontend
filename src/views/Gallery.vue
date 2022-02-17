@@ -72,6 +72,12 @@
             style="color:white;font-size:18px;width:70%"
           >Hey, I just saved word {{currentWord}} and made it nto NFT ! Check it out on Felix. </div>
         </div>
+        <div @click="toShare($event)" style="transform:translateY(60px)">
+          <img id="twitter" src="@/assets/imgs/twitter.svg" style="cursor:pointer;width:30px" />&nbsp;&nbsp;&nbsp;
+          <img id="telegram" src="@/assets/imgs/telegram.svg" style="cursor:pointer;width:32px" />&nbsp;&nbsp;&nbsp;
+          <img id="discord" src="@/assets/imgs/discord.png" style="cursor:pointer;width:25px" />&nbsp;&nbsp;&nbsp;
+          <img id="copy" src="@/assets/imgs/copy.png" style="cursor:pointer;width:25px" />
+        </div>
       </div>
     </div>
 
@@ -153,6 +159,31 @@ export default {
     modelOpt(type,val){
       document.querySelector(".isShowWarning").style.display = type === 'show' ? 'flex' : 'none';
       this.currentWord = val
+    },
+    toShare(e){
+      console.log(e.target.id)
+      if(e.target.id === 'twitter') window.open('https://twitter.com/home','_self')
+      if(e.target.id === 'telegram') window.open('https://telegram.me/share/url?url=www.saveaword.com&text=TEXT','_self')
+      if(e.target.id === 'discord') window.open('https://discord.com/app','_self')
+      if(e.target.id === 'copy') {
+        var target = document.createElement('div');
+        target.id = 'tempTarget';
+        target.style.opacity = '0';
+        target.innerText = this.currentWord;
+        document.body.appendChild(target);
+        try {
+          let range = document.createRange();
+          range.selectNode(target);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+          document.execCommand('copy');
+          window.getSelection().removeAllRanges();
+          alert('Copied ' + this.currentWord)
+          target.parentElement.removeChild(target);
+        } catch (e) {
+          alert('Fail to copy')
+        }
+      }
     }
   },
   async mounted() {
