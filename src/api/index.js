@@ -12,6 +12,14 @@ export const reqGetBalance = () => request({
   method: 'GET',
   url: '/balance',
 })
+export const reqNftIds = (contractId,address) => request({
+  method: 'GET',
+  url: '/find/indexer/associatedtokens/' + contractId + '/' + address,
+})
+export const reqNftContractId = (contractId,address) => request({
+  method: 'GET',
+  url: '/contractid'
+})
 export const reqSaveWordId = (wordIdArr) => request({
   method: 'post',
   url: '/save',
