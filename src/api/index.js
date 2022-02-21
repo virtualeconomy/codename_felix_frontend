@@ -16,9 +16,21 @@ export const reqNftIds = (contractId,address) => request({
   method: 'GET',
   url: '/find/indexer/associatedtokens/' + contractId + '/' + address,
 })
-export const reqNftContractId = (contractId,address) => request({
+export const reqNftContractId = () => request({
   method: 'GET',
   url: '/contractid'
+})
+export const reqGetLastSaved = () => request({
+  method: 'GET',
+  url: '/lastsaved',
+})
+export const reqGetCountNFT = () => request({
+  method: 'GET',
+  url: '/countnft',
+})
+export const reqGetCountSaved = () => request({
+  method: 'GET',
+  url: '/countsaved',
 })
 export const reqSaveWordId = (wordIdArr) => request({
   method: 'post',

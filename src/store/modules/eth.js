@@ -100,11 +100,13 @@ const mutations = {
 const actions = {
   async getAccount ({ commit, state, dispatch }) {
     const err = {
-      result: false
+      result: false,
+      code: 0
     }
     const { ethereum } = window
     if (!ethereum || !ethereum.isMetaMask) {
       err.message = 'Metamask extension is not installed'
+      err.code = 1
       return err
     }
     err.message = 'failed to load wallet'
@@ -163,7 +165,7 @@ const actions = {
         params.result = true
         commit('updateWallet', params)
         commit('app/updateWallet', params, { root: true })
-        dispatch('app/checkAppNet', null, { root: true })
+        // dispatch('app/checkAppNet', null, { root: true })
       }
       return params
     } catch (e) {

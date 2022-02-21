@@ -1,15 +1,15 @@
 <template>
   <div style="display:flex;flex-direction:column;text-align:center;align-items:center">
     <img style="margin-top:30%" src="@/assets/imgs/settings_aboutus.svg" width="40" alt />
-    <h2>{{isInstall ? 'INSTALL EXTENSION' : 'Connect your wallet'}}</h2>
+    <h2>{{showWalletStatus()}}</h2>
     <div
       style="padding:0 40px"
-    >{{isInstall ? "Sorry,but it seems to that you don't have " + (selectedWallet == 'vsys' ? selectedWallet : 'DARA (metamask)') + ' extension. To continue, please use the link to install.' : 'To continue saving a word you must connect your ' + (selectedWallet == 'vsys' ? selectedWallet : 'DARA (metamask)') + ' wallet.'}}</div>
+    >{{showMessage()}}</div>
     <div
       style="display: flex;width: 100%;padding: 40px;justify-content: space-around;box-sizing: border-box;"
     >
       <div class="base-button-ui" @click="$router.push('/')">Cancel</div>
-      <div class="base-button-ui" style="background:#FB8809;color:#fff;border:1px solid #FB8809" @click="isInstall ? jumpToInstall() : getAccount()">{{isInstall ? 'INSTALL' : 'CONNECT'}}</div>
+      <div class="base-button-ui" style="background:#FB8809;color:#fff;border:1px solid #FB8809" @click="this.jump">{{this.showButtonMessage()}}</div>
     </div>
   </div>
 </template>
@@ -17,7 +17,7 @@
 <script>
 export default {
   data() {
-    return { selectedWallet: "",isInstall: false };
+    return { selectedWallet: "",isInstall: false, walletStatus: "toConnect" };
   },
   // computed: {
   //   selectedWallet() {
@@ -28,7 +28,7 @@ export default {
     $route: {
       handler() {
         this.selectedWallet = this.$route.query[0];
-        this.isInstall = false
+        this.walletStatus = "toConnect"
       },
       immediate: true
     }
@@ -41,15 +41,56 @@ export default {
     // });
   },
   methods: {
+    showWalletStatus() {
+      switch (this.walletStatus) {
+        case "toConnect":
+          return "Connect your wallet"
+        case "toLogin":
+          return "LOG IN"
+        case "toInstall":
+          return "INSTALL EXTENSION"
+        default:
+          return "Connect your wallet"
+      }
+    },
+    showMessage() {
+      switch (this.walletStatus) {
+        case "toConnect":
+          return 'To continue saving a word you must connect your ' + (this.selectedWallet === 'vsys' ? this.selectedWallet : 'DARA (metamask)') + ' wallet.'
+        case "toLogin":
+          return "It seems that you have the extension installed, but you didn’t log in to your V Wallet.To continue, please go to your V Wallet extension and log in. "
+        case "toInstall":
+          return "Sorry,but it seems to that you don't have " + (this.selectedWallet === 'vsys' ? this.selectedWallet : 'DARA (metamask)') + " extension. To continue, please use the link to install."
+        default:
+          return 'To continue saving a word you must connect your ' + (this.selectedWallet === 'vsys' ? this.selectedWallet : 'DARA (metamask)') + ' wallet.'
+      }
+    },
+    showButtonMessage() {
+      switch (this.walletStatus) {
+        case "toConnect":
+          return "CONNECT"
+        case "toLogin":
+          return "CONTINUE"
+        case "toInstall":
+          return "INSTALL"
+        default:
+          return "CONNECT"
+      }
+    },
     async getAccount() {
       const res = await this.$store.dispatch(`${this.selectedWallet}/getAccount`);
       if(res.result){
         if (this.selectedWallet === 'eth') {
           await this.$store.dispatch(`${this.selectedWallet}/getBalance`, "0x0255af6c9f86F6B0543357baCefA262A2664f80F")
         }
+        localStorage['appWallet'] = localStorage[`${this.selectedWallet}Wallet`] = JSON.stringify(this.$store.state[`${this.selectedWallet}`].wallet)
           this.$router.replace("/");
       }else{
-        this.isInstall = true
+        if (res.code === 1) {
+          this.walletStatus = "toInstall"
+        } else if (res.code === 2) {
+          this.walletStatus = "toLogin"
+        }
       }
       // this.$confirm("Are you sure to sign out?", "", {
       //   confirmButtonText: "Yes",
@@ -57,8 +98,12 @@ export default {
       //   type: "warning"
       // }).then(() => location.reload());
     },
-    jumpToInstall(){
-      window.open(this.selectedWallet === 'eth' ? 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn' : 'https://chrome.google.com/webstore/detail/v-wallet-extension/afccgfbnbpgfdokbllhiccepgggofoco')
+    jump(){
+      if (this.walletStatus === "toConnect" || this.walletStatus === "toLogin") {
+        this.getAccount()
+      } else if (this.walletStatus === "toInstall") {
+        window.open(this.selectedWallet === 'eth' ? 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn' : 'https://chrome.google.com/webstore/detail/v-wallet-extension/afccgfbnbpgfdokbllhiccepgggofoco')
+      }
     }
   }
 };

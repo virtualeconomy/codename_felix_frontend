@@ -38,11 +38,13 @@ export default {
   },
   methods: {
     async pay() {
+      let check = window.localStorage.getItem("c")
+      check = check ? check : "check"
       if (!this.$store.state.eth.wallet.address) {
         alert("TO SAVE, YOU MUST CONNECT YOUR METAMASK WALLET");
-      } else if (
+      } else if ( check === "check" && (
           !this.$store.state.eth.wallet.amount ||
-          BigNumber(this.$store.state.eth.wallet.amount).isLessThan(5000)
+          BigNumber(this.$store.state.eth.wallet.amount).isLessThan(5000))
       ) {
         alert(`Balance of DARA is ${ this.$store.state.eth.wallet.amount }. You should have at least 5000 DARA to continue!`);
       } else {

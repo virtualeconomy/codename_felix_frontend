@@ -1,10 +1,17 @@
 <template>
   <div id="bottom">
-    <img style="padding:10px" src="@/assets/imgs/footer_logo.svg" width="30" />
-    <div style="flex:1;color:white;text-align:center">
-      <span style="font-weight:bold;color:#FB8809">Balance</span>
+    <img class="placeholderDiv" style="padding:10px" src="@/assets/imgs/footer_logo.svg" width="30" />
+    <div class="content" style="flex:1;color:white;text-align:center;">
+      <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">MINTED WORDS: </span>
       &nbsp;
-      <span>{{ balance }} VSYS</span>&nbsp;
+      <span class="placeholderDiv" >{{ NFTCount }} </span>
+      <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;LAST MINTED: </span>
+      &nbsp;
+      <span class="placeholderDiv" >{{ lastSavedWords }} </span>
+      <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      <span class="balance_label" style="font-weight:bold;color:#FB8809"> Balance</span>
+      &nbsp;
+      <span class="balance_amount">{{ balance }} VSYS</span>&nbsp;
       <div @click="dialogFormVisible=true" class="dontate-btn">DONATE</div>
     </div>
     <div class="placeholderDiv">
@@ -39,7 +46,7 @@
 
 <script>
 import BigNumber from "bignumber.js";
-import { reqGetBalance } from "@/api/index";
+import { reqGetBalance,reqGetLastSaved,reqGetCountNFT,reqGetCountSaved } from "@/api/index";
 
 export default {
   async created() {
@@ -49,13 +56,23 @@ export default {
       this.address = values[0].address
       this.balance = BigNumber(values[0].balance).dividedBy(1e8)
     }
+    const lastSavedWordsList = await reqGetLastSaved();
+    if (lastSavedWordsList) {
+      for (var savedWord in lastSavedWordsList){
+        this.lastSavedWords = this.lastSavedWords + " " + JSON.parse(lastSavedWordsList[savedWord])["word"]+ ", "
+      }
+      this.lastSavedWords = this.lastSavedWords.slice(0, this.lastSavedWords.length-2)
+    }
+    this.NFTCount = await reqGetCountNFT();
   },
   data() {
     return {
       address: "",
       balance: 0,
       amount: "",
-      dialogFormVisible: false
+      dialogFormVisible: false,
+      lastSavedWords: "",
+      NFTCount: 0
     };
   },
   methods: {
@@ -103,6 +120,17 @@ export default {
   .placeholderDiv {
     display: none;
   }
+  .balance_label {
+    margin-left: 20px;
+  }
+  .dontate-btn {
+    margin-right: 20px;
+  }
+  .content {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
 }
 #bottom {
   position: fixed;
@@ -124,5 +152,6 @@ export default {
   padding: 5px 10px;
   cursor: pointer;
   background: #fb8809;
+  margin-left: 20px;
 }
 </style>

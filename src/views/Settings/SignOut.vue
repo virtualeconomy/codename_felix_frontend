@@ -43,6 +43,7 @@ export default {
         publicKey: "",
         walletName: ""
       });
+      localStorage[`${this.selected}Wallet`] = ''
       if (
         !this.$store.state.eth.wallet.address &&
         !this.$store.state.vsys.wallet.address
@@ -53,6 +54,7 @@ export default {
           publicKey: "",
           walletName: ""
         });
+        localStorage['appWallet'] = ''
       }
       this.$router.replace("/");
       // location.reload();

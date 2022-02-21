@@ -115,6 +115,10 @@ export default {
         this.debounce(this.resetTimer(), 1000)
       );
     }
+    // check local wallet information
+    if (localStorage['vsysWallet']) this.$store.commit("vsys/updateWallet", JSON.parse(localStorage['vsysWallet']))
+    if (localStorage['ethWallet']) this.$store.commit("eth/updateWallet", JSON.parse(localStorage['ethWallet']))
+    if (localStorage['appWallet']) this.$store.commit("app/updateWallet", JSON.parse(localStorage['appWallet']))
   },
   components: {
     Navbar,
