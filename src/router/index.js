@@ -8,10 +8,12 @@ import WordFinish from '../views/WordFinish.vue'
 import SavedWords from '../views/Settings/SavedWords.vue'
 import About from '../views/Settings/About.vue'
 import SignOut from '../views/Settings/SignOut.vue'
+import TransId from '../views/Settings/TransId.vue'
 import DeviceSettings from '../views/Settings/DeviceSettings.vue'
 import Settings from '../views/Settings/Settings.vue'
 import Gallery from '../views/Gallery.vue'
 import ConnectWallet from '../views/ConnectWallet.vue'
+import MintSuccess from '../views/MintSuccess.vue'
 
 
 
@@ -45,6 +47,11 @@ const routes = [
     component: WordFinish
   },
   {
+    path: '/mint_success',
+    name: 'MintSuccess',
+    component: MintSuccess
+  },
+  {
     path: '/settings/device_settings',
     name: 'DeviceSettings',
     component: DeviceSettings
@@ -68,6 +75,11 @@ const routes = [
     path: '/settings/sign_out',
     name: 'SignOut',
     component: SignOut
+  },
+  {
+    path: '/settings/trans_id',
+    name: 'TransId',
+    component: TransId
   },
   {
     path: '/gallery',

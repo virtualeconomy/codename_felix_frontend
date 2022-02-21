@@ -191,5 +191,6 @@ export default {
   max-width: 414px;
   padding: 10px 20px;
   cursor: pointer;
+  border-radius: 8px;
 }
 </style>

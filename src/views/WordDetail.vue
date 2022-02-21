@@ -33,9 +33,9 @@
       class="base-add-button"
       style="border:1px solid #000;color:#000;"
       v-if="isSaved"
-    >WORD IS ALREADY SAVED</div>
-    <div @click="addWord" class="base-add-button" v-else>ADD WORD TO LIST FOR SAVING</div>
-    <div @click="save" class="base-button" v-if="!isSaved">SAVE THIS WORD</div>
+    >WORD IS ALREADY NFT</div>
+    <div @click="addWord" class="base-add-button" v-else>ADD WORD TO LIST FOR NFTs</div>
+    <div @click="save" class="base-button" v-if="!isSaved">MINT NOW</div>
   </div>
 </template>
 
@@ -77,7 +77,7 @@ export default {
         if (this.$router.currentRoute.name === "Detail") {
           this.word = this.$route.query[0];
           this.isSaved = false;
-          if (this.word && this.word.blockchainhash) {
+          if (this.word && (this.word.blockchainhash || this.word.isMinted)) {
             this.isSaved = true;
           }
           this.wordDetail = await reqLemmaWord(this.word.word);
@@ -95,7 +95,8 @@ export default {
     },
     save() {
       this.$store.commit("app/savedWords", [this.word]);
-      this.$router.push("/word_pay");
+      // this.$router.push("/word_pay");
+      this.$router.push("/word_finish");
     },
     addWord() {
       if (
@@ -146,7 +147,7 @@ export default {
 .scroll_container{
   overflow-y:auto;
   z-index: 2;
-  height: 750px;
+  height: 600px;
   margin-bottom: 50px;
 }
 </style>

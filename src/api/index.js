@@ -12,6 +12,14 @@ export const reqGetBalance = () => request({
   method: 'GET',
   url: '/balance',
 })
+export const reqNftIds = (contractId,address) => request({
+  method: 'GET',
+  url: '/find/indexer/associatedtokens/' + contractId + '/' + address,
+})
+export const reqNftContractId = () => request({
+  method: 'GET',
+  url: '/contractid'
+})
 export const reqGetLastSaved = () => request({
   method: 'GET',
   url: '/lastsaved',
@@ -40,9 +48,9 @@ export const reqFetchDefinition = (data) => request({
   url: '/fetchdefinition',
   data
 })
-export const reqMakeNft = (data) => request({
+export const reqMintNft = (data) => request({
   method: 'post',
-  url: '/makenft',
+  url: '/mintnft',
   data
   // data: {'ATwAPYdriV1aRXAWYmLViW7Y6K5Jb5bZDkT': wordIdArr}
 })

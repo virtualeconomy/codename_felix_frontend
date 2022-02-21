@@ -11,12 +11,19 @@ module.exports = {
   devServer: {
     // before: require('./mock/mock-server.js'),
     proxy: {
-      // '/': {
-      //   target: 'http://samblana.vos.systems:8000'
-      // },
+      '/find': {
+        target: 'https://staging.vsystems.dev',
+        ws: true,
+        changOrigin: true,
+        pathRewrite: {
+          '^/find': ''
+        }
+      },
       '/': {
-        // target: 'https://saveaword.com/api'
-        target: 'https://staging.vsystems.dev/api'
+        target: 'https://staging.vsystems.dev/api',
+        // target: 'http://163.172.101.111:8000',
+        // target: 'https://saveaword.com/api',
+        // target: 'http://samblana.vos.systems:8000'
       }
     }
   }

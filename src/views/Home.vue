@@ -10,7 +10,7 @@
         :class="{active: selected === 'Save'}"
         style="text-decoration:none;cursor:pointer"
         @click="selected = 'Save'"
-      >Save a word</a>
+      >Mint</a>
     </div>
 
     <div
@@ -43,8 +43,8 @@
         :key="item.id"
         @click="detail_selected(item,index)"
       >{{item.word}}
-        <span v-if="item.blockchainhash" style="font-size:10px;font-weight:600;float:right;margin-top:8px;">
-          WORD IS SAVED
+        <span v-if="item.blockchainhash || item.isMinted" style="font-size:10px;font-weight:600;float:right;margin-top:8px;">
+          WORD IS NFT
         </span>
       </div>
     </div>
@@ -65,7 +65,7 @@
 
     <div v-if="selected === 'Save'">
       <div class="base-button" @click="shuffle">SHUFFLE UNSELECTED WORDS</div>
-      <div class="base-button" @click="router_to_save" style="margin-top:20px">SELECT THESE WORDS</div>
+      <div class="base-button mint_btn" @click="router_to_save" style="margin-top:20px;">MINT</div>
     </div>
   </div>
 </template>
@@ -98,6 +98,12 @@ export default {
         if(this.$route.query.menu && this.$route.query.menu === 'save'){
           this.selected = 'Save'
         }
+        let nfts = JSON.parse(window.localStorage.getItem('nfts'))
+        if(nfts){
+          this.wordHistory.map(h=>{
+            h.isMinted = nfts.some(item => h.id === item.nft_word_ids[0])
+          })
+        }
       },
       immediate: true
     }
@@ -106,20 +112,21 @@ export default {
     async querySearchAsync() {
       var wordDetail = await reqLemmaWord(this.value);
       if (!wordDetail.length) return alert('Unfortunately, the word was not found')
-      this.$router.push({ path: "/word_detail", query: { 0: wordDetail[0]} });
+      this.$router.push({ path: "/word_detail", query: { 0: wordDetail.some(item=>item.blockchainhash) ? wordDetail[wordDetail.findIndex(idx=>idx.blockchainhash)] : wordDetail[0]} });
     },
     detail_selected(item, index) {
       if (this.selected === "Save") {
-        console.log(this.selectedArray.find(value => value === item))
-        if (this.selectedArray.find(value => value.id === item.id)) {
-          this.selectedArray.splice(
-            this.selectedArray.findIndex(value => value.id === item.id),
-            1
-          );
-        } else if (this.selectedArray.length < 10) {
-          this.selectedArray.push(item);
-        } else {
-          alert("Maximum storage is 10");
+        if(!item.isMinted){
+          if (this.selectedArray.find(value => value.id === item.id)) {
+            this.selectedArray.splice(
+              this.selectedArray.findIndex(value => value.id === item.id),
+              1
+            );
+          } else if (this.selectedArray.length < 10) {
+            this.selectedArray.push(item);
+          } else {
+            alert("Maximum storage is 10");
+          }
         }
       } else {
         this.$router.push({ path: "/word_detail", query: { 0: item } });
@@ -128,16 +135,18 @@ export default {
     router_to_save() {
       if (this.selectedArray.length > 0) {
         this.$store.commit("app/savedWords", this.selectedArray);
-        this.$router.push("/word_save");
+        this.$router.push("/word_finish");
+        // this.$router.push("/word_save");
       }
     },
     async shuffle() {
       this.wordHistory = await reqRandomWords();
+      this.wordHistory.map(item=>item.isMinted = false)
     }
   },
   async mounted() {
     this.wordHistory = await reqRandomWords();
-    console.log(this.wordHistory);
+    this.wordHistory.map(item=>item.isMinted = false)
   }
 };
 </script>
@@ -173,9 +182,14 @@ export default {
   margin: 0 12px;
   cursor: pointer;
 }
-.base-button:hover {
+/* .base-button:hover {
   color: white;
   background: #fb8809;
+} */
+.mint_btn{
+  background: #fb8809;
+  color: white;
+  font-weight: bold;
 }
 .goon {
   background: #fb8809 !important;
