@@ -11,13 +11,13 @@
             v-for="(item,index) in txId_list"
             :key="index">
             <div class="session_status">#{{index+1}} SESSION - {{ item.word }}</div>
-            <div class="detail_content" @click="txInfo(item.txId)"><u>{{item.txId}}</u></div>
+            <div class="detail_content" @click="txInfo(item.txId)" style="cursor:pointer"><u>{{item.txId}}</u></div>
             <div class="session_status">STATUS</div>
             <div class="detail_content">{{item.status}}</div>
         </div>
     </div>
-    <div @click="importData" class="import-button">IMPORT DATA</div>
-    <div @click="exportData" class="export-button">EXPORT DATA</div>
+    <!-- <div @click="importData" class="import-button">IMPORT DATA</div>
+    <div @click="exportData" class="export-button">EXPORT DATA</div> -->
   </div>
 </template>
 

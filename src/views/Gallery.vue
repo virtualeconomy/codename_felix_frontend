@@ -76,42 +76,17 @@
         class="isShowWarning"
         style="position:absolute;background-color:rgba(0, 0, 0, 0.5);z-index:100;width:100vw;height:100vh;left:0;top:0;display:none;justify-content:center;align-items:center;"
       >
-      <div style="width:100%;text-align:right;">
-        <img width="30" src="@/assets/imgs/gallery_close.svg" style="cursor:pointer" @click="modelOpt('close')" />
-      </div>
-        <h2>SHARE</h2>
-        <div style="width:100%;display:flex;justify-content:center">
-          <div
-            style="color:white;font-size:18px;width:70%"
-          >Hey, I just saved word {{currentWord}} and made it nto NFT ! Check it out on Felix. </div>
-        </div>
-        <div @click="toShare($event)" style="transform:translateY(60px)">
-          <img id="twitter" src="@/assets/imgs/twitter.svg" style="cursor:pointer;width:30px" />&nbsp;&nbsp;&nbsp;
-          <img id="telegram" src="@/assets/imgs/telegram.svg" style="cursor:pointer;width:32px" />&nbsp;&nbsp;&nbsp;
-          <img id="discord" src="@/assets/imgs/discord.png" style="cursor:pointer;width:25px" />&nbsp;&nbsp;&nbsp;
-          <img id="copy" src="@/assets/imgs/copy.png" style="cursor:pointer;width:25px" />
-        </div>
-      </div>
-    </div>
-
-      <!-- <div style="display: flex; min-height: 750px; flex-wrap: wrap; border: 1px solid #E6E1DC;">
-        <div class="words-col" v-for="i in 6" :key="i" style="border:1px solid red">
-          <div v-for="(j, index) in numberCol" :key="index" style="border:1px solid yellow">
-            <p style="font-size: 40px; font-style: italic">
-              {{ nftWords[i * numberCol + j].word }}
-            </p>
-            <div style="font-weight: 700">
-              <div
-                style="margin: auto; width: 80px; border-top: 1px solid grey"
-              ></div>
-              {{ nftWords[i * numberCol + j].origin }}
-              <div
-                style="margin: auto; width: 80px; border-top: 1px solid grey"
-              ></div>
-            </div>
-            <div style="margin-top: 40px">
-              {{ nftWords[i * numberCol + j].definition }}
-            </div>
+       <div
+          class="modal_container"
+          style="width:35%;background:#FB8809;border-radius:5px;text-align:center;padding:25px;box-sizing:border-box;padding-bottom:100px;"
+        >
+          <div style="width:100%;text-align:right;">
+            <img
+              width="30"
+              src="@/assets/imgs/gallery_close.svg"
+              style="cursor:pointer"
+              @click="modelOpt('close')"
+            />
           </div>
           <h2>SHARE</h2>
           <div style="width:100%;display:flex;justify-content:center">
@@ -119,10 +94,16 @@
               style="color:white;font-size:18px;width:70%"
             >Hey, I just saved word {{currentWord}} and made it nto NFT ! Check it out on Felix.</div>
           </div>
+          <div @click="toShare($event)" style="transform:translateY(60px)">
+            <img id="twitter" src="@/assets/imgs/twitter.svg" style="cursor:pointer;width:30px" />&nbsp;&nbsp;&nbsp;
+            <img id="telegram" src="@/assets/imgs/telegram.svg" style="cursor:pointer;width:32px" />&nbsp;&nbsp;&nbsp;
+            <img id="discord" src="@/assets/imgs/discord.png" style="cursor:pointer;width:25px" />&nbsp;&nbsp;&nbsp;
+            <img id="copy" src="@/assets/imgs/copy.png" style="cursor:pointer;width:25px" />
+          </div> 
         </div>
       </div>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
