@@ -46,7 +46,7 @@
       <div class="gellery_nft_content">
         <div
           class="word_content"
-          v-for="(item,idx) in  nftWordsList"
+          v-for="(item,idx) in  isSeach ? nftSearchWordsList :nftWordsList"
           :key="idx"
           v-if="currentWalletAddress"
         >
@@ -124,7 +124,9 @@ export default {
       value: "",
       nftWordsList: [],
       currentWord: "",
-      searchVal: ""
+      isSeach: false,
+      searchVal: "",
+      nftSearchWordsList: []
     };
   },
   computed: {
@@ -147,7 +149,15 @@ export default {
     },
     searchNft() {
       if (this.searchVal !== "") {
-        console.log("Search Value: " + this.searchVal);
+        this.isSeach = true
+        this.nftSearchWordsList = []
+        this.nftWordsList.map(item=>{
+          if(item.word.indexOf(this.searchVal) != -1){
+            this.nftSearchWordsList.push(item)
+          }
+        })
+      }else{
+        this.isSeach = false
       }
     }
   },
