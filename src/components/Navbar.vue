@@ -89,6 +89,7 @@
           <div
             class="wallet-list-item"
             style="border:0px;color:white;cursor:pointer"
+            v-if="$store.state.app.curWallet.address"
             @click="$router.push('/settings')"
           >
             <img src="@/assets/imgs/settings.svg" width="20" />&nbsp;&nbsp;

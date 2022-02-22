@@ -55,9 +55,9 @@
             <p
               style="font-size: 40px; font-style: italic;word-wrap: break-word;word-break: break-all;"
             >{{ item.word}}</p>
-            <div style="font-weight: 700;font-size:12px;cursor:pointer;">
+            <div style="font-weight: 700;font-size:12px;cursor:pointer;" @click="click2Copy(item.token_id)">
               <div style="margin: auto; width: 80px; border-top: 1px solid grey;"></div>
-              {{ item.token_id}}
+              {{ item.token_id.slice(0, 5) + "..." + item.token_id.slice(-3)}}
               <div style="margin: auto; width: 80px; border-top: 1px solid grey"></div>
             </div>
             <div style="margin-top: 40px;width:90%;margin-left:5%;word-wrap: break-word;word-break: break-all;">{{ item.definition }}</div>
@@ -65,6 +65,10 @@
               src="@/assets/imgs/share.png"
               style="width；25px;height:25px;margin-top:10px;cursor:pointer"
               @click="modelOpt('show',item.word)"
+            />
+             <img
+              src="@/assets/imgs/send.svg"
+              style="width；25px;height:25px;margin-top:10px;margin-left:24px;cursor:pointer"
             />
           </div>
         </div>
@@ -92,7 +96,9 @@
           <div style="width:100%;display:flex;justify-content:center">
             <div
               style="color:white;font-size:18px;width:70%"
-            >Hey, I just saved word {{currentWord}} and made it nto NFT ! Check it out on Felix.</div>
+            >Hey, I just saved word {{currentWord.toLocaleUpperCase()}} and made it nto NFT ! Check it out on Felix.
+            <div>www.saveaword.com</div>
+            </div>
           </div>
           <div @click="toShare($event)" style="transform:translateY(60px)">
             <img id="twitter" src="@/assets/imgs/twitter.svg" style="cursor:pointer;width:30px" />&nbsp;&nbsp;&nbsp;
@@ -167,15 +173,15 @@ export default {
       this.currentWord = val
     },
     toShare(e){
-      console.log(e.target.id)
-      if(e.target.id === 'twitter') window.open('https://twitter.com/home','_self')
-      if(e.target.id === 'telegram') window.open('https://telegram.me/share/url?url=www.saveaword.com&text=TEXT','_self')
-      if(e.target.id === 'discord') window.open('https://discord.com/app','_self')
+      let shareText = 'Hey, I just saved word ' + this.currentWord.toLocaleUpperCase() + ' and made it nto NFT ! Check it out on Felix. www.saveaword.com'
+      if(e.target.id === 'twitter') window.open('https://twitter.com/intent/tweet?text=' + shareText,'_blank')
+      if(e.target.id === 'telegram') window.open('https://telegram.me/share/url?url=www.saveaword.com&text=' + shareText,'_blank')
+      if(e.target.id === 'discord') window.open('https://discord.com/app','_blank')
       if(e.target.id === 'copy') {
         var target = document.createElement('div');
         target.id = 'tempTarget';
         target.style.opacity = '0';
-        target.innerText = this.currentWord;
+        target.innerText = shareText;
         document.body.appendChild(target);
         try {
           let range = document.createRange();
@@ -184,16 +190,23 @@ export default {
           window.getSelection().addRange(range);
           document.execCommand('copy');
           window.getSelection().removeAllRanges();
-          alert('Copied ' + this.currentWord)
+          this.$message.success('COPY SUCCESSFUL')
           target.parentElement.removeChild(target);
         } catch (e) {
           alert('Fail to copy')
         }
       }
+    },
+    click2Copy(val){
+      navigator.clipboard.writeText(val).then(res=>{
+        this.$message.success('COPY SUCCESSFUL')
+      }).catch(err=>{
+        this.$message.fail('COPY FAIL')
+      })
     }
   },
   async mounted() {
-    if (this.currentWalletAddress) {
+    if (this.$store.state.vsys.wallet.address) {
       let nftContractId = await reqNftContractId();
       let nftIds = await reqNftIds(
         nftContractId,
@@ -210,7 +223,7 @@ export default {
         });
       });
        this.nftWordsList.map((val,idx)=>{
-          val.token_id = nftIds[idx].slice(0, 5) + "..." + nftIds[idx].slice(-3)
+          val.token_id = nftIds[idx]
       })
     }
   }
