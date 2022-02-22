@@ -30,16 +30,19 @@ export default {
     };
   },
   created() {
-        let nfts = JSON.parse(window.localStorage.getItem('nfts'))
-        if(nfts.length > 0){
-            for(let i=0; i<nfts.length; i++){
-                let nft = {};
-                nft["word"] = nfts[i].nft_word_name
-                nft["txId"] = nfts[i].nft_creation_txid
-                nft["status"] = "done"
-                this.txId_list.push(nft)
-            }
-        }
+        let nfts = JSON.parse(window.localStorage.getItem('nfts')), currentNfts = [];
+        nfts.map(item=>{
+          if(item.recipient === this.$store.state.vsys.wallet.address){
+            currentNfts.push(item)
+          }
+        })
+        currentNfts.map(val=>{
+          this.txId_list.push({
+            word: val.nft_word_name,
+            txId: val.nft_creation_txid,
+            status: "done"
+          })
+        })
   },
   methods: {
     txInfo(txId) {

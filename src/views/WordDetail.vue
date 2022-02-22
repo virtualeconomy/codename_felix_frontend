@@ -24,7 +24,10 @@
             :key="item.id"
             v-html="`${index + 1}. ${formatDefinition(item.definition)}`"
           ></div>
-          
+          <div class="tx_id" v-if="isSaved">
+                <span class="id_title">TXID:</span>
+                <span class="id_text" @click="txInfo(word.blockchainhash)">{{word.blockchainhash.slice(0, 15) + "..." + word.blockchainhash.slice(-10)}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -113,12 +116,20 @@ export default {
       } else {
         alert("Maximum storage is 10");
       }
+    },
+    txInfo(txId) {
+        let NETWORK_BYTE = 'T'
+        let EXPLORER = 'https://explorer.v.systems'
+        let TEST_EXPLORER = 'https://testexplorer.v.systems'
+        let TX_URL = '/transactions/'
+        let url = NETWORK_BYTE === 'T' ? TEST_EXPLORER : EXPLORER
+        window.open(url + TX_URL + txId)
     }
   }
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .base-button {
   position: relative;
   z-index: 2;
@@ -149,5 +160,22 @@ export default {
   z-index: 2;
   height: 600px;
   margin-bottom: 50px;
+}
+
+.tx_id{
+    font-size: 15px;
+    font-weight: bold;
+    margin: 20px 0;
+
+  .id_title{
+    color: #000000;
+  }
+
+  .id_text{
+    color: #fb8809;
+    margin-left: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 }
 </style>

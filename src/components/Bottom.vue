@@ -152,6 +152,6 @@ export default {
   padding: 5px 10px;
   cursor: pointer;
   background: #fb8809;
-  margin-left: 20px;
+  margin: 10px 20px;
 }
 </style>

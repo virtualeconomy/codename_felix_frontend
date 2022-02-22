@@ -42,7 +42,7 @@
           margin-top:20px;
           background: black;
         "
-      >LIST OF SAVED WORDS THAT ARE NOW NFTs - {{currentTime}}</div>
+      >YOUR NFTs - {{currentTime}}</div>
 
       <div class="gellery_nft_content">
         <div
@@ -55,12 +55,12 @@
             <p
               style="font-size: 40px; font-style: italic;word-wrap: break-word;word-break: break-all;"
             >{{ item.word}}</p>
-            <div style="font-weight: 700;font-size:12px;">
+            <div style="font-weight: 700;font-size:12px;cursor:pointer;">
               <div style="margin: auto; width: 80px; border-top: 1px solid grey;"></div>
-              {{ currentWalletAddress}}
+              {{ item.token_id}}
               <div style="margin: auto; width: 80px; border-top: 1px solid grey"></div>
             </div>
-            <div style="margin-top: 40px;width:90%;margin-left:5%;">{{ item.definition }}</div>
+            <div style="margin-top: 40px;width:90%;margin-left:5%;word-wrap: break-word;word-break: break-all;">{{ item.definition }}</div>
             <img
               src="@/assets/imgs/share.png"
               style="width；25px;height:25px;margin-top:10px;cursor:pointer"
@@ -73,7 +73,7 @@
         </div>
       </div>
       <div
-        class="isShowWarning"
+        class="isShowGalleryShare"
         style="position:absolute;background-color:rgba(0, 0, 0, 0.5);z-index:100;width:100vw;height:100vh;left:0;top:0;display:none;justify-content:center;align-items:center;"
       >
        <div
@@ -163,7 +163,7 @@ export default {
       }
     },
     modelOpt(type,val){
-      document.querySelector(".isShowWarning").style.display = type === 'show' ? 'flex' : 'none';
+      document.querySelector(".isShowGalleryShare").style.display = type === 'show' ? 'flex' : 'none';
       this.currentWord = val
     },
     toShare(e){
@@ -209,6 +209,9 @@ export default {
           this.nftWordsList.push({ word: nftName, definition: definition });
         });
       });
+       this.nftWordsList.map((val,idx)=>{
+          val.token_id = nftIds[idx].slice(0, 5) + "..." + nftIds[idx].slice(-3)
+      })
     }
   }
 };
@@ -307,9 +310,10 @@ export default {
 @media screen and (max-width: 500px) {
   .gallery {
     background: #121212;
+    border:1px solid black;
   }
   .word_content {
-    width: 50%;
+    width: 49.5%;
     color: #fff;
     border-right: 1px solid #e6e1dc;
   }

@@ -44,13 +44,13 @@ export default {
     showWalletStatus() {
       switch (this.walletStatus) {
         case "toConnect":
-          return "Connect your wallet"
+          return "CONNECT YOUR WALLET"
         case "toLogin":
           return "LOG IN"
         case "toInstall":
           return "INSTALL EXTENSION"
         default:
-          return "Connect your wallet"
+          return "CONNECT YOUR WALLET"
       }
     },
     showMessage() {
