@@ -60,7 +60,7 @@
               {{ item.token_id.slice(0, 5) + "..." + item.token_id.slice(-3)}}
               <div style="margin: auto; width: 80px; border-top: 1px solid grey"></div>
             </div>
-            <div style="margin-top: 40px;width:90%;margin-left:5%;word-wrap: break-word;word-break: break-all;">{{ item.definition }}</div>
+            <div style="margin-top: 40px;width:90%;margin-left:5%;word-wrap: break-word;word-break: break-all;" v-html="item.definition "></div>
             <img
               src="@/assets/imgs/share.png"
               style="width；25px;height:25px;margin-top:10px;cursor:pointer"
