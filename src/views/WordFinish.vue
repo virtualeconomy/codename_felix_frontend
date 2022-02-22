@@ -55,6 +55,7 @@ export default {
           const nfts = await Promise.all(promises);
           let nftRecords = JSON.parse(window.localStorage.getItem('nfts'))
           nftRecords = nftRecords ? nftRecords : []
+          let newNFTs = []
           let nft = {}
           for (let i = 0; i < nfts.length; i ++) {
             const item = nfts[i]
@@ -67,15 +68,18 @@ export default {
               "nft_creation_txid": item["db_save_txid"],
               "nft_word_ids": item["word_ids"],
               "nft_word_name": this.$store.state.app.words[this.$store.state.app.words.findIndex(idx=>idx.id === item["word_ids"][0])].word,
-              "recipient": item["recipient"]
+              "recipient": item["recipient"],
+              "status": "done"
             }
             nftRecords.push(nft)
+            newNFTs.push(nft)
           }
           nftRecords = JSON.stringify(nftRecords)
           window.localStorage.setItem('nfts', nftRecords)
           this.$store.commit("app/savedWords", []);
           loading.close();
-          this.$router.push("/mint_success");
+          this.$router.push({ path: "/mint_success", query: { 0: newNFTs} });
+          // this.$router.push("/mint_success");
         }
       } catch (error) {
         // Need to check that the word has been saved
