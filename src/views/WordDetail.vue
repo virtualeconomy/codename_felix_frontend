@@ -10,14 +10,14 @@
         <h1>{{ word.word }}</h1>&nbsp;&nbsp;
         <!-- <i class="el-icon-star-off" style="color:black;"></i> -->
       </div>
-      <div>
+      <div style="word-wrap: break-word;word-break: break-all;">
         <span
-          style="color:#FB8809"
+          style="color:#FB8809;"
           v-for="(item,index) in lexical_category"
           :key="index"
         >{{ item }}&nbsp;</span>
         <h3>DEFINITIONS</h3>
-        <div style="min-height:500px">
+        <div style="min-height:500px;">
           <div
             style="position:relative;z-index:2;font-family:coves-light"
             v-for="(item, index) in wordDetail"

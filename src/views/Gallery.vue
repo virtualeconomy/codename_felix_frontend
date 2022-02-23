@@ -23,7 +23,7 @@
           />
         </el-input>
         <div style="display:flex;align-items:center">
-          <el-select v-model="value" placeholder="Recently Active">
+          <el-select v-model="value" placeholder="Recently Active" @change="sort">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -60,7 +60,15 @@
               {{ item.token_id.slice(0, 5) + "..." + item.token_id.slice(-3)}}
               <div style="margin: auto; width: 80px; border-top: 1px solid grey"></div>
             </div>
-            <div style="margin-top: 40px;width:90%;margin-left:5%;word-wrap: break-word;word-break: break-all;" v-html="item.definition "></div>
+            <div @click="clicl2ShowAllDefinition(item.word,idx)" v-if="item.wordDetail.length < 2 || !item.isShowAllDefinition" style="cursor:pointer;margin-top: 10px;width:90%;margin-left:5%;word-wrap: break-word;word-break: break-all;" v-html="item.definition "></div>
+            <div
+              style="cursor:pointer;position:relative;z-index:2;font-family:coves-light;margin-top: 10px;width:90%;margin-left:5%;word-wrap: break-word;word-break: break-all;"
+              v-for="(val, index) in item.wordDetail"
+              :key="val.id"
+              v-html="`${index + 1}. ${formatDefinition(val.definition)}`"
+              @click="clicl2ShowAllDefinition('',idx)"
+              v-else
+            ></div>
             <img
               src="@/assets/imgs/share.png"
               style="width；25px;height:25px;margin-top:10px;cursor:pointer"
@@ -96,7 +104,7 @@
           <div style="width:100%;display:flex;justify-content:center">
             <div
               style="color:white;font-size:18px;width:70%"
-            >Hey, I just saved word {{currentWord.toLocaleUpperCase()}} and made it nto NFT ! Check it out on Felix.
+            >Hey, I just saved word {{currentWord ? currentWord.toLocaleUpperCase() : currentWord}} and made it nto NFT ! Check it out on Felix.
             <div>www.saveaword.com</div>
             </div>
           </div>
@@ -117,7 +125,8 @@ import {
   reqInspectNft,
   reqFetchDefinition,
   reqNftIds,
-  reqNftContractId
+  reqNftContractId,
+  reqLemmaWord
 } from "@/api/index";
 
 export default {
@@ -139,7 +148,8 @@ export default {
       currentWord: "",
       isSeach: false,
       searchVal: "",
-      nftSearchWordsList: []
+      nftSearchWordsList: [],
+      firstNft:''
     };
   },
   computed: {
@@ -155,6 +165,34 @@ export default {
     }
   },
   methods: {
+    async clicl2ShowAllDefinition(word,idx){
+      if(word){
+        if(this.isSeach){
+          this.nftSearchWordsList[idx].isShowAllDefinition = true
+          if(this.nftSearchWordsList[idx].wordDetail.length === 0){
+            this.nftSearchWordsList[idx].wordDetail = await reqLemmaWord(word)
+          }
+        }else{
+          this.nftWordsList[idx].isShowAllDefinition = true
+          if(this.nftWordsList[idx].wordDetail.length === 0){
+            this.nftWordsList[idx].wordDetail = await reqLemmaWord(word)
+          }
+        }
+      }else{
+        if(this.isSeach){
+          this.nftSearchWordsList[idx].isShowAllDefinition = false
+        }else{
+          this.nftWordsList[idx].isShowAllDefinition = false
+        }
+      }
+      this.$forceUpdate()
+    },
+    formatDefinition(str) {
+      // return str.replace( /\''(.*?)\''/ig,function(item){return `<span style="color:blue;cursor:pointer">${item.substr(1, item.length-3).split('|')[1]}</span>`})
+      var str = str.replace( /\''(.*?)\''/ig,function(item){return `<span style="color:blue">${item.substr(1, item.length-3).split('|')[1]}</span>`})
+      if(/^[a-zA-Z]+$/.test(str.charAt(0))) return str.charAt(0).toUpperCase()+str.slice(1)
+      else return str
+    },
     searchNft(){
       if (this.searchVal !== "") {
         this.isSeach = true
@@ -164,8 +202,10 @@ export default {
             this.nftSearchWordsList.push(item)
           }
         })
+        this.firstNft = this.nftSearchWordsList[0].word
       }else{
         this.isSeach = false
+        this.firstNft = this.nftWordsList[0].word
       }
     },
     modelOpt(type,val){
@@ -203,6 +243,29 @@ export default {
       }).catch(err=>{
         this.$message.fail('COPY FAIL')
       })
+    },
+    sort(e){
+      if(this.isSeach){
+        if(this.firstNft === this.nftSearchWordsList[0].word){
+          if(e === 'Oldest'){
+           this.nftSearchWordsList.reverse()
+          }
+        }else{
+          if(e === 'Newest'){
+           this.nftSearchWordsList.reverse()
+          }
+        }
+      }else{
+          if(this.firstNft === this.nftWordsList[0].word){
+          if(e === 'Oldest'){
+           this.nftWordsList.reverse()
+          }
+        }else{
+          if(e === 'Newest'){
+           this.nftWordsList.reverse()
+          }
+        }
+      }
     }
   },
   async mounted() {
@@ -224,7 +287,10 @@ export default {
       });
        this.nftWordsList.map((val,idx)=>{
           val.token_id = nftIds[idx]
+          val.isShowAllDefinition = false
+          val.wordDetail = []
       })
+      this.firstNft = this.nftWordsList[0].word
     }
   }
 };

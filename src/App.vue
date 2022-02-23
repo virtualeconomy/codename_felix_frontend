@@ -128,12 +128,27 @@ export default {
 };
 </script>
 <style scoped>
+.gallery-btn {
+  text-align: center;
+  margin: 20px auto 0 auto;
+  background: #fb8809;
+  color: white;
+  max-width: 414px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 8px;
+}
 @media screen and (max-width: 500px) {
   .home_header {
     background: black;
   }
   #bg {
     display: none;
+  }
+
+  .gallery-btn {
+    margin: 1px auto !important;
+    border-radius: 0px ;
   }
 }
 @media only screen and (min-width: 500px) {
@@ -158,12 +173,7 @@ export default {
   .base-ui {
     background-color: whitesmoke;
   }
-  /*
-  .gallery-btn {
-    margin: 20px auto !important;
-    border-radius: 10px;
-  }
-  */
+ 
   .isShowWarning {
     display: none !important;
   }
@@ -182,15 +192,5 @@ export default {
   min-height: 750px;
   padding: 20px;
   border-radius: 10px;
-}
-.gallery-btn {
-  text-align: center;
-  margin: 20px auto 0 auto;
-  background: #fb8809;
-  color: white;
-  max-width: 414px;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 8px;
 }
 </style>

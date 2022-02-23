@@ -8,14 +8,14 @@
             v-for="(item,index) in newNFTs"
             :key="index">
             <div class="session_word">{{ item.nft_word_name }}</div>
-            <div class="session_status">TOKENS ID</div>
+            <div class="session_status">Database Save ID</div>
             <div class="detail_content" ref="txId" @click="txInfo(item.nft_creation_txid)" style="cursor:pointer;display:inline;">
-              <u>{{item.nft_creation_txid}}</u>
+              <u>{{item.nft_creation_txid.slice(0, 15) + "..." + item.nft_creation_txid.slice(-10)}}</u>
             </div>
             <div id="copy"
                 class="btn-copy"
                 @click="copyText(item.nft_creation_txid)">
-                <img src="@/assets/imgs/ic_copy.svg" style="cursor:pointer;width:25px">
+                <img src="@/assets/imgs/ic_copy.svg" style="cursor:pointer;width:15px;height:19px;">
             </div>
             <div class="session_status">STATUS</div>
             <div class="detail_content">{{item.status}}</div>
@@ -111,19 +111,19 @@ export default {
   .transaction_detail{
       margin-top:14px;
       height:150px;
-      border-bottom: solid black 1px;
       position: relative;
       z-index: 2;
   }
   .session_word {
       color: rgb(251, 136, 9);
       font-size:30px;
-      font-weight:bold
+      font-weight:bolder
   }
   .session_status {
       color:171616;
       font-size:20px;
-      font-weight:bold
+      font-weight:bold;
+      margin-top: 10px;
   }
   .detail_content {
       color:#FB8809;
@@ -135,8 +135,7 @@ export default {
   .btn-copy {
     display:inline;
     cursor: pointer;
-    float: right;
-    margin-right: 10px;
+    margin-left: 30px;
 }
 }
 </style>
