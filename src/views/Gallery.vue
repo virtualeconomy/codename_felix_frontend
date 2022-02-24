@@ -77,6 +77,7 @@
              <img
               src="@/assets/imgs/send.svg"
               style="width；25px;height:25px;margin-top:10px;margin-left:24px;cursor:pointer"
+              @click="modelOpt('show','',true)"
             />
           </div>
         </div>
@@ -85,12 +86,12 @@
         </div>
       </div>
       <div
-        class="isShowGalleryShare"
+        class="isShowGalleryModal"
         style="position:absolute;background-color:rgba(0, 0, 0, 0.5);z-index:100;width:100vw;height:100vh;left:0;top:0;display:none;justify-content:center;align-items:center;"
       >
        <div
           class="modal_container"
-          style="width:35%;background:#FB8809;border-radius:5px;text-align:center;padding:25px;box-sizing:border-box;padding-bottom:100px;"
+          :style="{paddingBottom:isSend ? isSendSuccess ? '30px' : '40px' : ''}"
         >
           <div style="width:100%;text-align:right;">
             <img
@@ -100,20 +101,43 @@
               @click="modelOpt('close')"
             />
           </div>
-          <h2>SHARE</h2>
-          <div style="width:100%;display:flex;justify-content:center">
-            <div
-              style="color:white;font-size:18px;width:70%"
-            >Hey, I just saved word {{currentWord ? currentWord.toLocaleUpperCase() : currentWord}} and made it nto NFT ! Check it out on Felix.
-            <div>www.saveaword.com</div>
+          <h2 v-show="!isSendSuccess">{{isSend ? 'SEND' : 'SHARE'}}</h2>
+          <div v-if="!isSend">
+            <div style="width:100%;display:flex;justify-content:center">
+              <div
+                style="color:white;font-size:18px;width:70%"
+              >Hey, I just saved word {{currentWord ? currentWord.toLocaleUpperCase() : currentWord}} and made it nto NFT ! Check it out on Felix.
+              <div>www.saveaword.com</div>
+              </div>
+            </div>
+            <div @click="toShare($event)" style="transform:translateY(60px)">
+              <img id="twitter" src="@/assets/imgs/twitter.svg" style="cursor:pointer;width:30px" />&nbsp;&nbsp;&nbsp;
+              <img id="telegram" src="@/assets/imgs/telegram.svg" style="cursor:pointer;width:32px" />&nbsp;&nbsp;&nbsp;
+              <img id="discord" src="@/assets/imgs/discord.png" style="cursor:pointer;width:25px" />&nbsp;&nbsp;&nbsp;
+              <img id="copy" src="@/assets/imgs/copy.png" style="cursor:pointer;width:25px" />
+            </div> 
+          </div>
+          <div class="sned_nft" v-else>
+            <div v-if="!isSendSuccess">
+              <div class="sned_title">WRITE OR PASTE ADDRESS</div>
+              <div class="send_ipt">
+                <el-input v-model="sendAddr" placeholder="WRITE HERE" style="width:95%;height:45px"></el-input>
+                <img src="@/assets/imgs/ic_copy.svg" style="cursor:pointer;width:15px;height:19px;" @click="click2Copy(sendAddr)">
+              </div>
+              <div class="send_btn" @click="snedNft">SEND</div>
+            </div>
+            <div v-else class="send_result">
+              <img :src="isSuccessRes ? require('@/assets/imgs/mint_success.svg') : require('@/assets/imgs/send_fail.svg')" style="width:81px;height:81px">
+              <div class="send_result_title">{{isSuccessRes ? 'YOUR NFT IS ON IT’S WAY!' : 'THERE WAS A PROBLEM!'}}</div>
+              <div class="send_result_des">{{isSuccessRes ? 'Sending NFT was successful.' : 'Sending NFT failed.You can try again.'}}</div>
+              <div class="send_result_des" style="margin-top:5px;" v-if="!isSuccessRes">Please make sure the address you are sending to is correct V Wallet address.</div>
+              <div class="send_result_txid" v-else>
+                <span>TRANSACTION ID: <span class="tx_id">{{txID}}</span></span>
+                <img src="@/assets/imgs/ic_copy.svg" style="cursor:pointer;width:15px;height:19px;margin-left:10px;" @click="click2Copy(txID)">
+              </div>
+              <div class="send_btn" style="width:248px;margin-left:5%;" @click="modelOpt('close')">GO BACK TO GALLERY</div>
             </div>
           </div>
-          <div @click="toShare($event)" style="transform:translateY(60px)">
-            <img id="twitter" src="@/assets/imgs/twitter.svg" style="cursor:pointer;width:30px" />&nbsp;&nbsp;&nbsp;
-            <img id="telegram" src="@/assets/imgs/telegram.svg" style="cursor:pointer;width:32px" />&nbsp;&nbsp;&nbsp;
-            <img id="discord" src="@/assets/imgs/discord.png" style="cursor:pointer;width:25px" />&nbsp;&nbsp;&nbsp;
-            <img id="copy" src="@/assets/imgs/copy.png" style="cursor:pointer;width:25px" />
-          </div> 
         </div>
       </div>
     </div>
@@ -149,7 +173,12 @@ export default {
       isSeach: false,
       searchVal: "",
       nftSearchWordsList: [],
-      firstNft:''
+      firstNft:'',
+      isSend:false,
+      isSendSuccess: false,
+      isSuccessRes: true,
+      txID:'',
+      sendAddr:''
     };
   },
   computed: {
@@ -165,6 +194,20 @@ export default {
     }
   },
   methods: {
+    snedNft(){
+      const loading = this.$loading({
+            lock: true,
+            text: 'PLEASE WAIT',
+            background: 'rgba(0, 0, 0, 0.8)',
+            customClass: 'loading_sty'
+      });
+      setTimeout(() => {
+      this.isSendSuccess  = true      //Next step after sending
+      this.isSuccessRes  = true       // The result that sending NFT
+      this.txID = '0x966e5D...3BA2D41701A'
+      loading.close();
+      }, 3000);
+    },
     async clicl2ShowAllDefinition(word,idx){
       if(word){
         if(this.isSeach){
@@ -208,9 +251,11 @@ export default {
         this.firstNft = this.nftWordsList[0].word
       }
     },
-    modelOpt(type,val){
-      document.querySelector(".isShowGalleryShare").style.display = type === 'show' ? 'flex' : 'none';
+    modelOpt(type,val,status){
+      document.querySelector(".isShowGalleryModal").style.display = type === 'show' ? 'flex' : 'none';
       this.currentWord = val
+      this.isSend = status
+      this.isSendSuccess = false
     },
     toShare(e){
       let shareText = 'Hey, I just saved word ' + this.currentWord.toLocaleUpperCase() + ' and made it nto NFT ! Check it out on Felix. www.saveaword.com'
@@ -245,24 +290,26 @@ export default {
       })
     },
     sort(e){
-      if(this.isSeach){
-        if(this.firstNft === this.nftSearchWordsList[0].word){
-          if(e === 'Oldest'){
-           this.nftSearchWordsList.reverse()
+      if(this.nftWordsList.length >0 || this.nftSearchWordsList.length >0) {
+        if(this.isSeach){
+          if(this.firstNft === this.nftSearchWordsList[0].word){
+            if(e === 'Newest'){
+            this.nftSearchWordsList.reverse()
+            }
+          }else{
+            if(e === 'Oldest'){
+            this.nftSearchWordsList.reverse()
+            }
           }
         }else{
-          if(e === 'Newest'){
-           this.nftSearchWordsList.reverse()
-          }
-        }
-      }else{
-          if(this.firstNft === this.nftWordsList[0].word){
-          if(e === 'Oldest'){
-           this.nftWordsList.reverse()
-          }
-        }else{
-          if(e === 'Newest'){
-           this.nftWordsList.reverse()
+            if(this.firstNft === this.nftWordsList[0].word){
+            if(e === 'Newest'){
+            this.nftWordsList.reverse()
+            }
+          }else{
+            if(e === 'Oldest'){
+            this.nftWordsList.reverse()
+            }
           }
         }
       }
@@ -297,6 +344,13 @@ export default {
 </script>
 
 <style scoped>
+
+.loading_sty .el-loading-spinner .path{
+      stroke: #FB8809;
+    }
+.loading_sty  .el-loading-spinner .el-loading-text {
+    color: #FB8809 ;
+}
 .checkWords >>> .el-input__inner {
   border: 0;
   border-bottom: 2px solid #e6e1dc;
@@ -384,6 +438,86 @@ export default {
   height: 100%;
   border-right: 1px solid #e6e1dc;
   color: #fff;
+}
+
+.sned_nft{
+  text-align: left;
+}
+
+.sned_title{
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.send_ipt{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.send_btn{
+  width: 126px;
+  height: 42px;
+  border: 1px solid #000000;
+  border-radius: 48px;
+  text-align: center;
+  line-height: 42px;
+  margin-top: 32px;
+  margin-left: 35%;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.sned_nft >>> .el-input__inner {
+  border: 1px solid #000;
+  background-color: rgba(0, 0, 0,0.1);
+  font-size: 14px;
+}
+.sned_nft >>> .el-input__inner::placeholder {
+  color: #000;
+}
+
+.send_result{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.send_result_title{
+  font-weight: bold;
+  font-size: 25px;
+  color: #171616;
+  margin-top: 15px;
+}
+
+.send_result_des{
+    font-size: 14px;
+    color: #231815;
+    margin-top: 15px;
+    width: 50%;
+    text-align: center;
+}
+
+.send_result_txid{
+  font-size: 14px;
+  color: #231815;
+  margin-top: 11px;
+  display: flex;
+  align-items: center;
+}
+
+.tx_id{
+  font-size:15px;
+  font-weight: bold;
+  color: #000000;
+  text-decoration: underline;
+  margin-left: 3px;
+  cursor: pointer;
+}
+
+.modal_container{
+  width:35%;background:#FB8809;border-radius:5px;text-align:center;padding:25px;box-sizing:border-box;padding-bottom:100px;
 }
 
 @media screen and (max-width: 500px) {
