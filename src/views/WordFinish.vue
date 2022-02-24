@@ -97,7 +97,7 @@ export default {
         } catch (error) {
           // Need to check that the word has been saved
           loading.close();
-          this.$message.error(error);
+          // this.$message.error(error);
         }
       }
     }
