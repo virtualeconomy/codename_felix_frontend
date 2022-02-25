@@ -77,7 +77,7 @@
              <img
               src="@/assets/imgs/send.svg"
               style="width；25px;height:25px;margin-top:10px;margin-left:24px;cursor:pointer"
-              @click="modelOpt('show','',true)"
+              @click="modelOpt('show',item.token_id,true)"
             />
           </div>
         </div>
@@ -124,7 +124,7 @@
                 <el-input v-model="sendAddr" placeholder="WRITE HERE" style="width:95%;height:45px"></el-input>
                 <img src="@/assets/imgs/ic_copy.svg" style="cursor:pointer;width:15px;height:19px;" @click="click2Copy(sendAddr)">
               </div>
-              <div class="send_btn" @click="snedNft">SEND</div>
+              <div class="send_btn" @click="sendNft">SEND</div>
             </div>
             <div v-else class="send_result">
               <img :src="isSuccessRes ? require('@/assets/imgs/mint_success.svg') : require('@/assets/imgs/send_fail.svg')" style="width:81px;height:81px">
@@ -132,7 +132,7 @@
               <div class="send_result_des">{{isSuccessRes ? 'Sending NFT was successful.' : 'Sending NFT failed.You can try again.'}}</div>
               <div class="send_result_des" style="margin-top:5px;" v-if="!isSuccessRes">Please make sure the address you are sending to is correct V Wallet address.</div>
               <div class="send_result_txid" v-else>
-                <span>TRANSACTION ID: <span class="tx_id">{{txID}}</span></span>
+                <span>TRANSACTION ID: <span class="tx_id" @click="openExplorer(txID)">{{txID}}</span></span>
                 <img src="@/assets/imgs/ic_copy.svg" style="cursor:pointer;width:15px;height:19px;margin-left:10px;" @click="click2Copy(txID)">
               </div>
               <div class="send_btn" style="width:248px;margin-left:5%;" @click="modelOpt('close')">GO BACK TO GALLERY</div>
@@ -177,13 +177,14 @@ export default {
       isSend:false,
       isSendSuccess: false,
       isSuccessRes: true,
+      currentTokenId: "",
       txID:'',
       sendAddr:''
     };
   },
   computed: {
     currentWalletAddress() {
-      var address = this.$store.state.app.curWallet.address;
+      var address = this.$store.state.vsys.wallet.address;
       if (address) return address.slice(0, 5) + "..." + address.slice(-3);
       else return false;
     },
@@ -194,19 +195,36 @@ export default {
     }
   },
   methods: {
-    snedNft(){
+    async sendNft(){
       const loading = this.$loading({
             lock: true,
             text: 'PLEASE WAIT',
             background: 'rgba(0, 0, 0, 0.8)',
             customClass: 'loading_sty'
       });
-      setTimeout(() => {
-      this.isSendSuccess  = true      //Next step after sending
-      this.isSuccessRes  = true       // The result that sending NFT
-      this.txID = '0x966e5D...3BA2D41701A'
+      let sendRes = await window.vsys.request({
+        method: 'sendNFT',
+        params:
+            {
+              tokenId: this.currentTokenId,
+              publicKey: this.$store.state.vsys.wallet.publicKey,
+              recipient: this.sendAddr,
+              description: 'Send Felix NFT'
+            }
+      })
+      this.isSendSuccess  = true
+      if (sendRes.result && sendRes.message === "OK") {
+        this.isSuccessRes  = true
+        this.txID = sendRes.transactionId
+      } else {
+        this.isSuccessRes = false
+      }
       loading.close();
-      }, 3000);
+      console.log(sendRes, "res")
+    },
+    openExplorer(txId) {
+      let url = this.$store.state.vsys.wallet.net === 'testnet' ? 'https://testexplorer.v.systems' : 'https://explorer.v.systems'
+      window.open(url + '/transactions/' + txId)
     },
     async clicl2ShowAllDefinition(word,idx){
       if(word){
@@ -253,8 +271,12 @@ export default {
     },
     modelOpt(type,val,status){
       document.querySelector(".isShowGalleryModal").style.display = type === 'show' ? 'flex' : 'none';
-      this.currentWord = val
       this.isSend = status
+      if (this.isSend) {
+        this.currentTokenId = val
+      } else {
+        this.currentWord = val
+      }
       this.isSendSuccess = false
     },
     toShare(e){
@@ -324,6 +346,7 @@ export default {
       );
       let dbkeys = await reqInspectNft(nftIds);
       let nftWordsCurrentList = await reqFetchDefinition(dbkeys);
+      console.log(nftWordsCurrentList, "list")
       nftWordsCurrentList.map(item => {
         Object.keys(item).map(val => {
           let wordData = JSON.parse(item[val]);
