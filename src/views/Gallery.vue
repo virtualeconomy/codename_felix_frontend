@@ -132,7 +132,7 @@
               <div class="send_result_des">{{isSuccessRes ? 'Sending NFT was successful.' : 'Sending NFT failed.You can try again.'}}</div>
               <div class="send_result_des" style="margin-top:5px;" v-if="!isSuccessRes">Please make sure the address you are sending to is correct V Wallet address.</div>
               <div class="send_result_txid" v-else>
-                <span>TRANSACTION ID: <span class="tx_id" @click="openExplorer(txID)">{{txID}}</span></span>
+                <span>TRANSACTION ID: <span class="tx_id" @click="openExplorer(txID)">{{ txID.slice(0, 10) + "..." + txID.slice(-5)}}</span></span>
                 <img src="@/assets/imgs/ic_copy.svg" style="cursor:pointer;width:15px;height:19px;margin-left:10px;" @click="click2Copy(txID)">
               </div>
               <div class="send_btn" style="width:248px;margin-left:5%;" @click="modelOpt('close')">GO BACK TO GALLERY</div>
