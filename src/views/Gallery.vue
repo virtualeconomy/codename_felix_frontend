@@ -4,7 +4,7 @@
       GALLERY
       <div
         class="wallet_addr"
-      >{{currentWalletAddress ? $store.state.app.curWallet.address: 'To view gallery, please connect your wallet.'}}</div>
+      >{{currentWalletAddress ? $store.state.vsys.wallet.address ? $store.state.app.curWallet.address : 'To view gallery, please connect your vsys wallet.': 'To view gallery, please connect your wallet.'}}</div>
     </div>
 
     <div style="max-width: 1400px; margin: auto">
