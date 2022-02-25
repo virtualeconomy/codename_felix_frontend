@@ -79,7 +79,7 @@
             v-if="!VsysWalletList.length"
             @click="toConnectWalletPage('vsys')"
             class="wallet-list-item"
-            style="color:white;cursor:pointer"
+            :style="{color:'white',cursor:'pointer',border: $store.state.app.curWallet.address ? '' : 'none'}"
           >
             <i class="el-icon-circle-plus-outline"></i>&nbsp;&nbsp;
             Connect V Wallet
