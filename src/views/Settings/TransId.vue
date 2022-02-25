@@ -66,6 +66,9 @@ export default {
     overflow: scroll;
     height: 600px;
 }
+.content::-webkit-scrollbar {
+  display: none;
+}
 .transaction_detail{
     margin-top:14px;
     height:120px;

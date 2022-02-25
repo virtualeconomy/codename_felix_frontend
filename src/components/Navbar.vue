@@ -193,6 +193,9 @@ export default {
   font: normal normal normal 15px/19px Rajdhani;
   color: #f9fcfd;
 }
+.connect_to_wallet_font::-webkit-scrollbar {
+  display: none;
+}
 .wallet-list-item {
   padding: 12px;
   display: flex;

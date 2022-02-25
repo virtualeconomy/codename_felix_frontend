@@ -129,6 +129,9 @@ export default {
   z-index: 2;
   height: 400px;
 }
+.scroll_container::-webkit-scrollbar {
+  display: none;
+}
 .mint_words{
   display: flex;
   align-items: center;

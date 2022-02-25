@@ -213,7 +213,7 @@ export default {
       this.currentWord = val
     },
     toShare(e){
-      let shareText = 'Hey, I just saved word ' + this.currentWord.toLocaleUpperCase() + ' and made it nto NFT ! Check it out on Felix. www.saveaword.com'
+      let shareText = 'Hey, I just saved word ' + this.currentWord.toLocaleUpperCase() + ' and made it into NFT ! Check it out on Felix. www.saveaword.com'
       if(e.target.id === 'twitter') window.open('https://twitter.com/intent/tweet?text=' + shareText,'_blank')
       if(e.target.id === 'telegram') window.open('https://telegram.me/share/url?url=www.saveaword.com&text=' + shareText,'_blank')
       if(e.target.id === 'discord') window.open('https://discord.com/app','_blank')

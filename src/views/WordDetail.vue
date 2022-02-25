@@ -162,6 +162,10 @@ export default {
   margin-bottom: 50px;
 }
 
+.scroll_container::-webkit-scrollbar {
+  display: none;
+}
+
 .tx_id{
     font-size: 15px;
     font-weight: bold;
