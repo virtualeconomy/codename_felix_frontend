@@ -9,20 +9,19 @@
     <div class="scroll_container">
       <div v-for="(item, index) in $store.state.app.words" :key="index" class="mint_words">
           <h3 style="color:#FB8809;">{{ item.word.toUpperCase() }}</h3>
-          <span v-show="step === 1">8 VSYS</span>
+          <span >8 VSYS</span>
       </div>
-      <div class="mint_words" v-show="step === 1" style="padding-bottom:20px">
+      <div class="mint_words"  style="padding-bottom:20px">
         <span style="font-size:20px;font-weight:bold">MINT FEES</span>
         <span style="font-size:15px;font-weight:bold">0.3 VSYS</span>
       </div>
     </div>
-    <div class="mint_words" style="z-index: 2;" v-if="step === 1">Total Price
+    <div class="mint_words" style="z-index: 2;">Total Price
         <div style="font-size:40px;color:#FB8809;">{{$store.state.app.words.length * 8 + 0.3}} VSYS</div>
     </div>
-    <div style="height:50px" v-else></div>
-    <div class="mint_tips">{{step === 1 ? 'After you click PAY, your V Wallet will be charged with needed amount.' : 'After you click MINT, your selection will be stored on the chain.'}}</div>
-    <div class="mint_tips">{{step === 1 ? 'Click PAY to continue' : 'Click MINT to continue'}}</div>
-    <div class="mint_btn" @click="mintNFT">{{step === 1 ? 'PAY' : 'MINT'}}</div>
+    <div class="mint_tips">After you click MINT, your selection will be stored on the chain.</div>
+    <div class="mint_tips">Click MINT to continue</div>
+    <div class="mint_btn" @click="mintNFT">MINT</div>
     <!-- <div class="base-button" @click="$router.push('/settings/saved_words')" style="margin-top:20px; cursor:pointer">VIEW YOUR SAVED WORDS</div> -->
   </div>
 </template>
@@ -34,19 +33,10 @@ export default {
   name: 'WordFinish',
   data() {
     return {
-      step:1
-    }
-  },
-  watch:{
-    $route(){
-      this.step = 1
     }
   },
   methods: {
     async mintNFT() {
-      if(this.step === 1){
-        this.step += 1
-      }else{
         const loading = this.$loading({
               lock: true,
               text: 'PLEASE WAIT',
@@ -99,7 +89,6 @@ export default {
           loading.close();
           // this.$message.error(error);
         }
-      }
     }
   }
 }

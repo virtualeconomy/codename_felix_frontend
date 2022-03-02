@@ -315,21 +315,21 @@ export default {
       if(this.nftWordsList.length >0 || this.nftSearchWordsList.length >0) {
         if(this.isSeach){
           if(this.firstNft === this.nftSearchWordsList[0].word){
-            if(e === 'Newest'){
+            if(e === 'Oldest'){
             this.nftSearchWordsList.reverse()
             }
           }else{
-            if(e === 'Oldest'){
+            if(e === 'Newest'){
             this.nftSearchWordsList.reverse()
             }
           }
         }else{
             if(this.firstNft === this.nftWordsList[0].word){
-            if(e === 'Newest'){
+            if(e === 'Oldest'){
             this.nftWordsList.reverse()
             }
           }else{
-            if(e === 'Oldest'){
+            if(e === 'Newest'){
             this.nftWordsList.reverse()
             }
           }
@@ -346,7 +346,6 @@ export default {
       );
       let dbkeys = await reqInspectNft(nftIds);
       let nftWordsCurrentList = await reqFetchDefinition(dbkeys);
-      console.log(nftWordsCurrentList, "list")
       nftWordsCurrentList.map(item => {
         Object.keys(item).map(val => {
           let wordData = JSON.parse(item[val]);
@@ -360,6 +359,7 @@ export default {
           val.isShowAllDefinition = false
           val.wordDetail = []
       })
+      this.nftWordsList.reverse()
       this.firstNft = this.nftWordsList[0].word
     }
   }
