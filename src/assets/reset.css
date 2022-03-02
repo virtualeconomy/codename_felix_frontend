@@ -28,11 +28,11 @@ body{
   src: url('./fonts/SenRegular.ttf');
 }
 @font-face {  
-  font-family: 'coves-bold';
+  font-family: 'sen-bold';
   src: url('./fonts/SenBold.ttf');
 }
 @font-face {  
-  font-family: 'coves-extra-bold';
+  font-family: 'sen-extra-bold';
   src: url('./fonts/SenExtraBold.ttf');
 }
 

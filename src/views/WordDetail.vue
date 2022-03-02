@@ -19,7 +19,7 @@
         <h3>DEFINITIONS</h3>
         <div style="min-height:500px;">
           <div
-            style="position:relative;z-index:2;font-family:coves-light"
+            style="position:relative;z-index:2;font-family:sen-light"
             v-for="(item, index) in wordDetail"
             :key="item.id"
             v-html="`${index + 1}. ${formatDefinition(item.definition)}`"
