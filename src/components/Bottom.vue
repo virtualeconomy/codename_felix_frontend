@@ -1,6 +1,6 @@
 <template>
   <div id="bottom">
-    <img class="placeholderDiv" style="padding:10px" src="@/assets/imgs/footer_logo.svg" width="30" />
+    <img class="placeholderDiv" style="padding:10px;width:30px;" src="@/assets/imgs/footer_icon.svg" width="30" />
     <div class="content" style="flex:1;color:white;text-align:center;">
       <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">MINTED WORDS: </span>
       &nbsp;
