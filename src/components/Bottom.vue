@@ -3,20 +3,18 @@
     <img class="placeholderDiv" style="padding:10px" src="@/assets/imgs/footer_logo.svg" width="30" />
     <div class="content" style="flex:1;color:white;text-align:center;">
       <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">MINTED WORDS: </span>
-      &nbsp;
       <span class="placeholderDiv" >{{ NFTCount }} </span>
-      <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;LAST MINTED: </span>
-      &nbsp;
+      <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">&nbsp;|&nbsp;LAST MINTED: </span>
       <span class="placeholderDiv" >{{ lastSavedWords }} </span>
-      <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      <span class="placeholderDiv" style="font-weight:bold;color:#FB8809">&nbsp;|&nbsp;</span>
       <span class="balance_label" style="font-weight:bold;color:#FB8809"> Balance</span>
       &nbsp;
-      <span class="balance_amount">{{ balance }} VSYS</span>&nbsp;
+      <span class="balance_amount">{{ balance }} VSYS</span>
       <div @click="dialogFormVisible=true" class="dontate-btn">DONATE</div>
     </div>
     <div class="placeholderDiv">
       <div style="position: absolute;transform: translate(-180px,-8px);width: 180px;">
-        <span @click="openUrl('https://dara.global/')" style="color:#FB8809;cursor:pointer">DARA</span>&nbsp;&nbsp;
+        <span @click="openUrl('https://dara.global/')" style="color:#FB8809;cursor:pointer">DARA</span>&nbsp;
         <span
           @click="openUrl('https://theimmutable.net/')"
           style="color:white;cursor:pointer"
@@ -114,6 +112,9 @@ export default {
   .placeholderDiv {
     position: relative;
     width: 50px;
+  }
+  .content {
+    margin-right:150px;
   }
 }
 @media screen and (max-width: 500px) {
