@@ -23,6 +23,19 @@ body{
   src: url('./fonts/CovesBold.otf');
 }
 
+@font-face {  
+  font-family: 'sen-light';
+  src: url('./fonts/SenRegular.ttf');
+}
+@font-face {  
+  font-family: 'coves-bold';
+  src: url('./fonts/SenBold.ttf');
+}
+@font-face {  
+  font-family: 'coves-extra-bold';
+  src: url('./fonts/SenExtraBold.ttf');
+}
+
 i {
   color: white
 }
