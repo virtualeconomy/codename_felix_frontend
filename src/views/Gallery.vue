@@ -106,7 +106,7 @@
             <div style="width:100%;display:flex;justify-content:center">
               <div
                 style="color:white;font-size:18px;width:70%"
-              >Hey, I just saved word {{currentWord ? currentWord.toLocaleUpperCase() : currentWord}} and made it nto NFT ! Check it out on Felix.
+              >I just saved the #Wiktionary definition of the word {{currentWord ? currentWord.toLocaleUpperCase() : currentWord}} to #blockchain, and minted a unique #NFT! Check out @FelixDictionary! www.saveaword.com.
               <div>www.saveaword.com</div>
               </div>
             </div>
@@ -280,7 +280,8 @@ export default {
       this.isSendSuccess = false
     },
     toShare(e){
-      let shareText = 'Hey, I just saved word ' + this.currentWord.toLocaleUpperCase() + ' and made it into NFT ! Check it out on Felix. www.saveaword.com'
+      // let shareText = 'Hey, I just saved word ' + this.currentWord.toLocaleUpperCase() + ' and made it into NFT ! Check it out on Felix. www.saveaword.com'
+      let shareText = 'I just saved the #Wiktionary definition of the word' + this.currentWord.toLocaleUpperCase() + ' to #blockchain, and minted a unique #NFT! Check out @FelixDictionary! www.saveaword.com'
       if(e.target.id === 'twitter') window.open('https://twitter.com/intent/tweet?text=' + shareText,'_blank')
       if(e.target.id === 'telegram') window.open('https://telegram.me/share/url?url=www.saveaword.com&text=' + shareText,'_blank')
       if(e.target.id === 'discord') window.open('https://discord.com/app','_blank')
