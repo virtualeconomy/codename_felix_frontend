@@ -56,13 +56,13 @@ export default {
     showMessage() {
       switch (this.walletStatus) {
         case "toConnect":
-          return 'To continue saving a word you must connect your ' + (this.selectedWallet === 'vsys' ? this.selectedWallet : 'DARA (metamask)') + ' wallet.'
+          return 'To continue minting you must connect your ' + (this.selectedWallet === 'vsys' ? 'V' : 'Metamask') + (this.selectedWallet === 'vsys' ? ' wallet.' : ' wallet and have a minimum of 5,000 DARA tokens available.')
         case "toLogin":
           return "It seems that you have the extension installed, but you didn’t log in to your V Wallet.To continue, please go to your V Wallet extension and log in. "
         case "toInstall":
           return "Sorry,but it seems to that you don't have " + (this.selectedWallet === 'vsys' ? this.selectedWallet : 'DARA (metamask)') + " extension. To continue, please use the link to install."
         default:
-          return 'To continue saving a word you must connect your ' + (this.selectedWallet === 'vsys' ? this.selectedWallet : 'DARA (metamask)') + ' wallet.'
+          return 'To continue minting you must connect your ' + (this.selectedWallet === 'vsys' ? 'V' : 'Metamask') + (this.selectedWallet === 'vsys' ? ' wallet.' : ' wallet and have a minimum of 5,000 DARA tokens available.')
       }
     },
     showButtonMessage() {
