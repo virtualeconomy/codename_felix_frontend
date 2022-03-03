@@ -130,7 +130,7 @@
               <img :src="isSuccessRes ? require('@/assets/imgs/mint_success.svg') : require('@/assets/imgs/send_fail.svg')" style="width:81px;height:81px">
               <div class="send_result_title">{{isSuccessRes ? 'YOUR NFT IS ON IT’S WAY!' : 'THERE WAS A PROBLEM!'}}</div>
               <div class="send_result_des">{{isSuccessRes ? 'Sending NFT was successful.' : 'Sending NFT failed.You can try again.'}}</div>
-              <div class="send_result_des" style="margin-top:5px;" v-if="!isSuccessRes">Please make sure the address you are sending to is correct V Wallet address.</div>
+              <div class="send_result_des" style="margin-top:5px;" v-if="!isSuccessRes">{{ failedMsg }}}</div>
               <div class="send_result_txid" v-else>
                 <span>TRANSACTION ID: <span class="tx_id" @click="openExplorer(txID)">{{ txID.slice(0, 10) + "..." + txID.slice(-5)}}</span></span>
                 <img src="@/assets/imgs/ic_copy.svg" style="cursor:pointer;width:15px;height:19px;margin-left:10px;" @click="click2Copy(txID)">
@@ -152,6 +152,7 @@ import {
   reqNftContractId,
   reqLemmaWord
 } from "@/api/index";
+import Base58 from 'base-58';
 
 export default {
   name: "SavedWords",
@@ -177,6 +178,7 @@ export default {
       isSend:false,
       isSendSuccess: false,
       isSuccessRes: true,
+      failedMsg: "Please make sure the address you are sending to is correct V Wallet address.",
       currentTokenId: "",
       txID:'',
       sendAddr:''
@@ -196,12 +198,40 @@ export default {
   },
   methods: {
     async sendNft(){
+      this.failedMsg = "Please make sure the address you are sending to is correct V Wallet address."
       const loading = this.$loading({
             lock: true,
             text: 'PLEASE WAIT',
             background: 'rgba(0, 0, 0, 0.8)',
             customClass: 'loading_sty'
       });
+
+      //check address && network
+      if (!this.sendAddr || typeof this.sendAddr !== 'string') {
+        loading.close()
+        this.isSendSuccess = true
+        this.isSuccessRes = false
+        return
+      }
+      let address_bytes = Base58.decode(this.sendAddr);
+      if (address_bytes[0] !== 5) {
+        loading.close()
+        this.isSendSuccess = true
+        this.isSuccessRes = false
+        return
+      }
+      let walletInfo = await window.vsys.request({ method: 'info' })
+      if (walletInfo.result) {
+        let network = walletInfo.network.toLowerCase()
+        let networkByte = network === "mainnet" ? 'M'.charCodeAt(0) : 'T'.charCodeAt(0)
+        if (address_bytes[1] !== networkByte) {
+          loading.close()
+          this.isSendSuccess = true
+          this.isSuccessRes = false
+          this.failedMsg = "It seems that the address you are sending to does not match your network type, please select the correct network type in V extension wallet"
+          return
+        }
+      }
       let sendRes = await window.vsys.request({
         method: 'sendNFT',
         params:
@@ -217,6 +247,9 @@ export default {
         this.isSuccessRes  = true
         this.txID = sendRes.transactionId
       } else {
+        if (sendRes.message === "account is locked") {
+          this.failedMsg = "It seems that you have the extension installed, but you didn’t log in to your V Wallet.To continue, please go to your V Wallet extension and log in."
+        }
         this.isSuccessRes = false
       }
       loading.close();
