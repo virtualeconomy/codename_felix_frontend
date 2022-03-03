@@ -29,7 +29,7 @@ export default {
       isShow: false,
       currentPage: 0,
       tipTextList: [
-        `<span style="color:#FB8809">Save a word</span> is home to Felix Dictionary, a non-profit and community operated project. Inspired by The Immutable and blessed by Sunny King, everyone in the world is able to immortalise words onto the V Systems blockchain and mint unique NFTs. To ensure we complete our mission of saving all words and their definitions (present and future) we gratefully accept your donations. Thanks.`,
+        `Welcome to <span style="color:#FB8809">Felix</span>, the world's first dictionary on a blockchain. Created by The Immutable Network, word definitions can now be immortalized as unique NFTs!`,
         `Turn tips <span style="color:#FB8809">off/on</span> simply by clicking INFO icon. For fist time users we suggest that you leave tips ON.`,
         `In order to ensure everyone is able to participate you can always help this project by clicking <span style="color:#FB8809">DONTE</span> button in the footer.`,
         `<span style="color:#FB8809">BALANCE</span><br />of the project is always shown in the footer of the webapp.`,
