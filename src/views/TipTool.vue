@@ -7,7 +7,7 @@
     />
     <div
       v-show="isShow"
-      style="background:#171616;border-radius:5px;padding:8px 16px;position:absolute;top:120px;left:50%;transform:translateX(240px);width:300px;text-align:center;color:white;font-family:'coves-light';"
+      style="background:#171616;border-radius:5px;padding:8px 16px;position:absolute;top:120px;left:50%;transform:translateX(240px);width:300px;text-align:center;color:white;font-family:'sen-light';"
     >
       <div style="text-align:right;cursor:pointer">
         <img @click="isShow=false" width="16px" src="@/assets/imgs/remove_white.svg" />

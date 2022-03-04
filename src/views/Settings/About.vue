@@ -6,7 +6,7 @@
         style="color:#FB8809;font-size:20px;font-weight:600;cursor:pointer"
     >back to settings</i>
     <h3>About us</h3>
-    <div style="margin-bottom:19px;font-family:'coves-light'">
+    <div style="margin-bottom:19px;font-family:'sen-light'">
       Felix is the first dictionary on a blockchain.
       It was inspired by The Immutable (DARA),
       a community led project focused on immortalizingthe most valuable content and informationin the world today.Felix is powered by

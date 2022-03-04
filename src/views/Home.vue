@@ -35,7 +35,7 @@
     </el-input>
 
     <div style="margin:24px 0;z-index:2;">
-      <div style="margin-bottom:10px;fon-size:20px;font-weight:600">Random words</div>
+      <div style="font-family:sen-bold;margin-bottom:10px;fon-size:20px;font-weight:600;color:#FB8809">Random words</div>
       <div
         :style="{color:selectedArray.find((value)=>value.id===item.id)?'#FB8809':''}"
         class="word-ui"
@@ -154,7 +154,7 @@ export default {
 <style scoped>
 .word-ui {
   margin-bottom: 10px;
-  font-family: coves-light;
+  font-family: sen-light;
 }
 .word-ui:hover {
   background: #fb8809;

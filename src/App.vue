@@ -191,7 +191,7 @@ export default {
   }
 }
 #app {
-  font-family: "coves-bold";
+  font-family: "sen-bold";
   font-size: 20px;
   padding-bottom: 100px;
 }
