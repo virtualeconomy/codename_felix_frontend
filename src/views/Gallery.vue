@@ -317,8 +317,7 @@ export default {
       let shareText = 'I just saved the #Wiktionary definition of the word' + this.currentWord.toLocaleUpperCase() + ' to #blockchain, and minted a unique #NFT! Check out @FelixDictionary! www.saveaword.com'
       if(e.target.id === 'twitter') window.open('https://twitter.com/intent/tweet?text=' + shareText,'_blank')
       if(e.target.id === 'telegram') window.open('https://telegram.me/share/url?url=www.saveaword.com&text=' + shareText,'_blank')
-      if(e.target.id === 'discord') window.open('https://discord.com/app','_blank')
-      if(e.target.id === 'copy') {
+      if(e.target.id === 'discord' || e.target.id === 'copy') {
         var target = document.createElement('div');
         target.id = 'tempTarget';
         target.style.opacity = '0';
@@ -331,7 +330,11 @@ export default {
           window.getSelection().addRange(range);
           document.execCommand('copy');
           window.getSelection().removeAllRanges();
-          this.$message.success('COPY SUCCESSFUL')
+          if (e.target.id === 'discord') {
+            window.open('https://discord.com/app','_blank')
+          } else {
+            this.$message.success('COPY SUCCESSFUL')
+          }
           target.parentElement.removeChild(target);
         } catch (e) {
           alert('Fail to copy')
