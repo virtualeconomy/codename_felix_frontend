@@ -154,7 +154,7 @@ export default {
 <style scoped>
 .word-ui {
   margin-bottom: 10px;
-  font-family: sen-regular;
+  font-family: sen-light;
 }
 .word-ui:hover {
   background: #fb8809;
