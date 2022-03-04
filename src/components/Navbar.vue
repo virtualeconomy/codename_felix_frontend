@@ -197,6 +197,8 @@ export default {
   display: none;
 }
 .wallet-list-item {
+  font-family: sen-bold;
+  font-size: 15px;
   padding: 12px;
   display: flex;
   align-items: center;
