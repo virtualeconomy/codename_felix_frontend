@@ -6,28 +6,33 @@
     <el-container class="home_container">
       <!--header-->
       <el-header class="home_header">
-        <navbar />
+        <navbar :isFirstOpen='isFirstOpen'/>
       </el-header>
 
       <!-- middle -->
       <!-- el-aside -->
 
-      <el-main style="padding:0">
+      <el-main style="padding:0" >
         <router-view name="gallery" />
         <keep-alive>
-          <router-view class="base-ui" />
+          <router-view class="base-ui"  v-show="!isFirstOpen" />
         </keep-alive>
-        <TipTool />
+        <TipTool  v-if="!isFirstOpen"/>
         <img
           :style="{'display':watchRoute === '/gallery' ? 'none' :'block'}"
           style="position: absolute; width: 200px; left: 50%; transform: translate(-50%, -340px);z-index: 0;"
           src="@/assets/imgs/felix_logo.svg"
         />
+        <div style="width:100%;text-align:center;" v-show="isFirstOpen">
+          <img
+            src="@/assets/imgs/landing_cover.svg"
+          />
+        </div>
         <div
           @click="routeTo"
           class="gallery-btn"
           v-show="$route.path === '/' || $route.path === '/gallery'"
-        >{{watchRoute === '/gallery' ? 'BACK TO DICTIONARY' : 'GALLERY'}}</div>
+        >{{watchRoute === '/gallery' ? 'BACK TO DICTIONARY' : isFirstOpen ? 'OPEN' : 'GALLERY'}}</div>
       </el-main>
       <!-- bottom -->
       <Bottom class="home-footer" />
@@ -66,7 +71,8 @@ export default {
   name: "app",
   data() {
     return {
-      isShowWarning: false
+      isShowWarning: false,
+      isFirstOpen: false
     };
   },
   computed: {
@@ -96,10 +102,15 @@ export default {
       };
     },
     routeTo() {
-      if (this.$route.path === "/gallery") {
-        this.$router.replace("/");
-      } else {
-        this.$router.push("/gallery");
+      if(this.isFirstOpen){
+        this.isFirstOpen = false
+        window.localStorage.setItem('openFelix', true)
+      }else{
+        if (this.$route.path === "/gallery") {
+          this.$router.replace("/");
+        } else {
+          this.$router.push("/gallery");
+        }
       }
     },
     close() {
@@ -119,6 +130,7 @@ export default {
     if (localStorage['vsysWallet']) this.$store.commit("vsys/updateWallet", JSON.parse(localStorage['vsysWallet']))
     if (localStorage['ethWallet']) this.$store.commit("eth/updateWallet", JSON.parse(localStorage['ethWallet']))
     if (localStorage['appWallet']) this.$store.commit("app/updateWallet", JSON.parse(localStorage['appWallet']))
+    this.isFirstOpen = localStorage.getItem('openFelix') ? false : true
   },
   components: {
     Navbar,

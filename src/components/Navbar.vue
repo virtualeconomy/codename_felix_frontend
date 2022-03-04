@@ -119,6 +119,12 @@ export default {
       isShow: false
     };
   },
+  props:{
+    isFirstOpen:{
+      type:Boolean,
+      default: false
+    }
+  },
   computed: {
     daraBalance() {
       return this.$store.state.eth.wallet.amount;
@@ -147,17 +153,21 @@ export default {
   },
   methods: {
     toConnectWalletPage(walletName) {
-      if (walletName == this.$route.query[0]) return;
-      this.$router.push({
-        path: "/connect_wallet",
-        query: { 0: walletName }
-      });
+      if(this.isFirstOpen){
+        alert('PLEASE OPEN THE DICTIONARY !')
+      }else{
+        if (walletName == this.$route.query[0]) return;
+        this.$router.push({
+          path: "/connect_wallet",
+          query: { 0: walletName }
+        });
+      }
     },
     switchWallet(walletName) {
-      this.$store.commit(
-        "app/updateWallet",
-        this.$store.state[walletName].wallet
-      );
+        this.$store.commit(
+          "app/updateWallet",
+          this.$store.state[walletName].wallet
+        );
     }
   }
 };
