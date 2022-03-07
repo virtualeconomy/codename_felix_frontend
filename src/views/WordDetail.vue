@@ -4,7 +4,7 @@
       class="el-icon-arrow-left"
       @click="$router.push('/')"
       style="color:#FB8809;font-size:20px;font-weight:600;cursor:pointer"
-    >search</i>
+    ><span style="font-family:sen-light!important;">search</span></i>
     <div class="scroll_container">
       <div style="display:flex;align-items:baseline">
         <h1>{{ word.word }}</h1>&nbsp;&nbsp;
