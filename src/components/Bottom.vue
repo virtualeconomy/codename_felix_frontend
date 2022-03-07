@@ -22,7 +22,7 @@
       </div>
     </div>
     <el-dialog
-      style="font-family:sen-light!importtant;"
+      style="font-family:sen-light!important;"
       title="Thank you for your donation!"
       :visible.sync="dialogFormVisible"
       append-to-body
