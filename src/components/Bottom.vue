@@ -52,7 +52,7 @@
           <div
             style="font-family: sen-regular;font-size:18px;"
           >The money you donate will go into this account:</div>
-          <div style="color:#FB8809;font-family: sen-regular;font-size:18px">{{ isDonateVSYS ?  address : '0xcB613BFC2fA5F14F64024b4E012aBB742AA1B677' }}</div>
+          <div style="color:#FB8809;font-family: sen-regular;font-size:18px">{{ isDonateVSYS ?  address : daraAddress }}</div>
           <div style="font-family: sen-regular;font-size:18px;margin-top:20px;margin-bottom:10px;">Amount {{isDonateVSYS ? 'VSYS' : 'DARA'}}:</div>
           <el-input type="number" v-model="amount" auto-complete="off"></el-input>
         </el-form>
@@ -70,9 +70,9 @@ import BigNumber from "bignumber.js";
 import {
   reqGetBalance,
   reqGetLastSaved,
-  reqGetCountNFT,
-  reqGetCountSaved
+  reqGetCountNFT
 } from "@/api/index";
+import Web3 from 'web3'
 
 export default {
   async created() {
@@ -101,6 +101,7 @@ export default {
   data() {
     return {
       address: "",
+      daraAddress: "0xcB613BFC2fA5F14F64024b4E012aBB742AA1B677",
       balance: 0,
       amount: "",
       dialogFormVisible: false,
@@ -124,25 +125,48 @@ export default {
     },
     async donate() {
       if (!this.amount) return;
-      if (!this.$store.state.vsys.wallet.address) {
-        alert("TO DONATE, YOU MUST CONNECT YOUR V WALLET");
-      } else if (!this.address) {
-        return alert("Invalid address");
-      } else {
-        let res = await window.vsys.request({
-          method: "send",
-          params: {
-            publicKey: this.$store.state.vsys.wallet.publicKey,
-            recipient: this.address,
-            amount: this.amount,
-            description: "donation"
-          }
-        });
-        if (res.result && res.message === "OK") {
-          this.dialogFormVisible = false;
-          alert("Payment submitted successfully, please refresh page later");
+      if (this.isDonateVSYS) {
+        if (!this.$store.state.vsys.wallet.address) {
+          alert("TO DONATE, YOU MUST CONNECT YOUR V WALLET");
+        } else if (!this.address) {
+          return alert("Invalid address");
         } else {
-          console.log(res, "cancel");
+          let res = await window.vsys.request({
+            method: "send",
+            params: {
+              publicKey: this.$store.state.vsys.wallet.publicKey,
+              recipient: this.address,
+              amount: this.amount,
+              description: "donation"
+            }
+          });
+          if (res.result && res.message === "OK") {
+            this.dialogFormVisible = false;
+            alert("Payment submitted successfully, please refresh page later");
+          } else {
+            console.log(res, "cancel");
+          }
+        }
+      } else {
+        let sender = this.$store.state.eth.wallet.address
+        if (!sender) {
+          alert("TO DONATE, YOU MUST CONNECT YOUR METAMASK WALLET");
+        } else if (!this.address) {
+          return alert("Invalid address");
+        } else {
+          const web3 = new Web3(window.ethereum)
+          const tokenABI = [{"inputs":[{"internalType":"string","name":"tokenName","type":"string"},{"internalType":"string","name":"tokenSymbol","type":"string"},{"internalType":"uint8","name":"tokenDecimals","type":"uint8"},{"internalType":"uint256","name":"tokenTotalSupply","type":"uint256"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getCounter","outputs":[{"internalType":"int256","name":"","type":"int256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"int256","name":"key","type":"int256"}],"name":"getHash","outputs":[{"internalType":"string","name":"value","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"int256","name":"","type":"int256"}],"name":"store","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"value","type":"string"}],"name":"storeHash","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"}]
+          const tokenInst = new web3.eth.Contract(tokenABI, "0x0255af6c9f86F6B0543357baCefA262A2664f80F")
+          const tx = {
+            from: sender,
+            to: tokenInst._address,
+            data: tokenInst.methods.transfer(this.daraAddress,web3.utils.toWei( this.amount ) ).encodeABI(),
+          }
+          web3.eth.sendTransaction(tx).then(res => {
+            console.log("res",res)
+          }).catch(err => {
+            console.log("err",err)
+          });
         }
       }
     }
