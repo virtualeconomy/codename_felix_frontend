@@ -22,6 +22,7 @@
       </div>
     </div>
     <el-dialog
+      style="font-family:sen-light!importtant;"
       title="Thank you for your donation!"
       :visible.sync="dialogFormVisible"
       append-to-body
@@ -29,14 +30,14 @@
       <el-form>
         <div
           style="font-size:20px;margin-bottom:10px"
-        >The money you donate will go into this account:</div>
-        <div style="color:#FB8809">{{ address }}</div>
-        <div style="font-size:20px;margin-top:10px">Amount VSYS:</div>
+        ><span style="font-family:sen-light!important;">The money you donate will go into this account:</span></div>
+        <div style="color:#FB8809;font-family:sen-light!important;">{{ address }}</div>
+        <div style="font-size:20px;margin-top:10px;font-family:sen-light!important;">Amount VSYS:</div>
         <el-input type="number" v-model="amount" auto-complete="off"></el-input>
       </el-form>
       <div slot="footer" style="display:flex;justify-content:space-between">
-        <el-button @click="dialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="donate">Confirm</el-button>
+        <el-button @click="dialogFormVisible = false"><span style="font-family:sen-light!important;">Cancel</span></el-button>
+        <el-button type="primary" @click="donate"><span style="font-family:sen-light!important;">Confirm</span></el-button>
       </div>
     </el-dialog>
   </div>
