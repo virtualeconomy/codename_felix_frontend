@@ -2,7 +2,7 @@
   <div style="display:flex;flex-direction:column;text-align:center;align-items:center">
     <img style="margin-top:30%" src="@/assets/imgs/settings_aboutus.svg" width="40" alt />
     <h2>Sign out of wallet</h2>
-    <div style="padding:0 30px 30px 30px;font-family:'sen-light'">
+    <div style="padding:0 30px 30px 30px;font-family:'sen-light';z-index:2;">
       Before you sign out of your wallet, please make sure that you have need information to sign in again. Without it, you will use access to to your saved words.
       <br />
       <br />Select wallet to sign out. You must select at least one to continue.
