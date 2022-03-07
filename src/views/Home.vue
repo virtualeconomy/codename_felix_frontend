@@ -20,7 +20,7 @@
 
     <el-input
       class="custom-input"
-      style="width:100%"
+      style="width:100%;font-family:sen-light!important;"
       v-model="value"
       placeholder="Search here"
       @keyup.enter.native="querySearchAsync"
@@ -154,7 +154,7 @@ export default {
 <style scoped>
 .word-ui {
   margin-bottom: 10px;
-  font-family: sen-light;
+  font-family: sen-light!important;
 }
 .word-ui:hover {
   background: #fb8809;
@@ -170,6 +170,7 @@ export default {
 .custom-input >>> input,
 .custom-input >>> input::-webkit-input-placeholder {
   color: #fb8809;
+  font-family: sen-light!important;
 }
 .base-button {
   position: relative;
