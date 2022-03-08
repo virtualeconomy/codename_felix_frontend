@@ -107,7 +107,7 @@
             <div style="font-family:sen-light!important;width:100%;display:flex;justify-content:center">
               <div
                 style="font-family:sen-light!important;color:white;font-size:18px;width:70%"
-              >I just saved the #Wiktionary definition of the word {{currentWord ? currentWord.toLocaleUpperCase() : currentWord}} to #blockchain, and minted a unique #NFT! Check out @FelixDictionary!.
+              >I just saved the #Wiktionary definition of the word {{currentWord ? currentWord.toLocaleUpperCase() : currentWord}} to #blockchain, and minted a unique #NFT! Check out @FelixDictionary!
               <div>www.saveaword.com</div>
               </div>
             </div>
