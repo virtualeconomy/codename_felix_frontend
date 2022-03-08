@@ -4,7 +4,7 @@
       class="el-icon-arrow-left"
       @click="$router.go(-1)"
       style="color:#FB8809;font-size:20px;font-weight:600; cursor:pointer"
-    >back</i>
+    ><span style="font-family:sen-light!important;">back</span></i>
     <div style="margin-top:39px">MINT SELECTION</div>
     <div class="scroll_container">
       <div v-for="(item, index) in $store.state.app.words" :key="index" class="mint_words">

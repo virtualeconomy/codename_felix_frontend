@@ -1,5 +1,5 @@
 <template>
-  <div class="gallery" style="text-align: center; font-family: serif">
+  <div class="gallery" style="text-align: center; font-family: serif;">
     <div class="gallery_title">
       GALLERY
       <div
@@ -7,7 +7,7 @@
       >{{currentWalletAddress ? $store.state.vsys.wallet.address ? $store.state.app.curWallet.address : 'To view gallery, please connect your vsys wallet.': 'To view gallery, please connect your wallet.'}}</div>
     </div>
 
-    <div style="max-width: 1400px; margin: auto">
+    <div style="max-width: 1400px; margin: auto;">
       <div class="checkWords">
         <el-input
           placeholder="Search"
@@ -22,13 +22,14 @@
             @click="searchNft"
           />
         </el-input>
-        <div style="display:flex;align-items:center">
-          <el-select v-model="value" placeholder="Recently Active" @change="sort">
+        <div style="display:flex;align-items:center;">
+          <el-select style="font-family:sen-light!important;" v-model="value" placeholder="Recently Active" @change="sort">
             <el-option
               v-for="item in options"
               :key="item.value"
               :label="item.label"
               :value="item.value"
+              style="font-family:sen-light!important;"
             ></el-option>
           </el-select>
           <div id="triangle-down"></div>
@@ -60,9 +61,9 @@
               {{ item.token_id.slice(0, 5) + "..." + item.token_id.slice(-3)}}
               <div style="margin: auto; width: 80px; border-top: 1px solid grey"></div>
             </div>
-            <div @click="clicl2ShowAllDefinition(item.word,idx)" v-if="item.wordDetail.length < 2 || !item.isShowAllDefinition" style="cursor:pointer;margin-top: 10px;width:90%;margin-left:5%;" v-html="item.definition "></div>
+            <div @click="clicl2ShowAllDefinition(item.word,idx)" v-if="item.wordDetail.length < 2 || !item.isShowAllDefinition" style="font-family:sen-light!important;cursor:pointer;margin-top: 10px;width:90%;margin-left:5%;" v-html="item.definition "></div>
             <div
-              style="cursor:pointer;position:relative;z-index:2;font-family:sen-light;margin-top: 10px;width:90%;margin-left:5%;"
+              style="cursor:pointer;position:relative;z-index:2;font-family:sen-light!important;margin-top: 10px;width:90%;margin-left:5%;"
               v-for="(val, index) in item.wordDetail"
               :key="val.id"
               v-html="`${index + 1}. ${formatDefinition(val.definition)}`"
@@ -101,11 +102,11 @@
               @click="modelOpt('close')"
             />
           </div>
-          <h2 v-show="!isSendSuccess">{{isSend ? 'SEND' : 'SHARE'}}</h2>
-          <div v-if="!isSend">
-            <div style="width:100%;display:flex;justify-content:center">
+          <h2 style="font-family:sen-light!important;" v-show="!isSendSuccess">{{isSend ? 'SEND' : 'SHARE'}}</h2>
+          <div v-if="!isSend" style="font-family:sen-light!important;">
+            <div style="font-family:sen-light!important;width:100%;display:flex;justify-content:center">
               <div
-                style="color:white;font-size:18px;width:70%"
+                style="font-family:sen-light!important;color:white;font-size:18px;width:70%"
               >I just saved the #Wiktionary definition of the word {{currentWord ? currentWord.toLocaleUpperCase() : currentWord}} to #blockchain, and minted a unique #NFT! Check out @FelixDictionary!.
               <div>www.saveaword.com</div>
               </div>
@@ -117,7 +118,7 @@
               <img id="copy" src="@/assets/imgs/copy.png" style="cursor:pointer;width:25px" />
             </div> 
           </div>
-          <div class="sned_nft" v-else>
+          <div class="sned_nft" v-else style="font-family:sen-light!important;">
             <div v-if="!isSendSuccess">
               <div class="sned_title">WRITE OR PASTE ADDRESS</div>
               <div class="send_ipt">
@@ -415,12 +416,14 @@ export default {
   border-bottom: 2px solid #e6e1dc;
   border-radius: 0;
   background-color: transparent;
+  font-family: sen-light!important;
 }
 
 .checkWords {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-family: sen-light!important;
 }
 #triangle-down {
   width: 0;

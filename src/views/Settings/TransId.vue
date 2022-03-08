@@ -4,7 +4,7 @@
         class="el-icon-arrow-left"
         @click="$router.go(-1)"
         style="color:#FB8809;font-size:20px;font-weight:600;cursor:pointer"
-    >back to settings</i>
+    ><span style="font-family:sen-light!important;">back to settings</span></i>
     <h3>List of transactions ID</h3>
     <div class="content">
         <div class="transaction_detail"

@@ -26,7 +26,7 @@
         >Immutable DAO</span>
       </div>
     </div>
-    <el-dialog :visible.sync="dialogFormVisible" :show-close="false" top="25vh" append-to-body @closed="closeDonate">
+    <el-dialog :visible.sync="dialogFormVisible" style="font-family:sen-light!important;" :show-close="false" top="25vh" append-to-body @closed="closeDonate">
       <div v-if="isShowTips"  slot="title">
         <div style="width:100%;text-align:right;">
           <img

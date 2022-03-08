@@ -4,7 +4,7 @@
       class="el-icon-arrow-left"
       @click="$router.push('/settings')"
       style="color:#FB8809;font-size:20px;font-weight:600;cursor:pointer"
-    >back to settings</i>
+    ><span style="font-family:sen-light!important;">back to settings</span></i>
     <h3>Device Settings</h3>
     <div style="font-weight:bold;margin-bottom:19px">
       Wallet:

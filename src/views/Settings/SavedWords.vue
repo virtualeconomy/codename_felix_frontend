@@ -4,7 +4,7 @@
       class="el-icon-arrow-left"
       @click="$router.push('/settings')"
       style="color:#FB8809;font-size:20px;font-weight:600;cursor:pointer"
-    >back to settings</i>
+    ><span style="font-family:sen-light!important;">back to settings</span></i>
     <h3>Saved Words</h3>
     <div style="margin-top:19px;font-weight:bold">Here you can find full list of your saved words:</div>
     <div style="position: relative; z-index: 2;" v-for="(item, index) in saveWord" :key="index">
