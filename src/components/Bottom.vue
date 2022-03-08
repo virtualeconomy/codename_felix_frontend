@@ -36,7 +36,7 @@
             @click="dialogFormVisible=false"
           />
         </div>
-        <div style="width:100%;text-align:center;font-family:sen-light !important;font-size:18px">
+        <div style="width:100%;text-align:center;font-family:sen-bold !important;font-size:18px">
           <div style="width:70%;margin-left:15%;margin-top:15px;">
            If you would like to support Felix Dictionary you can send DARA (DARA) or VSYS (V Systems). Thanks!
           </div>
@@ -47,7 +47,7 @@
         </div>
       </div>
       <div v-else slot="title">
-        <div style="font-family:sen-light !important;font-size:18px">Thank you for your donation!</div>
+        <div style="font-family:sen-bold !important;font-size:18px;">Thank you for your donation!</div>
         <el-form style="margin-top:25px;">
           <div
             style="font-family:sen-light !important;font-size:18px;"
