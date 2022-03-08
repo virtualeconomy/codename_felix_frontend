@@ -9,17 +9,18 @@
     <div class="scroll_container">
       <div v-for="(item, index) in $store.state.app.words" :key="index" class="mint_words">
           <h3 style="color:#FB8809;">{{ item.word.toUpperCase() }}</h3>
-          <span >8 VSYS</span>
+          <!-- <span >8 VSYS</span> -->
       </div>
-      <div class="mint_words"  style="padding-bottom:20px">
+      <!-- <div class="mint_words"  style="padding-bottom:20px">
         <span style="font-size:20px;font-weight:bold">MINT FEES</span>
         <span style="font-size:15px;font-weight:bold">0.3 VSYS</span>
-      </div>
+      </div> -->
     </div>
-    <div class="mint_words" style="z-index: 2;">Total Price
+    <!-- <div class="mint_words" style="z-index: 2;">
+        Total Price
         <div style="font-size:40px;color:#FB8809;">{{$store.state.app.words.length * 8 + 0.3}} VSYS</div>
-    </div>
-    <div class="mint_tips">After you click MINT, your selection will be stored on the chain.</div>
+    </div> -->
+    <div class="mint_tips" style="margin-top:100px;">After you click MINT, your selection will be stored on the chain.</div>
     <div class="mint_tips">Click MINT to continue</div>
     <div class="mint_btn" @click="mintNFT">MINT</div>
     <!-- <div class="base-button" @click="$router.push('/settings/saved_words')" style="margin-top:20px; cursor:pointer">VIEW YOUR SAVED WORDS</div> -->
