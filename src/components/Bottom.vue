@@ -26,7 +26,7 @@
         >Immutable DAO</span>
       </div>
     </div>
-    <el-dialog :visible.sync="dialogFormVisible" style="font-family:sen-light!important;" :show-close="false" top="25vh" append-to-body @closed="closeDonate">
+    <el-dialog :visible.sync="dialogFormVisible" style="font-family:sen-light !important;" :show-close="false" top="25vh" append-to-body @closed="closeDonate">
       <div v-if="isShowTips"  slot="title">
         <div style="width:100%;text-align:right;">
           <img
@@ -36,30 +36,30 @@
             @click="dialogFormVisible=false"
           />
         </div>
-        <div style="width:100%;text-align:center;font-family:sen-light!important;font-size:18px">
+        <div style="width:100%;text-align:center;font-family:sen-light !important;font-size:18px">
           <div style="width:70%;margin-left:15%;margin-top:15px;">
            If you would like to support Felix Dictionary you can send DARA (DARA) or VSYS (V Systems). Thanks!
           </div>
         </div>
         <div style="width:100%;display:flex;flex-direction:column;align-items:center;">
-          <div @click="chooseDonationType(true)" style="width:288px;height:43px;background:#FB8809;color:#F3EDE6;font-family:sen-light!important;font-size:20px;text-align:center;line-height:43px;border-radius:8px;cursor:pointer;margin-top:35px;">DONATE VSYS</div>
-          <div @click="chooseDonationType(false)" style="width:288px;height:43px;background:#FB8809;color:#F3EDE6;font-family:sen-light!important;font-size:20px;text-align:center;line-height:43px;border-radius:8px;cursor:pointer;margin-top:20px;">DONATE DARA</div>
+          <div @click="chooseDonationType(true)" style="width:288px;height:43px;background:#FB8809;color:#F3EDE6;font-family:sen-light !important;font-size:20px;text-align:center;line-height:43px;border-radius:8px;cursor:pointer;margin-top:35px;">DONATE VSYS</div>
+          <div @click="chooseDonationType(false)" style="width:288px;height:43px;background:#FB8809;color:#F3EDE6;font-family:sen-light !important;font-size:20px;text-align:center;line-height:43px;border-radius:8px;cursor:pointer;margin-top:20px;">DONATE DARA</div>
         </div>
       </div>
       <div v-else slot="title">
-        <div style="font-family:sen-light!important;font-size:18px">Thank you for your donation!</div>
+        <div style="font-family:sen-light !important;font-size:18px">Thank you for your donation!</div>
         <el-form style="margin-top:25px;">
           <div
-            style="font-family:sen-light!important;font-size:18px;"
+            style="font-family:sen-light !important;font-size:18px;"
           >The money you donate will go into this account:</div>
-          <div style="color:#FB8809;font-family:sen-light!important;font-size:18px">{{ isDonateVSYS ?  address : daraAddress }}</div>
-          <div style="font-family:sen-light!important;font-size:18px;margin-top:20px;margin-bottom:10px;">Amount {{isDonateVSYS ? 'VSYS' : 'DARA'}}:</div>
+          <div style="color:#FB8809;font-family:sen-light !important;font-size:18px">{{ isDonateVSYS ?  address : daraAddress }}</div>
+          <div style="font-family:sen-light !important;font-size:18px;margin-top:20px;margin-bottom:10px;">Amount {{isDonateVSYS ? 'VSYS' : 'DARA'}}:</div>
           <el-input type="number" v-model="amount" auto-complete="off"></el-input>
         </el-form>
       </div>
         <div v-if="!isShowTips" slot="footer" style="display:flex;justify-content:space-between">
-          <el-button @click="dialogFormVisible = false" style="border:1px solid #000000;color:#171616;font-family:sen-light!important;" plain>Cancel</el-button>
-          <el-button @click="donate" style="border:none;background:#FB8809;color:#FFFFFF;font-family:sen-light!important;" plain>Confirm</el-button>
+          <el-button @click="dialogFormVisible = false" style="border:1px solid #000000;color:#171616;font-family:sen-light !important;" plain>CANCEL</el-button>
+          <el-button @click="donate" style="border:none;background:#FB8809;color:#FFFFFF;font-family:sen-light !important;" plain>CONFIRM</el-button>
         </div>
     </el-dialog>
   </div>
@@ -191,7 +191,7 @@ export default {
     border-radius: 8px;
 
     /deep/ span {
-        font-family: sen-regular;
+        font-family: sen-light;
         font-size:20px;
         font-weight: normal;
     }
