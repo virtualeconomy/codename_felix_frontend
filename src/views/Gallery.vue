@@ -54,7 +54,7 @@
         >
           <div>
             <p
-              style="font-size: 40px; font-style: italic;word-wrap: break-word;word-break: break-all;"
+              style="font-size: 40px;font-style: italic;word-wrap: break-word;margin-bottom: 10px;margin-top: 20px;line-height: 40px"
             >{{ item.word}}</p>
             <div style="font-weight: 700;font-size:12px;cursor:pointer;" @click="click2Copy(item.token_id)">
               <div style="margin: auto; width: 80px; border-top: 1px solid grey;"></div>
