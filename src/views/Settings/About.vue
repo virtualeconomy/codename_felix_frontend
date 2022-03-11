@@ -15,7 +15,7 @@
     <div style="font-size:1.17em;font-weight:bold">Official website</div>
     <span style="color:#FB8809">saveaword.com</span>
     <div style="font-size:1.17em;font-weight:bold;margin-top:19px">Version</div>
-    <span style="color:#FB8809">0.1</span>
+    <span style="color:#FB8809">0.2</span>
   </div>
 </template>
 
