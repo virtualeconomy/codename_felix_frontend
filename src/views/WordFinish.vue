@@ -29,6 +29,7 @@
 
 <script>
 import { reqMintNft } from "@/api/index";
+import BigNumber from "bignumber.js";
 
 export default {
   name: 'WordFinish',
@@ -38,17 +39,20 @@ export default {
   },
   methods: {
     async mintNFT() {
-        const loading = this.$loading({
+        try {
+          if (!this.$store.state.vsys.wallet.address) {
+            alert("TO MINT, YOU MUST CONNECT YOUR V WALLET");
+          } else if (!this.$store.state.eth.wallet.address) {
+            alert("TO MINT, YOU MUST CONNECT YOUR METAMASK WALLET");
+          } else if (!this.$store.state.eth.wallet.amount || BigNumber(this.$store.state.eth.wallet.amount).isLessThan(5000)) {
+            alert(`Balance of DARA is ${ this.$store.state.eth.wallet.amount }. You should have at least 5000 DARA to continue!`);
+          } else {
+            const loading = this.$loading({
               lock: true,
               text: 'PLEASE WAIT',
               background: 'rgba(0, 0, 0, 0.8)',
               customClass: 'loading_sty'
-        });
-        try {
-          if (!this.$store.state.vsys.wallet.address) {
-            loading.close();
-            alert("TO MINT, YOU MUST CONNECT YOUR V WALLET");
-          } else {
+            });
             const promises = this.$store.state.app.words.map(async word => {
               let reqArg = { user_addr :this.$store.state.vsys.wallet.address ,
                             words: [word.id]

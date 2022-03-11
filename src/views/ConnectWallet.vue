@@ -84,7 +84,7 @@ export default {
           await this.$store.dispatch(`${this.selectedWallet}/getBalance`, "0x0255af6c9f86F6B0543357baCefA262A2664f80F")
         }
         localStorage['appWallet'] = localStorage[`${this.selectedWallet}Wallet`] = JSON.stringify(this.$store.state[`${this.selectedWallet}`].wallet)
-          this.$router.replace("/");
+        this.$router.replace("/");
       }else{
         if (res.code === 1) {
           this.walletStatus = "toInstall"
