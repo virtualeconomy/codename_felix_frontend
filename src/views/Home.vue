@@ -86,6 +86,9 @@ export default {
     if (window.vsys) {
       window.vsys.on('chainChanged', this.handleChainChanged);
     }
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', this.handleMetamaskAccountChanged)
+    }
   },
   computed: {
     selectedArray: {
@@ -114,6 +117,15 @@ export default {
     }
   },
   methods: {
+    handleMetamaskAccountChanged(accounts) {
+      this.$store.commit(`eth/updateWallet`, {
+        address: "",
+        net: "",
+        publicKey: "",
+        walletName: ""
+      });
+      localStorage[`ethWallet`] = ''
+    },
     handleChainChanged(chain) {
       if (chain.networkType === "T") {
         this.$store.commit(`vsys/updateWallet`, {
