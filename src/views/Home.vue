@@ -82,6 +82,11 @@ export default {
       selected: "Dic"
     };
   },
+  created() {
+    if (window.vsys) {
+      window.vsys.on('chainChanged', this.handleChainChanged);
+    }
+  },
   computed: {
     selectedArray: {
       get() {
@@ -109,6 +114,17 @@ export default {
     }
   },
   methods: {
+    handleChainChanged(chain) {
+      if (chain.networkType === "T") {
+        this.$store.commit(`vsys/updateWallet`, {
+          address: "",
+          net: "",
+          publicKey: "",
+          walletName: ""
+        });
+        localStorage[`vsysWallet`] = ''
+      }
+    },
     async querySearchAsync() {
       var wordDetail = await reqLemmaWord(this.value);
       if (!wordDetail.length) return alert('Unfortunately, the word was not found')

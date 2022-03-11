@@ -43,6 +43,11 @@ var actions = {
     if (walletInfo) {
       if (walletInfo.result) {
         params.net = walletInfo.network.toLowerCase()
+        if (params.net !== "mainnet") {
+          err.message = 'V wallet extension is not set to mainnet'
+          err.code = 3
+          return err
+        }
       } else {
         if (walletInfo.message === "account is not created") {
           err.message = "Account is not created"

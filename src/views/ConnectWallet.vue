@@ -58,9 +58,11 @@ export default {
         case "toConnect":
           return 'To continue minting you must connect your ' + (this.selectedWallet === 'vsys' ? 'V' : 'Metamask') + (this.selectedWallet === 'vsys' ? ' wallet.' : ' wallet and have a minimum of 5000 DARA tokens available.')
         case "toLogin":
-          return "It seems that you have the extension installed, but you didn’t log in to your V Wallet.To continue, please go to your V Wallet extension and log in. "
+          return "It seems that you have the extension installed, but you didn’t log in to your V Wallet. To continue, please go to your V Wallet extension and log in. "
         case "toInstall":
           return "Sorry,but it seems to that you don't have " + (this.selectedWallet === 'vsys' ? 'V' : 'Metamask') + " extension. To continue, please use the link to install."
+        case "toSwitchNetwork":
+          return "It seems that your V Wallet extension is on testnet. To continue, please go to your V Wallet extension and set it to mainnet."
         default:
           return 'To continue minting you must connect your ' + (this.selectedWallet === 'vsys' ? 'V' : 'Metamask') + (this.selectedWallet === 'vsys' ? ' wallet.' : ' wallet and have a minimum of 5,000 DARA tokens available.')
       }
@@ -73,6 +75,8 @@ export default {
           return "CONTINUE"
         case "toInstall":
           return "INSTALL"
+        case "toSwitchNetwork":
+          return "SWITCH"
         default:
           return "CONNECT"
       }
@@ -90,6 +94,8 @@ export default {
           this.walletStatus = "toInstall"
         } else if (res.code === 2) {
           this.walletStatus = "toLogin"
+        } else if (res.code === 3) {
+          this.walletStatus = "toSwitchNetwork" // For v wallet extension
         }
       }
       // this.$confirm("Are you sure to sign out?", "", {
@@ -99,7 +105,7 @@ export default {
       // }).then(() => location.reload());
     },
     jump(){
-      if (this.walletStatus === "toConnect" || this.walletStatus === "toLogin") {
+      if (this.walletStatus === "toConnect" || this.walletStatus === "toLogin" || this.walletStatus === "toSwitchNetwork") {
         this.getAccount()
       } else if (this.walletStatus === "toInstall") {
         window.open(this.selectedWallet === 'eth' ? 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn' : 'https://chrome.google.com/webstore/detail/v-wallet-extension/afccgfbnbpgfdokbllhiccepgggofoco')
