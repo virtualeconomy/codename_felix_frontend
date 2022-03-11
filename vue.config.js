@@ -9,7 +9,7 @@ module.exports = {
     // before: require('./mock/mock-server.js'),
     proxy: {
       '/': {
-        // target: 'https://saveaword.com/api',
+        target: 'https://saveaword.com/api',
       }
     }
   }
