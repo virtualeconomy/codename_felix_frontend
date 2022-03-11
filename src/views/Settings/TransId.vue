@@ -46,11 +46,10 @@ export default {
   },
   methods: {
     txInfo(txId) {
-        let NETWORK_BYTE = 'T'
         let EXPLORER = 'https://explorer.v.systems'
         let TEST_EXPLORER = 'https://testexplorer.v.systems'
         let TX_URL = '/transactions/'
-        let url = NETWORK_BYTE === 'T' ? TEST_EXPLORER : EXPLORER
+        let url = this.$store.state.vsys.wallet.net === 'testnet' ? TEST_EXPLORER : EXPLORER
         window.open(url + TX_URL + txId)
     },
     importData(){},
