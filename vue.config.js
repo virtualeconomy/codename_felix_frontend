@@ -1,8 +1,5 @@
 module.exports = {
-  // publicPath: '/',
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/felix_frontend'
-    : '/',
+  publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'static',
   // For dev deployment
@@ -12,10 +9,7 @@ module.exports = {
     // before: require('./mock/mock-server.js'),
     proxy: {
       '/': {
-        target: 'https://staging.vsystems.dev',
-        // target: 'http://163.172.101.111:8000',
         // target: 'https://saveaword.com/api',
-        // target: 'http://samblana.vos.systems:8000'
       }
     }
   }
