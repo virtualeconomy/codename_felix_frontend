@@ -45,7 +45,9 @@ export default {
           background: 'rgba(0, 0, 0, 0.8)',
           customClass: 'loading_sty'
         });
-        await this.$store.dispatch(`eth/getBalance`, "0x0255af6c9f86F6B0543357baCefA262A2664f80F")
+        if(this.$store.state.app.curWallet.address && this.$store.state.eth.wallet.address){
+          await this.$store.dispatch(`eth/getBalance`, "0x0255af6c9f86F6B0543357baCefA262A2664f80F")
+        }
         try {
           if (!this.$store.state.vsys.wallet.address) {
             loading.close();
