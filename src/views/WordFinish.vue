@@ -30,6 +30,7 @@
 <script>
 import { reqMintNft } from "@/api/index";
 import BigNumber from "bignumber.js";
+import { DARA_RESTRICTION } from '@/constants'
 
 export default {
   name: 'WordFinish',
@@ -55,7 +56,7 @@ export default {
           } else if (!this.$store.state.eth.wallet.address) {
             loading.close();
             alert("TO MINT, YOU MUST CONNECT YOUR METAMASK WALLET");
-          } else if (!this.$store.state.eth.wallet.amount || BigNumber(this.$store.state.eth.wallet.amount).isLessThan(5000)) {
+          } else if (!this.$store.state.eth.wallet.amount || BigNumber(this.$store.state.eth.wallet.amount).isLessThan(DARA_RESTRICTION)) {
             loading.close();
             alert(`Balance of DARA is ${ this.$store.state.eth.wallet.amount }. You should have at least 5000 DARA to continue!`);
           } else {

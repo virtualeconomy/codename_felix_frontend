@@ -15,15 +15,16 @@
     <div style="font-size:1.17em;font-weight:bold">Official website</div>
     <span style="color:#FB8809">saveaword.com</span>
     <div style="font-size:1.17em;font-weight:bold;margin-top:19px">Version</div>
-    <span style="color:#FB8809">0.2</span>
+    <span style="color:#FB8809">{{ vNumber }}</span>
   </div>
 </template>
-
 <script>
+import { WALLET_VERSION } from '@/constants'
 export default {
   name: "About",
   data() {
     return {
+      vNumber: WALLET_VERSION
     };
   },
   methods: {},

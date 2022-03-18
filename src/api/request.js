@@ -22,7 +22,6 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
   return response.data
 }, err => {
-  console.log(err.response.data)
   if (err && err.response) {
     switch (err.response.status) {
       case 400: err.message = 'This NFT is already issued!'; break;
