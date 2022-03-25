@@ -61,13 +61,12 @@
               {{ item.token_id.slice(0, 5) + "..." + item.token_id.slice(-3)}}
               <div style="margin: auto; width: 80px; border-top: 1px solid grey"></div>
             </div>
-            <div @click="clicl2ShowAllDefinition(item.word,idx)" v-if="item.wordDetail.length < 2 || !item.isShowAllDefinition" style="font-family:sen-light!important;cursor:pointer;margin-top: 10px;width:90%;margin-left:5%;" v-html="item.definition "></div>
+            <div v-if="item.wordDetail.length < 2 || !item.isShowAllDefinition" style="font-family:sen-light!important;margin-top: 10px;width:90%;margin-left:5%;" v-html="item.definition "></div>
             <div
-              style="cursor:pointer;position:relative;z-index:2;font-family:sen-light!important;margin-top: 10px;width:90%;margin-left:5%;"
+              style="position:relative;z-index:2;font-family:sen-light!important;margin-top: 10px;width:90%;margin-left:5%;"
               v-for="(val, index) in item.wordDetail"
               :key="val.id"
               v-html="`${index + 1}. ${formatDefinition(val.definition)}`"
-              @click="clicl2ShowAllDefinition('',idx)"
               v-else
             ></div>
             <img
