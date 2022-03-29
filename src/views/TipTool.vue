@@ -31,7 +31,7 @@ export default {
       tipTextList: [
         `Welcome to <span style="color:#FB8809">Felix</span>, the world's first dictionary on a blockchain. Created by The Immutable Network, word definitions can now be immortalized as unique NFTs!`,
         `Turn tips <span style="color:#FB8809">off/on</span> simply by clicking INFO icon. For fist time users we suggest that you leave tips ON.`,
-        `In order to ensure everyone is able to participate you can always help this project by clicking <span style="color:#FB8809">DONTE</span> button in the footer.`,
+        `In order to ensure everyone is able to participate you can always help this project by clicking <span style="color:#FB8809">DONATE</span> button in the footer.`,
         `<span style="color:#FB8809">BALANCE</span><br />of the project is always shown in the footer of the webapp.`,
         `For best experience we suggest using the <span style="color:#FB8809">FELIX</span> in the desktop mode`,
         `You can save up to 3 words / minute`,
