@@ -43,7 +43,7 @@
         :key="item.id"
         @click="detail_selected(item,index)"
       >{{item.word}}
-        <span v-if="item.blockchainhash || item.isMinted" style="font-size:10px;font-weight:600;float:right;margin-top:8px;">
+        <span v-if="item.blockchainhash" style="font-size:10px;font-weight:600;float:right;margin-top:8px;">
           WORD IS NFT
         </span>
       </div>
@@ -109,7 +109,11 @@ export default {
         let nfts = JSON.parse(window.localStorage.getItem('nfts'))
         if(nfts){
           this.wordHistory.map(h=>{
-            h.isMinted = nfts.some(item => h.id === item.nft_word_ids[0])
+            nfts.some(item =>{
+              if( h.id === item.nft_word_ids[0]){
+              h.blockchainhash = item.nft_creation_txid
+              }
+            })
           })
         }
       },
@@ -140,11 +144,11 @@ export default {
     async querySearchAsync() {
       var wordDetail = await reqLemmaWord(this.value);
       if (!wordDetail.length) return alert('Unfortunately, the word was not found')
-      this.$router.push({ path: "/word_detail", query: { 0: wordDetail.some(item=>item.blockchainhash) ? wordDetail[wordDetail.findIndex(idx=>idx.blockchainhash)] : wordDetail[0]} });
+      this.$router.push({ path: "/word_detail", query: { 0: JSON.stringify(wordDetail.some(item=>item.blockchainhash) ? wordDetail[wordDetail.findIndex(idx=>idx.blockchainhash)] : wordDetail[0])} });
     },
     detail_selected(item, index) {
       if (this.selected === "Save") {
-        if(!item.isMinted){
+        if(!item.blockchainhash){
           if (this.selectedArray.find(value => value.id === item.id)) {
             this.selectedArray.splice(
               this.selectedArray.findIndex(value => value.id === item.id),
@@ -157,7 +161,7 @@ export default {
           }
         }
       } else {
-        this.$router.push({ path: "/word_detail", query: { 0: item } });
+        this.$router.push({ path: "/word_detail", query: { 0: JSON.stringify(item) } });
       }
     },
     router_to_save() {
@@ -169,12 +173,10 @@ export default {
     },
     async shuffle() {
       this.wordHistory = await reqRandomWords();
-      this.wordHistory.map(item=>item.isMinted = false)
     }
   },
   async mounted() {
     this.wordHistory = await reqRandomWords();
-    this.wordHistory.map(item=>item.isMinted = false)
   }
 };
 </script>
