@@ -12,9 +12,9 @@ module.exports = {
     // before: require('./mock/mock-server.js'),
     proxy: {
       '/': {
-        target: 'https://staging.vsystems.dev',
+        // target: 'https://staging.vsystems.dev',
         // target: 'http://163.172.101.111:8000',
-        // target: 'https://saveaword.com/api',
+        target: 'https://saveaword.com/api',
         // target: 'http://samblana.vos.systems:8000'
       }
     }
