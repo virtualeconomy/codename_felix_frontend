@@ -14,7 +14,7 @@ module.exports = {
       '/': {
         // target: 'https://staging.vsystems.dev',
         // target: 'http://163.172.101.111:8000',
-        target: 'https://saveaword.com/api',
+        target: 'https://saveaword.com',
         // target: 'http://samblana.vos.systems:8000'
       }
     }

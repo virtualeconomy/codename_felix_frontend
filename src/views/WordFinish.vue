@@ -46,9 +46,12 @@ export default {
           background: 'rgba(0, 0, 0, 0.8)',
           customClass: 'loading_sty'
         });
-        if(this.$store.state.app.curWallet.address && this.$store.state.eth.wallet.address){
-          await this.$store.dispatch(`eth/getBalance`, "0x0255af6c9f86F6B0543357baCefA262A2664f80F")
-        }
+        // if(this.$store.state.app.curWallet.address && this.$store.state.eth.wallet.address){
+        //   try{
+        //     await this.$store.dispatch(`eth/getBalance`, "0x0255af6c9f86F6B0543357baCefA262A2664f80F")
+        //   }catch{
+        //   }
+        // }
         try {
           if (!this.$store.state.vsys.wallet.address) {
             loading.close();
@@ -56,10 +59,12 @@ export default {
           } else if (!this.$store.state.eth.wallet.address) {
             loading.close();
             alert("TO MINT, YOU MUST CONNECT YOUR METAMASK WALLET");
-          } else if (!this.$store.state.eth.wallet.amount || BigNumber(this.$store.state.eth.wallet.amount).isLessThan(DARA_RESTRICTION)) {
-            loading.close();
-            alert(`Balance of DARA is ${ this.$store.state.eth.wallet.amount }. You should have at least 5000 DARA to continue!`);
-          } else {
+          } 
+          // else if (!this.$store.state.eth.wallet.amount || BigNumber(this.$store.state.eth.wallet.amount).isLessThan(DARA_RESTRICTION)) {
+          //   loading.close();
+          //   alert(`Balance of DARA is ${ this.$store.state.eth.wallet.amount }. You should have at least 5000 DARA to continue!`);
+          // } 
+          else {
             const promises = this.$store.state.app.words.map(async word => {
               let reqArg = { user_addr :this.$store.state.vsys.wallet.address ,
                             words: [word.id]
