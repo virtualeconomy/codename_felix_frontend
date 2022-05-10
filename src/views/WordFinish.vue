@@ -56,10 +56,11 @@ export default {
           if (!this.$store.state.vsys.wallet.address) {
             loading.close();
             alert("TO MINT, YOU MUST CONNECT YOUR V WALLET");
-          } else if (!this.$store.state.eth.wallet.address) {
-            loading.close();
-            alert("TO MINT, YOU MUST CONNECT YOUR METAMASK WALLET");
           } 
+          // else if (!this.$store.state.eth.wallet.address) {
+          //   loading.close();
+          //   alert("TO MINT, YOU MUST CONNECT YOUR METAMASK WALLET");
+          // } 
           // else if (!this.$store.state.eth.wallet.amount || BigNumber(this.$store.state.eth.wallet.amount).isLessThan(DARA_RESTRICTION)) {
           //   loading.close();
           //   alert(`Balance of DARA is ${ this.$store.state.eth.wallet.amount }. You should have at least 5000 DARA to continue!`);

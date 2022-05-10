@@ -5,9 +5,9 @@
       <transition name="fade">
         <div class="wallet-list" v-show="isShow">
           <!-- METAMASK WALLET -->
-          <div class="wallet-list-item">METAMASK WALLET</div>
+          <!-- <div class="wallet-list-item">METAMASK WALLET</div> -->
           <!-- account list of eth -->
-          <div
+          <!-- <div
             class="wallet-list-item wallet_column_list"
             style="color:white;cursor:pointer"
             v-for="address in EthWalletList"
@@ -24,7 +24,7 @@
             &nbsp;&nbsp;
             {{address.slice(0, 5) + "..." + address.slice(-3)}}</div>
             <div class="coin_num">{{ daraBalance }} DARA</div>
-          </div>
+          </div> -->
           <!-- Metamask Settings -->
 <!--          <div-->
 <!--            v-if="EthWalletList.length"-->
@@ -34,7 +34,7 @@
 <!--            <img src="@/assets/imgs/more.svg" width="20" />&nbsp;&nbsp;-->
 <!--            Metamask Settings-->
 <!--          </div>-->
-          <div
+          <!-- <div
             v-if="!EthWalletList.length"
             @click="toConnectWalletPage('eth')"
             class="wallet-list-item"
@@ -42,7 +42,7 @@
           >
             <i class="el-icon-circle-plus-outline"></i>&nbsp;&nbsp;
             Connect Metamask
-          </div>
+          </div> -->
 
           <!-- V WALLET -->
           <div class="wallet-list-item">V WALLET</div>

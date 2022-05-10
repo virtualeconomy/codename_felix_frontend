@@ -7,11 +7,11 @@
       <br />
       <br />Select wallet to sign out. You must select at least one to continue.
     </div>
-    <div style="z-index:2;cursor:pointer" :class="{active:selected==='eth'}" @click="$store.state.eth.wallet.address ? selected='eth' : ''">
+    <!-- <div style="z-index:2;cursor:pointer" :class="{active:selected==='eth'}" @click="$store.state.eth.wallet.address ? selected='eth' : ''">
       <img v-if="selected==='eth'" src="@/assets/imgs/selectedHighlight.svg" width="20" />
       <i v-else width="20"></i>
       <span :style="{display: 'inline-block',width: '90px',color: $store.state.eth.wallet.address ? 'black' : 'grey'}">Metamask</span>
-    </div>
+    </div> -->
     <div style="height:10px"></div>
     <div style="z-index:2;cursor:pointer" :class="{active:selected==='vsys'}" @click="$store.state.vsys.wallet.address ? selected='vsys' : ''">
       <img v-if="selected==='vsys'" src="@/assets/imgs/selectedHighlight.svg" width="20" />

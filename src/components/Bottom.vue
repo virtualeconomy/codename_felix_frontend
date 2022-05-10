@@ -38,12 +38,13 @@
         </div>
         <div style="width:100%;text-align:center;font-family:sen-bold !important;font-size:18px">
           <div style="width:70%;margin-left:15%;margin-top:15px;">
-           If you would like to support Felix Dictionary you can send DARA (DARA) or VSYS (V Systems). Thanks!
+           <!-- If you would like to support Felix Dictionary you can send DARA (DARA) or VSYS (V Systems). Thanks! -->
+           If you would like to support Felix Dictionary you can send VSYS (V Systems). Thanks!
           </div>
         </div>
         <div style="width:100%;display:flex;flex-direction:column;align-items:center;">
           <div @click="chooseDonationType(true)" style="width:288px;height:43px;background:#FB8809;color:#F3EDE6;font-family:sen-light !important;font-size:20px;text-align:center;line-height:43px;border-radius:8px;cursor:pointer;margin-top:35px;">DONATE VSYS</div>
-          <div @click="chooseDonationType(false)" style="width:288px;height:43px;background:#FB8809;color:#F3EDE6;font-family:sen-light !important;font-size:20px;text-align:center;line-height:43px;border-radius:8px;cursor:pointer;margin-top:20px;">DONATE DARA</div>
+          <!-- <div @click="chooseDonationType(false)" style="width:288px;height:43px;background:#FB8809;color:#F3EDE6;font-family:sen-light !important;font-size:20px;text-align:center;line-height:43px;border-radius:8px;cursor:pointer;margin-top:20px;">DONATE DARA</div> -->
         </div>
       </div>
       <div v-else slot="title">
